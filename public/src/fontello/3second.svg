@@ -1,0 +1,12 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2020 by original authors @ fontello.com</metadata>
+<defs>
+<font id="3second" horiz-adv-x="1000" >
+<font-face font-family="3second" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="3second" unicode="&#xe800;" d="M312 717c-4-8-12-41-18-75l-9-62 176-57c95-32 177-55 181-52 4 5 10 21 13 37 3 22-31 50-155 125-167 100-176 103-188 84z m74-268c-4-13-10-34-15-46-3-12 14-35 38-53 26-18 46-39 46-47 0-7-37-14-79-14-44 0-117-4-161-10l-82-9 11-55c6-30 15-59 20-65 10-11 398 53 425 70 29 18 19 68-21 94-56 36-47 54 28 48 48-3 63 2 63 18 0 14-41 34-121 56-146 41-142 41-152 13z m8-331c-112-29-129-38-124-63 3-17 10-37 16-43 17-17 275 85 293 115 18 35-18 32-185-9z" horiz-adv-x="788" />
+</font>
+</defs>
+</svg>
