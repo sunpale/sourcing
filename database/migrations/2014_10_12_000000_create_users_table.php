@@ -1,5 +1,6 @@
 <?php
 
+use App\Schemas\Grammars\CustomSqlServerGrammar;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,8 +14,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
+        DB::connection()->setSchemaGrammar(new CustomSqlServerGrammar());
+        Schema::create('users', static function (Blueprint $table) {
+            $table->smallIncrements('id')->unique();
             $table->string('name');
             $table->string('username',20)->unique();
             $table->string('password');
