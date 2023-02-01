@@ -8,11 +8,16 @@ use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
 use App\Models\User;
 use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 use Laravel\Fortify\Fortify;
+use Laravel\Fortify\Http\Responses\LoginResponse;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -21,7 +26,17 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->instance(LoginResponse::class, new class extends LoginResponse {
+            public function toResponse($request): JsonResponse|RedirectResponse
+            {
+                session()->put('role', Auth::user()->getRoleNames()[0]);
+                session()->put('key', Str::random(40));
+                if ($request->wantsJson()) {
+                    return response()->json(['two_factor' => false]);
+                }
+                return redirect()->intended(Fortify::redirects('login'));
+            }
+        });
     }
 
     /**
