@@ -38,18 +38,10 @@ class FabricsController extends Controller
         return response()->json($response);
     }
 
-    public function create()
-    {
-    }
-
     public function store(FabricRequest $request)
     {
         Fabric::create($request->only(['kode','description']));
         return redirect()->route('fabric.index')->with('success',config('constants.SUCCESS_SAVE'));
-    }
-
-    public function show(Fabric $fabric)
-    {
     }
 
     public function edit(Fabric $fabric)
