@@ -176,6 +176,15 @@
             notifikasi('success','{{session('success')}}')
             @endif
 
+            @if(old('number'))
+            document.getElementById('frm-fabric').setAttribute('action','/master-rm/fabric/'+ {{old('number')}});
+            let methodEl = document.createElement('input');
+            methodEl.type = 'hidden';
+            methodEl.name = '_method';
+            methodEl.value = 'PATCH';
+            document.getElementById('frm-fabric').appendChild(methodEl);
+            @endif
+
             tableFabric();
             document.getElementById('input-fabric').addEventListener('shown.bs.modal',function (){
                prefix.focus();
