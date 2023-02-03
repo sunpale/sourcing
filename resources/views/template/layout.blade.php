@@ -187,7 +187,7 @@
                                     <a href="{!! route('fabric.index') !!}" class="nav-link" data-key="t-fabric"> Jenis Fabric </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{--{!! route('indikator.index') !!}--}}" class="nav-link" data-key="t-indikator"> Komposisi </a>
+                                    <a href="{!! route('komposisi.index') !!}" class="nav-link" data-key="t-komposisi"> Komposisi </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{--{!! route('aspek.index') !!}--}}" class="nav-link" data-key="t-aspek"> Raw Material </a>
