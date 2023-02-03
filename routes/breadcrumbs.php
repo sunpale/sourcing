@@ -18,4 +18,10 @@ Breadcrumbs::for('fabric',function (BreadcrumbTrail $trail){
     $trail->push('Jenis Fabric',route('fabric.index'));
 });
 //endregion
+Breadcrumbs::for('komposisi',function (BreadcrumbTrail $trail){
+    $trail->parent('master-rm');
+    $trail->push('Komposisi',route('komposisi.index'));
+});
+//region
+//endregion
 //endregion
