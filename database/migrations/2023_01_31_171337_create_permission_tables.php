@@ -1,6 +1,7 @@
 <?php
 
 use App\Schemas\Grammars\CustomSqlServerGrammar;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -15,7 +16,9 @@ class CreatePermissionTables extends Migration
      */
     public function up()
     {
-        DB::connection()->setSchemaGrammar(new CustomSqlServerGrammar());
+        if (env('DB_CONNECTION')==='sqlsrv') {
+            DB::connection()->setSchemaGrammar(new CustomSqlServerGrammar());
+        }
         $tableNames = config('permission.table_names');
         $columnNames = config('permission.column_names');
         $teams = config('permission.teams');

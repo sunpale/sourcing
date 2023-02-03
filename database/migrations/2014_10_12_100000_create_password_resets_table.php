@@ -3,6 +3,7 @@
 use App\Schemas\Grammars\CustomSqlServerGrammar;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -14,7 +15,9 @@ return new class extends Migration
      */
     public function up()
     {
-        DB::connection()->setSchemaGrammar(new CustomSqlServerGrammar());
+        if (env('DB_CONNECTION')==='sqlsrv') {
+            DB::connection()->setSchemaGrammar(new CustomSqlServerGrammar());
+        }
         Schema::create('password_resets', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');

@@ -3,12 +3,15 @@
 use App\Schemas\Grammars\CustomSqlServerGrammar;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
     public function up()
     {
-        DB::connection()->setSchemaGrammar(new CustomSqlServerGrammar());
+        if (env('DB_CONNECTION')==='sqlsrv') {
+            DB::connection()->setSchemaGrammar(new CustomSqlServerGrammar());
+        }
         Schema::create('fabrics', function (Blueprint $table) {
             $table->smallIncrements('id')->unique();
             $table->string('kode',3)->index();
