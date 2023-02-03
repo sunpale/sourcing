@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-layout="vertical" data-topbar="dark" data-sidebar="dark" data-layout-style="detached" data-layout-position="fixed" data-sidebar-size="lg" data-preloader="disable">
+<html lang="en" data-layout="vertical" data-topbar="dark" data-sidebar="dark" data-layout-style="detached" data-layout-position="fixed" data-sidebar-size="lg" data-preloader="enable">
 <head>
     <meta charset="utf-8">
     <title>{{$title}} | Biensi Fesyenindo RM Manajemen</title>
@@ -184,7 +184,7 @@
                         <div class="collapse menu-dropdown" id="sidebarMasterMaterial">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="{{--{!! route('fabric.index') !!}--}}" class="nav-link" data-key="t-nilai"> Jenis Fabric </a>
+                                    <a href="{!! route('fabric.index') !!}" class="nav-link" data-key="t-fabric"> Jenis Fabric </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{--{!! route('indikator.index') !!}--}}" class="nav-link" data-key="t-indikator"> Komposisi </a>
