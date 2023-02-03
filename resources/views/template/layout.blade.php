@@ -223,7 +223,7 @@
                         <div class="collapse menu-dropdown" id="sidebarMasterWarna">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="apps-chat.html" class="nav-link" data-key="t-toko"> Warna MD </a>
+                                    <a href="{!! route('warna.index') !!}" class="nav-link" data-key="t-warna"> Warna MD </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{--{!! route('area.index') !!}--}}" class="nav-link" data-key="t-region"> Pantone </a>
