@@ -10,8 +10,10 @@
 
                 @if ($breadcrumb->url && !$loop->last)
                     <li class="breadcrumb-item"><a href="{{ $breadcrumb->url }}">{{ $breadcrumb->title }}</a></li>
+                @elseif($loop->last)
+                    <li class="breadcrumb-item active" aria-current="page"><span class="fw-bold">{{ $breadcrumb->title }}</span></li>
                 @else
-                    <li class="breadcrumb-item active" aria-current="page">{{ $breadcrumb->title }}</li>
+                    <li class="breadcrumb-item" aria-current="page">{{ $breadcrumb->title }}</li>
                 @endif
 
             @endforeach
