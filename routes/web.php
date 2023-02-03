@@ -34,7 +34,7 @@ Route::prefix('master-rm')->middleware('auth:web')->group(function (){
 //region Master Warna
 Route::prefix('master-warna')->middleware('auth:web')->group(function (){
 //Region Warna MD
-    Route::resource('warna', ColorsController::class);
+    Route::resource('warna', ColorsController::class)->except(['create','show']);
 //endregion
 });
 //endregion
