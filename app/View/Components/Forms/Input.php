@@ -16,8 +16,10 @@ class Input extends Component
     public bool $isRequired;
     public string $marginBottom;
     public string $formInput;
+    public bool $readOnly;
+    public string $maxLength;
 
-    public function __construct(string|null $formInput= null, string|null $label = null, string|null $id = null, string|null $type = null, string|null $name = null, string|null $value = null, bool|null $isRequired = null, string|null $placeholder = null, string|null $marginBottom = null)
+    public function __construct(string|null $formInput= null, string|null $label = null, string|null $id = null, string|null $type = null, string|null $name = null, string|null $value = null, bool|null $isRequired = null, string|null $placeholder = null, string|null $marginBottom = null,bool|null $readOnly=null,int|null $maxLength = null)
     {
         $marginBottom ??= 'mb-2';
         $placeholder ??= '';
@@ -28,6 +30,8 @@ class Input extends Component
         $id ??= '';
         $label ??= '';
         $formInput ??= 'input';
+        $readOnly??=false;
+        $maxLength ??= '';
         $this->formInput = $formInput;
         $this->label = $label;
         $this->id   = $id;
@@ -37,6 +41,8 @@ class Input extends Component
         $this->isRequired = $isRequired;
         $this->placeholder = $placeholder==='' ? $label:$placeholder;
         $this->marginBottom = $marginBottom;
+        $this->readOnly = $readOnly;
+        $this->maxLength = $maxLength;
     }
 
     public function render(): View

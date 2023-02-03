@@ -1,7 +1,7 @@
 <div class="{{$marginBottom}}">
     <label class="form-label" for="{{$id}}">{{$label}}</label>
     @if($formInput==='input')
-        <input type="{{$type}}" id="{{$id}}" class="form-control @error($name) is-invalid @enderror " name="{{$name}}" value="{{old($name)??$value}}" placeholder="{{$placeholder}}" {{$isRequired ? 'required' : ''}}>
+        <input type="{{$type}}" id="{{$id}}" class="form-control @error($name) is-invalid @enderror " name="{{$name}}" value="{{old($name)??$value}}" placeholder="{{$placeholder}}" {{$isRequired ? 'required' : ''}} {{$readOnly ? 'readonly':''}} maxlength="{{$maxLength}}">
         @error($name)
         <div class="invalid-feedback">{{$message}}</div>
         @enderror
