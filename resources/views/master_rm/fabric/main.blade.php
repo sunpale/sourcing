@@ -198,7 +198,6 @@
                         }
                     });
                 }
-
             }
 
             fabric.onsubmit = function (event) {
