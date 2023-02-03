@@ -3,6 +3,7 @@
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\master_rm\FabricsController;
 use App\Http\Controllers\master_rm\KomposisiController;
+use App\Http\Controllers\master_warna\ColorsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,7 +26,15 @@ Route::prefix('master-rm')->middleware('auth:web')->group(function (){
 //endregion
 
 //region Komposisi
-    Route::resource('komposisi', KomposisiController::class);
+    Route::resource('komposisi', KomposisiController::class)->except(['create','show']);
+//endregion
+});
+//endregion
+
+//region Master Warna
+Route::prefix('master-warna')->middleware('auth:web')->group(function (){
+//Region Warna MD
+    Route::resource('warna', ColorsController::class);
 //endregion
 });
 //endregion

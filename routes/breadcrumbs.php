@@ -18,10 +18,23 @@ Breadcrumbs::for('fabric',function (BreadcrumbTrail $trail){
     $trail->push('Jenis Fabric',route('fabric.index'));
 });
 //endregion
+//region Komposisi
 Breadcrumbs::for('komposisi',function (BreadcrumbTrail $trail){
     $trail->parent('master-rm');
     $trail->push('Komposisi',route('komposisi.index'));
 });
-//region
 //endregion
 //endregion
+
+//region Master Warna
+Breadcrumbs::for('master-warna',function (BreadcrumbTrail $trail){
+    $trail->parent('main');
+    $trail->push('Master Warna');
+});
+//region Warna MD
+Breadcrumbs::for('warna',function (BreadcrumbTrail $trail){
+    $trail->parent('master-warna');
+    $trail->push('warna',route('warna.index'));
+});
+//endregion
+//
