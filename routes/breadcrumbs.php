@@ -13,9 +13,9 @@ Breadcrumbs::for('master-rm',function (BreadcrumbTrail $trail){
     $trail->push('Master RM');
 });
 //region Fabric
-/*Breadcrumbs::for('fabric',function (BreadcrumbTrail $trail){
+Breadcrumbs::for('fabric',function (BreadcrumbTrail $trail){
     $trail->parent('master-rm');
     $trail->push('Jenis Fabric',route('fabric.index'));
-});*/
+});
 //endregion
 //endregion

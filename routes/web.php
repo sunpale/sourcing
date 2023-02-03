@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\master_rm\FabricsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,4 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [MainController::class,'index'])->name('main')->middleware('auth');
+Route::get('/', [MainController::class,'index'])->name('main')->middleware('auth:web');
+//region Master RM
+Route::prefix('master-rm')->middleware('auth:web')->group(function (){
+//region Fabric
+    Route::get('fabric/generate-code',[FabricsController::class,'generateCode'])->name('fabric.generate-code');
+    Route::resource('fabric', FabricsController::class)->except(['create','show']);
+//endregion
+});
+//endregion
