@@ -16,18 +16,10 @@ class ColorsController extends Controller
         return view('master_warna.md',$data);
     }
 
-    public function create()
-    {
-    }
-
     public function store(ColorRequest $request)
     {
         Color::create($request->only(['kode','description']));
         return redirect()->route('warna.index')->with('success',config('constants.SUCCESS_SAVE'));
-    }
-
-    public function show(Color $color)
-    {
     }
 
     public function edit(Color $warna)
