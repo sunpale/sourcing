@@ -56,4 +56,10 @@ Breadcrumbs::for('brands',function (BreadcrumbTrail $trail){
     $trail->push('Brands',route('brands.index'));
 });
 //endregion
+//region Unit of Measure
+Breadcrumbs::for('uom',function (BreadcrumbTrail $trail){
+    $trail->parent('master-data');
+    $trail->push('Unit of Measure',route('measure.index'));
+});
+//endregion
 //endregion

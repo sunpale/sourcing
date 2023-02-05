@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\master_data\BrandsController;
+use App\Http\Controllers\master_data\MeasuresController;
 use App\Http\Controllers\master_rm\FabricsController;
 use App\Http\Controllers\master_rm\KomposisiController;
 use App\Http\Controllers\master_warna\ColorsController;
@@ -49,6 +50,9 @@ Route::prefix('master-warna')->middleware('auth:web')->group(function (){
 Route::prefix('master-data')->middleware('auth:web')->group(function (){
 //region Brand
     Route::resource('brands', BrandsController::class)->except(['create','show']);
+//endregion
+//region Unit of Measure
+    Route::resource('measure', MeasuresController::class)->except(['show','create']);
 //endregion
 });
 //endregion
