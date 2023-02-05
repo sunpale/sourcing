@@ -75,7 +75,7 @@
                                             <input type="password" class="form-control pe-5 password-input" placeholder="Enter password" id="password-input" name="password">
                                             <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
                                         </div>
-                                        @error('pswd')
+                                        @error('password')
                                         <div class="invalid-feedback">{{$message}}</div>
                                         @enderror
                                     </div>

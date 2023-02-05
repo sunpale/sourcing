@@ -67,8 +67,8 @@
                         @csrf
                         <input type="hidden" name="number" id="number" value="{{old('number')??''}}">
                         <input type="hidden" name="old_kode" id="old_kode" value="{{old('old_kode')??''}}">
-                        <x-forms.input label="Kode" id="kode" name="kode" max-length="2"></x-forms.input>
-                        <x-forms.input label="Description" id="description" name="description" margin-bottom="mb-3"></x-forms.input>
+                        <x-forms.input label="Kode" id="kode" name="kode" maxlength="2" placeholder="Kode"></x-forms.input>
+                        <x-forms.input label="Description" id="description" name="description" margin-bottom="mb-3" placeholder="Description"></x-forms.input>
                         <div class="text-end">
                             <button type="submit" class="btn btn-success data-submit me-1">Save</button>
                             <button type="reset" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancel</button>

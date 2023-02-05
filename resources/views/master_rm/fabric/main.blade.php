@@ -68,10 +68,10 @@
                         <input type="hidden" name="number" id="number" value="{{old('number')??''}}">
                         <input type="hidden" name="old_kode" id="old_kode" value="{{old('old_kode')??''}}">
                         <div class="col-md-3">
-                            <x-forms.input label="Prefix Code" id="prefix" name="prefix" max-length="1"></x-forms.input>
+                            <x-forms.input label="Prefix Code" id="prefix" name="prefix" placeholder="Prefix Code" maxlength="1"></x-forms.input>
                         </div>
-                        <x-forms.input label="Kode" id="kode" name="kode" read-only=true></x-forms.input>
-                        <x-forms.input label="Description" id="description" name="description" margin-bottom="mb-3"></x-forms.input>
+                        <x-forms.input label="Code" id="kode" name="kode" placeholder="Code" readonly></x-forms.input>
+                        <x-forms.input label="Description" id="description" name="description" placeholder="Description" margin-bottom="mb-3"></x-forms.input>
                         <div class="text-end">
                             <button type="submit" class="btn btn-success data-submit me-1">Save</button>
                             <button type="reset" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancel</button>
