@@ -66,8 +66,8 @@
                     <form method="post" action="{{route('komposisi.store')}}" id="frm-komposisi">
                         @csrf
                         <input type="hidden" name="number" id="number" value="{{old('number')??''}}">
-                        <x-forms.input label="Komposisi" id="komposisi" name="komposisi"></x-forms.input>
-                        <x-forms.input form-input="textarea" label="Keterangan" id="keterangan" name="keterangan" margin-bottom="mb-3"></x-forms.input>
+                        <x-forms.input label="Komposisi" id="komposisi" name="komposisi" placeholder="Komposisi"></x-forms.input>
+                        <x-forms.textarea label="Keterangan" id="keterangan" name="keterangan" placeholder="Keterangan" margin-bottom="mb-3"></x-forms.textarea>
                         <div class="text-end">
                             <button type="submit" class="btn btn-success data-submit me-1">Save</button>
                             <button type="reset" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancel</button>
