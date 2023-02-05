@@ -226,7 +226,7 @@
                                     <a href="{!! route('warna.index') !!}" class="nav-link" data-key="t-warna"> Warna MD </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{--{!! route('area.index') !!}--}}" class="nav-link" data-key="t-region"> Pantone </a>
+                                    <a href="{!! route('pantone.index') !!}" class="nav-link" data-key="t-region"> Pantone </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{--{!! route('area.index') !!}--}}" class="nav-link" data-key="t-region"> Warna Aksesoris </a>
