@@ -5,6 +5,7 @@ use App\Http\Controllers\master_data\BrandsController;
 use App\Http\Controllers\master_rm\FabricsController;
 use App\Http\Controllers\master_rm\KomposisiController;
 use App\Http\Controllers\master_warna\ColorsController;
+use App\Http\Controllers\master_warna\PantonesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,6 +37,9 @@ Route::prefix('master-rm')->middleware('auth:web')->group(function (){
 Route::prefix('master-warna')->middleware('auth:web')->group(function (){
 //Region Warna MD
     Route::resource('warna', ColorsController::class)->except(['create','show']);
+//endregion
+//region Warna Pantone
+    Route::resource('pantone', PantonesController::class)->except(['create','show']);
 //endregion
 });
 //endregion
