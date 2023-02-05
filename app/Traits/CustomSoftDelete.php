@@ -3,8 +3,7 @@ namespace App\Traits;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
-trait CustomSoftDeleteTrait {
+trait CustomSoftDelete {
     protected function runSoftDelete(): void
     {
         $keyName = $this->getKeyName();
