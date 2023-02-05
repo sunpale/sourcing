@@ -236,7 +236,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link menu-link" href="widgets.html" aria-expanded="false">
+                        <a class="nav-link menu-link" href="{!! route('brands.index') !!}" aria-expanded="false">
                             <i class="icon-3second"></i> <span data-key="t-widgets">Brands</span>
                         </a>
                     </li>
