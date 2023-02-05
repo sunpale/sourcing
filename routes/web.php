@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\master_data\BrandsController;
 use App\Http\Controllers\master_rm\FabricsController;
 use App\Http\Controllers\master_rm\KomposisiController;
 use App\Http\Controllers\master_warna\ColorsController;
@@ -35,6 +36,15 @@ Route::prefix('master-rm')->middleware('auth:web')->group(function (){
 Route::prefix('master-warna')->middleware('auth:web')->group(function (){
 //Region Warna MD
     Route::resource('warna', ColorsController::class)->except(['create','show']);
+//endregion
+});
+//endregion
+
+
+//region Master Data
+Route::prefix('master-data')->middleware('auth:web')->group(function (){
+//region Brand
+    Route::resource('brands', BrandsController::class)->except(['create','show']);
 //endregion
 });
 //endregion

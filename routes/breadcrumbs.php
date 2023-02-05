@@ -37,4 +37,17 @@ Breadcrumbs::for('warna',function (BreadcrumbTrail $trail){
     $trail->push('warna',route('warna.index'));
 });
 //endregion
-//
+//endregion
+
+//region Master Data
+Breadcrumbs::for('master-data',function (BreadcrumbTrail $trail){
+    $trail->parent('main');
+    $trail->push('Master Data');
+});
+//region Brands
+Breadcrumbs::for('brands',function (BreadcrumbTrail $trail){
+    $trail->parent('master-data');
+    $trail->push('Brands',route('brands.index'));
+});
+//endregion
+//endregion
