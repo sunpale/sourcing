@@ -199,13 +199,13 @@
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="#sidebarMasterAksesoris" data-bs-toggle="collapse" role="button"
                            aria-expanded="false" aria-controls="sidebarMasterAksesoris">
-                            <i class="ri-account-circle-line"></i> <span
+                            <i class="ri-pantone-fill"></i> <span
                                 data-key="t-authentication">Master Aksesoris</span>
                         </a>
                         <div class="collapse menu-dropdown" id="sidebarMasterAksesoris">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="apps-chat.html" class="nav-link" data-key="t-toko"> Product Group </a>
+                                    <a href="{!! route('product-group.index') !!}" class="nav-link" data-key="t-toko"> Product Group </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{--{!! route('area.index') !!}--}}" class="nav-link" data-key="t-region"> Aksesoris </a>
@@ -217,7 +217,7 @@
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="#sidebarMasterWarna" data-bs-toggle="collapse" role="button"
                            aria-expanded="false" aria-controls="sidebarMasterWarna">
-                            <i class="ri-account-circle-line"></i> <span
+                            <i class="ri-palette-line"></i> <span
                                 data-key="t-authentication">Master Warna</span>
                         </a>
                         <div class="collapse menu-dropdown" id="sidebarMasterWarna">
@@ -242,7 +242,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="widgets.html" aria-expanded="false">
-                            <i class="mdi mdi-puzzle-outline"></i> <span data-key="t-widgets">Supplier</span>
+                            <i class="mdi mdi-truck-delivery"></i> <span data-key="t-widgets">Supplier</span>
                         </a>
                     </li>
                     <li class="nav-item">
