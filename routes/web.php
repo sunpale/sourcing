@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\master_aks\ProductGroupsController;
 use App\Http\Controllers\master_data\BrandsController;
 use App\Http\Controllers\master_data\MeasuresController;
 use App\Http\Controllers\master_rm\FabricsController;
@@ -55,4 +56,13 @@ Route::prefix('master-data')->middleware('auth:web')->group(function (){
     Route::resource('measure', MeasuresController::class)->except(['show','create']);
 //endregion
 });
+//endregion
+
+//region Master Aksesoris
+Route::prefix('master-aksesoris')->middleware('auth:web')->group(function (){
+//region Product Group
+    Route::resource('product-group', ProductGroupsController::class)->except(['create','show']);
+//endregion
+});
+
 //endregion

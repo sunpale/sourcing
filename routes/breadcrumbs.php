@@ -63,3 +63,16 @@ Breadcrumbs::for('uom',function (BreadcrumbTrail $trail){
 });
 //endregion
 //endregion
+
+//region Master Aksesoris
+Breadcrumbs::for('master-aks',function (BreadcrumbTrail $trail){
+    $trail->parent('main');
+    $trail->push('Master Aksesoris');
+});
+//region Product Group
+Breadcrumbs::for('product-group',function (BreadcrumbTrail $trail){
+    $trail->parent('master-aks');
+    $trail->push('Product Group',route('product-group.index'));
+});
+//endregion
+//endregion
