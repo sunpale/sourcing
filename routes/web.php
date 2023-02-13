@@ -4,6 +4,7 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\master_aks\ProductGroupsController;
 use App\Http\Controllers\master_data\BrandsController;
 use App\Http\Controllers\master_data\MeasuresController;
+use App\Http\Controllers\master_data\SuppliersController;
 use App\Http\Controllers\master_rm\FabricsController;
 use App\Http\Controllers\master_rm\KomposisiController;
 use App\Http\Controllers\master_warna\ColorsController;
@@ -54,6 +55,9 @@ Route::prefix('master-data')->middleware('auth:web')->group(function (){
 //endregion
 //region Unit of Measure
     Route::resource('measure', MeasuresController::class)->except(['show','create']);
+//endregion
+//region Supplier
+    Route::resource('supplier', SuppliersController::class)->names(['show' => 'supplier.data']);
 //endregion
 });
 //endregion

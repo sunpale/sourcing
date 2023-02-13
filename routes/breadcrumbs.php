@@ -62,6 +62,16 @@ Breadcrumbs::for('uom',function (BreadcrumbTrail $trail){
     $trail->push('Unit of Measure',route('measure.index'));
 });
 //endregion
+//region Supplier
+Breadcrumbs::for('supplier',function (BreadcrumbTrail $trail){
+    $trail->parent('master-data');
+    $trail->push('Supplier',route('supplier.index'));
+});
+Breadcrumbs::for('supplier.create',function (BreadcrumbTrail $trail){
+    $trail->parent('supplier');
+    $trail->push('New',route('supplier.create'));
+});
+//endregion
 //endregion
 
 //region Master Aksesoris
