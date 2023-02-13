@@ -241,7 +241,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link menu-link" href="widgets.html" aria-expanded="false">
+                        <a class="nav-link menu-link" href="{!! route('supplier.index') !!}" aria-expanded="false">
                             <i class="mdi mdi-truck-delivery"></i> <span data-key="t-widgets">Supplier</span>
                         </a>
                     </li>
