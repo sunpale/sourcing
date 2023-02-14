@@ -43,6 +43,12 @@ Breadcrumbs::for('pantone',function (BreadcrumbTrail $trail){
     $trail->push('Warna Pantone',route('pantone.index'));
 });
 //endregion
+//region Warna Aksesoris
+Breadcrumbs::for('warna-aks',function (BreadcrumbTrail $trail){
+    $trail->parent('master-warna');
+    $trail->push('Warna Aksesoris',route('warna-aksesoris.index'));
+});
+//endregion
 //endregion
 
 //region Master Data
