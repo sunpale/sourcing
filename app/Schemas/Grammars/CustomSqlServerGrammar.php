@@ -143,4 +143,15 @@ class CustomSqlServerGrammar extends SqlServerGrammar
     {
         return 'varchar(17)';
     }
+
+    /**
+     * Create the column definition for a char type.
+     *
+     * @param Fluent $column
+     * @return string
+     */
+    protected function typeChar(Fluent $column): string
+    {
+        return "char({$column->length})";
+    }
 }
