@@ -28,7 +28,7 @@ class SuppliersController extends Controller
         $stringList = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $code = '';
         while (strlen($code) < 3){
-            $position = rand(0,strlen(strlen($stringList))-1);
+            $position = rand(0,strlen($stringList)-1);
             $character = $stringList[$position];
             $code .= $character;
         }
