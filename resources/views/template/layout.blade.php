@@ -229,7 +229,7 @@
                                     <a href="{!! route('pantone.index') !!}" class="nav-link" data-key="t-region"> Pantone </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{--{!! route('area.index') !!}--}}" class="nav-link" data-key="t-region"> Warna Aksesoris </a>
+                                    <a href="{!! route('warna-aksesoris.index') !!}" class="nav-link" data-key="t-region"> Warna Aksesoris </a>
                                 </li>
                             </ul>
                         </div>
