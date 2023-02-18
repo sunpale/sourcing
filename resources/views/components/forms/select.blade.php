@@ -1,15 +1,15 @@
 <div class="{{$marginBottom}}">
     <label class="form-label" for="{{$id}}">{{$label}}</label>
-    <select {{$attributes->merge(['class'=>'form-control'.($errors->has($name) ? ' is-invalid' : '')])}} id="{{$id}}" name="{{$name}}">
+    <select {{$attributes->merge(['class'=>'form-select'.($errors->has($name) ? ' is-invalid' : '')])}} id="{{$id}}" name="{{$name}}">
         @if(count($listValue)==0)
             {{$slot}}
         @else
             <option disabled selected value>-{{$slot}}-</option>
-            @foreach($listValue as $rowData)
+            @foreach($listValue as $key => $nilai)
                 @if(old($name))
-                    <option value="{!! $rowData[$dataValue] !!}" {{old($name)==$rowData[$dataValue] ? 'selected':''}}>{!! $rowData[$dataColumn] !!}</option>
+                    <option value="{!! $key !!}" {{old($name)==$key ? 'selected':''}}>{!! $nilai !!}</option>
                 @else
-                    <option value="{!! $rowData[$dataValue] !!}" {{$value==$rowData[$dataValue] ? 'selected':''}}>{!! $rowData[$dataColumn] !!}</option>
+                    <option value="{!! $key !!}" {{$value==$key ? 'selected':''}}>{!! $nilai !!}</option>
                 @endif
 
             @endforeach

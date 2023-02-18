@@ -13,19 +13,20 @@ class Select extends Component
     public string $value;
     public string $marginBottom;
     public array $listValue;
-    public string $dataValue;
-    public string $dataColumn;
 
-    public function __construct(string $id = null,string $name = '',string $value = '', string $marginBottom='mb-2',string $label = '',array $listValue = [],string $dataValue = '',string $dataColumn = '')
+    public function __construct(string|null $id = null, string|null $name = null, string|null $value = null, string|null $marginBottom= null, string|null $label = null, array|null $listValue = null)
     {
+        $listValue ??= [];
+        $label ??= '';
+        $marginBottom ??= 'mb-2';
+        $value ??= '';
+        $name ??= '';
         $this->id = $id;
         $this->name = $name;
         $this->value = $value;
         $this->marginBottom = $marginBottom;
         $this->label = $label;
         $this->listValue = $listValue;
-        $this->dataValue = $dataValue;
-        $this->dataColumn = $dataColumn;
     }
     public function render(): View
     {
