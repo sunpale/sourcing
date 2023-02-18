@@ -19,7 +19,7 @@ class SuppliersController extends Controller
     public function create()
     {
         $data = [
-            'dataGroup' => ProductGroup::select(['id','group'])->get()
+            'dataGroup' => ProductGroup::select(['id','group'])->pluck('group','id')
         ];
         return view('master_data.supplier.create',$data);
     }
@@ -48,7 +48,7 @@ class SuppliersController extends Controller
         $data = $request->except('_token');
         $data['kode'] = $this->generateCode();
         if (!isset($request->product_group_id))
-            $data['product_group_id'] = '0';
+            $data['product_group_id'] = '1';
         Supplier::create($data);
         return redirect()->route('supplier.index')->with('success',config('constants.SUCCESS_SAVE'));
     }
@@ -68,7 +68,7 @@ class SuppliersController extends Controller
     public function edit(Supplier $supplier)
     {
         $data = [
-            'dataGroup' => ProductGroup::select(['id','group'])->get(),
+            'dataGroup' => ProductGroup::select(['id','group'])->pluck('group','id'),
             'supplier' => $supplier
         ];
         return view('master_data.supplier.edit',$data);
@@ -78,7 +78,7 @@ class SuppliersController extends Controller
     {
         $data = $request->except(['_token','_method']);
         if (!isset($request->product_group_id))
-            $data['product_group_id'] = '0';
+            $data['product_group_id'] = '1';
 
         Supplier::where('id',$supplier->id)->update($data);
         return redirect()->route('supplier.index')->with('success',config('constants.SUCCESS_UPDATE'));
@@ -88,5 +88,40 @@ class SuppliersController extends Controller
     {
         Supplier::destroy($supplier->id);
         return redirect()->route('supplier.index')->with('success',config('constants.SUCCESS_DELETE'));
+    }
+
+    public function getSupplier(Request $request){
+        /*get data pencarian dan jumlah halaman dari komponen select2*/
+        $search = $request->search;
+        $halaman = $request->page;
+        $searchData = empty($search) ? "" : $search;
+        $type = $request->type;
+        /*end*/
+        /*Set jumlah data per halaman*/
+        $pageLoad = 25;
+        /*End*/
+        /*Cek jumlah halaman, kemudian dikurang satu (offset data di mulai dari 0)*/
+        if($halaman==1){
+            $page=0;
+        }else{
+            /*Jika halaman lebih dari 1, maka setelah dikurang satu dikalikan jumlah data per halaman untuk mendapatkan data offset halaman berikutnya*/
+            $page=($halaman-1)*$pageLoad;
+            /*end*/
+        }
+        /*end*/
+        /*Memanggil data dan jumlah data dari database*/
+        $dataItem=Supplier::select(['id','kode','name'])->where('type',$type)->where('name','LIKE','%'.$searchData.'%')->limit($pageLoad)->offset($page)->get();
+        $dataCount=Supplier::select(['id','kode','name'])->where('type',$type)->where('name','LIKE','%'.$searchData.'%')->count();
+        /*End*/
+
+        /*Mengubah hasil data dari database sesuai dengan format dari select2*/
+        $result=array();
+        foreach ($dataItem as $item){
+            $result[] = array("id" => $item->id,"text"=>$item->kode.' - '.$item->name);
+        }
+        $resultQuery['items']=$result;
+        $resultQuery['total_count']=$dataCount;
+        /*End*/
+        return response()->json($resultQuery);
     }
 }
