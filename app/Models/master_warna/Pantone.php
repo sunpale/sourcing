@@ -12,4 +12,9 @@ class Pantone extends Model
     use UserInput,CustomSoftDelete,SoftDeletes {CustomSoftDelete::runSoftDelete insteadof SoftDeletes;}
 
     protected $fillable = ['kode','pantone'];
+
+    public function getFullPantoneAttribute(): string
+    {
+        return $this->kode.' - '.$this->pantone;
+    }
 }

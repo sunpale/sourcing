@@ -12,4 +12,9 @@ class Brand extends Model
     use UserInput,CustomSoftDelete,SoftDeletes {CustomSoftDelete::runSoftDelete insteadof SoftDeletes;}
 
     protected $fillable = ['kode','brand'];
+
+    public function getFullBrandAttribute(): string
+    {
+        return $this->kode.' - '.$this->brand;
+    }
 }
