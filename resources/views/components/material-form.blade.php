@@ -1,0 +1,179 @@
+<x-layout breadcrumbs="material.create" :select2="true">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header align-items-center d-flex">
+                    <h4 class="card-title mb-0 flex-grow-1">Input Data Supplier</h4>
+                    <div class="flex-shrink-0">
+                        <span class="text-end ml-auto fw-bold">Kode : </span>
+                        <span class="text-end kode-text mx-2 fw-bold">{{old('kode') ? old('kode'): config('constants.'.$form).'0000 00000 00000'}}</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form method="post" id="frm-<?=$form?>" {{$attributes->merge(['action'=> route('raw-material.store')])}}>
+                        @csrf
+                        <input type="hidden" id="number" name="number">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <x-forms.select id="fabric" name="fabric_id" label="Fabric Code" class="form-select-sm select2 select-default" :list-value="$fabric">Select Fabric</x-forms.select>
+                            </div>
+                            <div class="col-md-4">
+                                <x-forms.select id="color" name="color_id" label="Color Code" class="form-select-sm select2 select-default" :list-value="$warna">Select Color</x-forms.select>
+                            </div>
+                            <div class="col-md-4">
+                                <x-forms.select id="brand" name="brand_id" label="Brand Code" class="form-select-sm select2 select-default" :list-value="$brand">Select Brand</x-forms.select>
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label" for="supplier">Supplier</label>
+                                <select class="form-select form-select-sm select2 @error('supplier_id') is-invalid @enderror" id="supplier" name="supplier_id">
+                                    <option disabled selected value>Select Supplier</option>
+                                </select>
+                                @error('supplier_id')
+                                <div class="invalid-feedback">
+                                    {{$errors->messages()['supplier_id'][0]}}
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="col-md-6">
+                                <x-forms.select id="pantone" name="pantone_id" label="Pantone Code" class="form-select-sm select2 select-default" :list-value="$pantone">Select Pantone Color</x-forms.select>
+                            </div>
+                            <div class="col-md-6">
+                                <x-forms.select id="komposisi" name="komposisi_id" label="Composition" class="form-select-sm select2 select-default" :list-value="$komposisi">Select Composition</x-forms.select>
+                            </div>
+                            <x-forms.input id="item_name" name="item_name" label="Item Name" placeholder="Item Name"></x-forms.input>
+                            <x-forms.textarea id="item_desc" name="item_desc" label="Item Description" placeholder="Item Description" margin-bottom="mb-4"></x-forms.textarea>
+                            <div class="col-md-4">
+                                <x-forms.input id="gramasi" name="gramasi" label="Gramasi (GSM)" placeholder="Gramasi"></x-forms.input>
+                            </div>
+                            <div class="col md-4">
+                                <x-forms.input id="lebar" name="lebar" label="Lebar (Inch)" placeholder="Lebar"></x-forms.input>
+                            </div>
+                            <div class="col-md-4">
+                                <x-forms.input type="number" id="susut" name="susut" label="Susut (%)" placeholder="Susut"></x-forms.input>
+                            </div>
+                            <div class="col-md-6">
+                                <x-forms.input id="finish" name="finish" label="Finish" placeholder="Finish"></x-forms.input>
+                            </div>
+                            <div class="col-md-6">
+                                <x-forms.input id="lead_time" type="number" name="lead_time" label="Production Lead Time" placeholder="Lead Time"></x-forms.input>
+                            </div>
+                            <div class="col-md-6">
+                                <x-forms.input id="moq" name="moq" type="number" label="MOQ / Greige" placeholder="MOQ / Greige"></x-forms.input>
+                            </div>
+                            <div class="col-md-6">
+                                <x-forms.input id="moq_color" type="number" name="moq_color" label="MOQ / Col" placeholder="MOQ / Col"></x-forms.input>
+                            </div>
+                            <div class="col-md-6">
+                                <x-forms.select id="measure" name="measure_id" label="Unit of Measure" class="form-select-sm select2 select-default" :list-value="$measure">Select UOM</x-forms.select>
+                            </div>
+                            <div class="col-md-6">
+                                <x-forms.select id="ppn" name="ppn" label="PPN" class="form-select-sm select2 select-default">
+                                    <option disabled selected value>-Select PPN-</option>
+                                    <option value="1" {{old('ppn') ? 'selected':''}}>PPN</option>
+                                    <option value="0" {{old('ppn') ? 'selected':''}}>Non PPN</option>
+                                </x-forms.select>
+                            </div>
+                            <div class="text-end">
+                                <button type="submit" class="btn btn-success data-submit me-1">Save</button>
+                                <a href="{!! route('supplier.index') !!}" class="btn btn-outline-danger">Cancel</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    @section('script')
+    <script>
+        const brandEl = document.querySelector('#brand');
+        const supplier = document.querySelector('#supplier');
+        const item = document.querySelector('#item_name');
+        @if($form==='RM')
+        const fabricEl = document.querySelector('#fabric');
+        const colorEl = document.querySelector('#color');
+        const pantoneEl = document.querySelector('#pantone');
+        const komposisiEL = document.querySelector('#komposisi');
+        @endif
+        const supplierEl = document.querySelector('#supplier');
+
+        function generateCode(){
+            let fabric = fabricEl.options[fabricEl.selectedIndex].textContent.split(' - ');
+            let color = colorEl.options[colorEl.selectedIndex].textContent.split(' - ');
+            let brand = brandEl.options[brandEl.selectedIndex].textContent.split(' - ');
+            let supplier = supplierEl.options[supplierEl.selectedIndex].textContent.split(' - ');
+            let prefixCode = '{{config('constants.'.$form)}}'+fabric[0]+color[0]+brand[0]+supplier[0];
+            $.ajax({
+                url         : '{{route('raw-material.generate-code')}}',
+                type        : 'get',
+                data        : 'prefixCode='+prefixCode,
+                dataType    : 'json',
+                success     : function (response) {
+                    document.getElementById('number').value = response.kode;
+                    document.querySelector('.kode-text').innerHTML = response.kode;
+                }
+            });
+        }
+
+        function validateKode(){
+            let kode = document.querySelector('.kode-text').innerHTML;
+            if (kode!=='10000 00000 00000'){
+                generateCode();
+            }
+        }
+
+        function getSupplier(){
+            $('#supplier').select2({
+                ajax : {
+                    url         : '{{route('suppliers.data-supplier')}}',
+                    dataType    : 'json',
+                    type        : 'get',
+                    delay       : 250,
+                    data        : function (params) {
+                        return {
+                            search      : params.term,
+                            page        : params.page || 1,
+                            type        : '{{$form}}'
+                        }
+                    },
+                    processResults : function (data, params) {
+                        params.page = params.page ||1;
+                        return {
+                            results     : data.items,
+                            pagination  : {
+                                more    : (params.page * 25) < data.total_count
+                            }
+                        }
+                    },
+                    cache : true
+                },
+                /*minimumInputLength : 1,*/
+                placeholder : "Supplier",
+                templateResult : format,
+                templateSelection :formatSelection,
+                containerCssClass: "wrap"
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded',function (){
+            $('.select-default').select2();
+            getSupplier();
+
+            fabricEl.onchange = function (){
+                validateKode();
+            }
+
+            colorEl.onchange = function (){
+                validateKode();
+            }
+
+            brandEl.onchange = function (){
+                validateKode();
+            }
+
+            supplierEl.onchange = function () {
+                generateCode();
+            }
+        })
+    </script>
+    @endsection
+</x-layout>
