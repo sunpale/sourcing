@@ -190,7 +190,7 @@
                                     <a href="{!! route('komposisi.index') !!}" class="nav-link" data-key="t-komposisi"> Komposisi </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{--{!! route('aspek.index') !!}--}}" class="nav-link" data-key="t-aspek"> Raw Material </a>
+                                    <a href="{!! route('raw-material.index') !!}" class="nav-link" data-key="t-aspek"> Raw Material </a>
                                 </li>
                             </ul>
                         </div>
