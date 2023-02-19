@@ -19,5 +19,7 @@ return [
     'KODE_TRANSAKSI_KIRIM_BARANG'           => '30',
     'KODE_TRANSAKSI_REALISASI_OP'           => '11',
     'PAGE_ACCESS_NOT_ALLOWED'   => 'Anda tidak memiliki izin yang memadai untuk mengakses halaman ini',
-    'FITUR_ACCESS_NOT_ALLOWED'  => 'Anda tidak memiliki izin yang memadai untuk mengakses fitur ini'
+    'FITUR_ACCESS_NOT_ALLOWED'  => 'Anda tidak memiliki izin yang memadai untuk mengakses fitur ini',
+    'RM'                    => '1',
+    'AKS'                   => '2'
 ];
