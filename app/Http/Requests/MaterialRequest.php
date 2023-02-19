@@ -1,0 +1,39 @@
+<?php
+
+namespace App\Http\Requests;
+
+use App\Rules\AlpaSpaceRule;
+use App\Rules\AlphaNumericPunctRule;
+use App\Rules\AlphaNumericSpaceRule;
+use Illuminate\Foundation\Http\FormRequest;
+
+class MaterialRequest extends FormRequest
+{
+    public function rules(): array
+    {
+        return [
+            'fabric_id'     => 'required|numeric',
+            'color_id'      => 'required|numeric',
+            'brand_id'      => 'required|numeric',
+            'supplier_id'   => 'required|numeric',
+            'pantone_id'    => 'required|numeric',
+            'komposisi_id'  => 'required|numeric',
+            'item_name'     => ['required',new AlphaNumericPunctRule(),'max:100'],
+            'item_desc'     => ['required',new AlphaNumericPunctRule(),'max:255'],
+            'gramasi'       => ['required',new AlphaNumericPunctRule(),'max:25'],
+            'lebar'         => ['required',new AlphaNumericPunctRule(),'max:15'],
+            'susut'         => 'required|numeric',
+            'finish'        => ['required',new AlphaNumericSpaceRule(),'max:25'],
+            'lead_time'     => 'required|numeric',
+            'moq'           => 'required|numeric',
+            'moq_color'     => 'required|numeric',
+            'ppn'           => 'required|numeric',
+            'measure_id'    => 'required|numeric'
+        ];
+    }
+
+    public function authorize(): bool
+    {
+        return true;
+    }
+}
