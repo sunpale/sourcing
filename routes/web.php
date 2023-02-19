@@ -3,6 +3,7 @@
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\master_aks\ProductGroupsController;
 use App\Http\Controllers\master_data\BrandsController;
+use App\Http\Controllers\master_rm\MaterialsController;
 use App\Http\Controllers\master_data\MeasuresController;
 use App\Http\Controllers\master_data\SuppliersController;
 use App\Http\Controllers\master_rm\FabricsController;
@@ -34,6 +35,10 @@ Route::prefix('master-rm')->middleware('auth:web')->group(function (){
 //region Komposisi
     Route::resource('komposisi', KomposisiController::class)->except(['create','show']);
 //endregion
+//region material
+    Route::get('/raw-material/generate-code',[MaterialsController::class,'generateCode'])->name('raw-material.generate-code');
+    Route::resource('raw-material', MaterialsController::class);
+//endregion
 });
 //endregion
 
@@ -62,6 +67,7 @@ Route::prefix('master-data')->middleware('auth:web')->group(function (){
 //endregion
 //region Supplier
     Route::resource('supplier', SuppliersController::class)->names(['show' => 'supplier.data']);
+    Route::get('data-supplier',[SuppliersController::class,'getSupplier'])->name('suppliers.data-supplier');
 //endregion
 });
 //endregion
