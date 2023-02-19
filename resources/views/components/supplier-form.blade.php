@@ -9,36 +9,36 @@
                     <form method="post" id="frm-supplier" {{$attributes->merge(['action'=> route('supplier.store')])}}>
                         @csrf
                         @if($editMode)
-                        @method('PATCH')
-                        <x-forms.input id="name" name="name" label="Supplier Name" placeholder="Supplier Name" :value="$dataEdit['name']"></x-forms.input>
-                        <div class="row">
-                            <div class="col-md-12" id="col-type">
-                                <x-forms.select id="type" name="type" label="Type" class="form-control-sm select2">
-                                    <option disabled selected value>-Please Choose Type-</option>
-                                    <option value="RM" {{old('type')||$dataEdit['type']==='RM' ? 'selected':''}}>Raw Material</option>
-                                    <option value="AKS" {{old('type')||$dataEdit['type']==='AKS' ? 'selected':''}}>Aksesoris</option>
-                                </x-forms.select>
+                            @method('PATCH')
+                            <x-forms.input id="name" name="name" label="Supplier Name" placeholder="Supplier Name" :value="$dataEdit['name']"></x-forms.input>
+                            <div class="row">
+                                <div class="col-md-12" id="col-type">
+                                    <x-forms.select id="type" name="type" label="Type" class="form-control-sm select2">
+                                        <option disabled selected value>-Please Choose Type-</option>
+                                        <option value="RM" {{old('type')||$dataEdit['type']==='RM' ? 'selected':''}}>Raw Material</option>
+                                        <option value="AKS" {{old('type')||$dataEdit['type']==='AKS' ? 'selected':''}}>Aksesoris</option>
+                                    </x-forms.select>
+                                </div>
+                                <div class="col-md-6 sembunyi" id="col-group">
+                                    <x-forms.select id="group" name="product_group_id" label="Product Group" class="form-control-sm select2" :list-value="$productGroup" disabled :value="$dataEdit['product_group_id']">Please Choose Product Group</x-forms.select>
+                                </div>
                             </div>
-                            <div class="col-md-6 sembunyi" id="col-group">
-                                <x-forms.select id="group" name="product_group_id" label="Product Group" class="form-control-sm select2" :list-value="$productGroup" data-column="group" data-value="id" disabled :value="$dataEdit['product_group_id']">Please Choose Product Group</x-forms.select>
-                            </div>
-                        </div>
-                        <x-forms.textarea id="address" name="address" label="Address" placeholder="Supplier Address" margin-bottom="mb-3" :value="$dataEdit['address']"></x-forms.textarea>
+                            <x-forms.textarea id="address" name="address" label="Address" placeholder="Supplier Address" margin-bottom="mb-3" :value="$dataEdit['address']"></x-forms.textarea>
                         @else
-                        <x-forms.input id="name" name="name" label="Supplier Name" placeholder="Supplier Name"></x-forms.input>
-                        <div class="row">
-                            <div class="col-md-12" id="col-type">
-                                <x-forms.select id="type" name="type" label="Type" class="form-control-sm select2">
-                                    <option disabled selected value>-Please Choose Type-</option>
-                                    <option value="RM" {{old('type') ? 'selected':''}}>Raw Material</option>
-                                    <option value="AKS" {{old('type') ? 'selected':''}}>Aksesoris</option>
-                                </x-forms.select>
+                            <x-forms.input id="name" name="name" label="Supplier Name" placeholder="Supplier Name"></x-forms.input>
+                            <div class="row">
+                                <div class="col-md-12" id="col-type">
+                                    <x-forms.select id="type" name="type" label="Type" class="form-select-sm select2">
+                                        <option disabled selected value>-Please Choose Type-</option>
+                                        <option value="RM" {{old('type') ? 'selected':''}}>Raw Material</option>
+                                        <option value="AKS" {{old('type') ? 'selected':''}}>Aksesoris</option>
+                                    </x-forms.select>
+                                </div>
+                                <div class="col-md-6 sembunyi" id="col-group">
+                                    <x-forms.select id="group" name="product_group_id" label="Product Group" class="form-select-sm select2" :list-value="$productGroup" disabled>Select Product Group</x-forms.select>
+                                </div>
                             </div>
-                            <div class="col-md-6 sembunyi" id="col-group">
-                                <x-forms.select id="group" name="product_group_id" label="Product Group" class="form-control-sm select2" :list-value="$productGroup" data-column="group" data-value="id" disabled>Please Choose Product Group</x-forms.select>
-                            </div>
-                        </div>
-                        <x-forms.textarea id="address" name="address" label="Address" placeholder="Supplier Address" margin-bottom="mb-3"></x-forms.textarea>
+                            <x-forms.textarea id="address" name="address" label="Address" placeholder="Supplier Address" margin-bottom="mb-3"></x-forms.textarea>
                         @endif
 
                         <div class="text-end">
