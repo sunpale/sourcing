@@ -7,9 +7,10 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
     public function up()
-    {if (env('DB_CONNECTION')==='sqlsrv'){
-        DB::connection()->setSchemaGrammar(new CustomSqlServerGrammar());
-    }
+    {
+        if (env('DB_CONNECTION')==='sqlsrv'){
+            DB::connection()->setSchemaGrammar(new CustomSqlServerGrammar());
+        }
         Schema::create('color_aks', function (Blueprint $table) {
             $table->smallIncrements('id')->unique();
             $table->string('kode',3)->unique();
