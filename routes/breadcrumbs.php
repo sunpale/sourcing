@@ -24,6 +24,16 @@ Breadcrumbs::for('komposisi',function (BreadcrumbTrail $trail){
     $trail->push('Komposisi',route('komposisi.index'));
 });
 //endregion
+//region material
+Breadcrumbs::for('material',function (BreadcrumbTrail $trail){
+    $trail->parent('master-rm');
+    $trail->push('Raw Material',route('raw-material.index'));
+});
+Breadcrumbs::for('material.create',function (BreadcrumbTrail $trail){
+    $trail->parent('material');
+    $trail->push('New',route('raw-material.index'));
+});
+//endregion
 //endregion
 
 //region Master Warna
