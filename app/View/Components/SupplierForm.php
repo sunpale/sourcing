@@ -10,8 +10,9 @@ class SupplierForm extends Component
     public array $productGroup;
     public bool $editMode;
     public array $dataEdit;
-    public function __construct(array $productGroup = [],$editMode =false,array $dataEdit = [])
+    public function __construct(array|null $productGroup = null, $editMode =false, array $dataEdit = [])
     {
+        $productGroup ??= [];
         $this->productGroup = $productGroup;
         $this->editMode = $editMode;
         $this->dataEdit = $dataEdit;
