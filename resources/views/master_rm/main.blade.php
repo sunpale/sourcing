@@ -1,4 +1,4 @@
-<x-layout breadcrumbs="material">
+<x-layout breadcrumbs="material" :datatable="true" :sweetalert="true" :toastify="true" :freeze-ui="true">
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
@@ -12,18 +12,21 @@
                 </div>
                 <div class="card-body">
                     @csrf
-                    <table id="tbl-supplier" class="table table-sm table-bordered table-hover dt-responsive nowrap table-striped align-middle w-100 fw">
+                    <table id="tbl-material" class="table table-sm table-bordered table-hover dt-responsive nowrap table-striped align-middle w-100 fw">
                         <thead>
                         <tr>
                             <th></th>
                             <th class="text-center">No</th>
-                            <th class="text-center">id</th>
-                            <th class="text-center">Kode</th>
-                            <th class="text-center">Type</th>
-                            <th class="text-center">Product Group ID</th>
-                            <th class="text-center">Product Group</th>
-                            <th class="text-center">Supplier Name</th>
-                            <th class="text-center">Address</th>
+                            <th class="text-center">ID</th>
+                            <th class="text-center">ID Infor</th>
+                            <th class="text-center">Fabric</th>
+                            <th class="text-center">Color</th>
+                            <th class="text-center">Brand</th>
+                            <th class="text-center">Supplier</th>
+                            <th class="text-center">Item Name</th>
+                            <th class="text-center">Item Desc</th>
+                            <th class="text-center">Komposisi</th>
+                            <th class="text-center">UOM</th>
                             <th class="text-center">Action</th>
                         </tr>
                         </thead>
@@ -35,4 +38,101 @@
             </div>
         </div>
     </div>
+    @section('script')
+    <script>
+        function tableMaterial(){
+            const material = $('#tbl-material').DataTable({
+                serverSide: true,
+                ajax: '{{route('raw-material.data',1)}}',
+                columns: [
+                    {data: 'responsive',name:'responsive',searchable:false},
+                    {data: 'rownum',name:'rownum',searchable:false}, {data: 'kode',name: 'kode'}, {data: 'kode_infor',name: 'kode_infor'}, {data: 'fabric.description',name: 'fabric.description'},{data: 'color.description',name: 'color.description'}, {data: 'brand.brand',name: 'brand.brand'}, {data: 'supplier.name',name: 'supplier.name'},{data : 'item_name',name: 'item_name'},{data : 'item_desc',name: 'item_desc'},{data : 'komposisi.komposisi',name: 'komposisi.komposisi'},{data:'measure.kode',data:'measure.kode'},{data: 'action',name: 'action'}
+                ],
+                columnDefs: [
+                    {
+                        // For Responsive
+                        className: 'control',
+                        orderable: false,
+                        responsivePriority: 2,
+                        targets: 0
+                    },
+                    {
+                        targets: [1,-1],
+                        width: '3%',
+                        className: 'text-center p-1'
+                    },
+                    {
+                        targets: [1,2],
+                        width: '8%',
+                        className: 'text-center'
+                    },
+                    {
+                        targets: [3,4,5],
+                        width: '8%'
+                    },
+                    {
+                        targets: 6,
+                        width: '8%'
+                    },
+                    {
+                        targets: 9,
+                        width: '25%'
+                    }
+                ],
+                drawCallback: function () {
+                    $('[data-bs-toggle="tooltip"]').tooltip();
+                }
+            });
+            const tblMaterialInput = $('#tbl-material_filter input');
+            tblMaterialInput.unbind();
+            tblMaterialInput.bind('keyup', function (e) {
+                if (e.keyCode === 13){
+                    material.search(this.value).draw();
+                }
+            });
+        }
+
+        function edit(id){
+            Swal.fire({
+                title: "{!! config('constants.CONFIRM_TITLE_EDIT') !!}",
+                text: "{!! config('constants.WARNING_MESSAGE') !!}",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonText: "Yes"
+            }).then(function (result) {
+                if(result.value){
+                    url_redirect({
+                        url : baseUrl + '/master-data/supplier/'+id+'/edit',
+                        method  : "get"
+                    });
+                }
+            });
+        }
+
+        function hapus(id){
+            let token=document.getElementsByName('_token');
+            Swal.fire({
+                title: "{{config('constants.CONFIRM_TITLE_DELETE')}}",
+                text: "{{config('constants.WARNING_MESSAGE')}}",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes, delete it!"
+            }).then((function (result) {
+                if(result.value){
+                    url_redirect({
+                        url     : baseUrl + '/master-rm/raw-material/'+id,
+                        method  : "post",
+                        data    : {"_token" : token[0].value,"_method":'DELETE'}
+                    });
+                }
+            }));
+        }
+        document.addEventListener('DOMContentLoaded',function (){
+            @if(Session::has('success'))
+            notifikasi('success','{{session('success')}}')
+            @endif
+            tableMaterial();
+        });
+    </script>
+    @endsection
 </x-layout>
