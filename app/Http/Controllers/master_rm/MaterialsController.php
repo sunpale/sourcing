@@ -65,10 +65,27 @@ class MaterialsController extends Controller
 
     public function edit(Material $raw_material)
     {
+        $data = [
+            'dataFabric' => Fabric::all()->pluck('full_description','id'),
+            'dataWarna' => Color::all()->pluck('full_description','id'),
+            'dataBrand' => Brand::all()->pluck('full_brand','id'),
+            'dataPantone' => Pantone::all()->pluck('full_pantone','id'),
+            'dataKomposisi' => Komposisi::select(['id','komposisi'])->pluck('komposisi','id'),
+            'dataMeasure' => Measure::select(['id','kode'])->pluck('kode','id'),
+            'dataRm'    => $raw_material->with('supplier:id,kode,name')->where('kode',$raw_material->kode)->get()
+        ];
+        return view('master_rm.edit',$data);
     }
 
-    public function update(Request $request, Material $raw_material)
+    public function update(MaterialRequest $request, Material $raw_material)
     {
+        $data = $request->except(['_token','_method','number']);
+        $kodeGenerated = $request->number;
+        $prefixOldKode = substr($raw_material->kode,0,strlen($raw_material->kode)-3);
+        $prefix = substr($kodeGenerated,0,strlen($kodeGenerated)-3);
+        $data['kode']= strcmp($prefix,$prefixOldKode) == 0 ? $raw_material->kode : $this->createCode($prefix);
+        Material::where('kode',$raw_material->kode)->update($data);
+        return redirect()->route('raw-material.index')->with('success',config('constants.SUCCESS_UPDATE'));
     }
 
     public function destroy(Material $raw_material)

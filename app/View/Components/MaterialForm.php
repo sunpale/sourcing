@@ -14,8 +14,12 @@ class MaterialForm extends Component
     public array $pantone;
     public array $komposisi;
     public array $measure;
-    public function __construct(string|null $form = null, array|null $fabric = null, array|null $warna = null, array|null $brand = null, array|null $pantone = null, array|null $komposisi = null, array $measure = [])
+    public bool $editMode;
+    public array $dataEdit;
+    public function __construct(string|null $form = null, array|null $fabric = null, array|null $warna = null, array|null $brand = null, array|null $pantone = null, array|null $komposisi = null, array|null $measure = null, bool|null $editMode = null, array $dataEdit = [])
     {
+        $editMode ??= false;
+        $measure ??= [];
         $komposisi ??= [];
         $pantone ??= [];
         $brand ??= [];
@@ -29,6 +33,8 @@ class MaterialForm extends Component
         $this->pantone = $pantone;
         $this->komposisi = $komposisi;
         $this->measure = $measure;
+        $this->editMode = $editMode;
+        $this->dataEdit = $dataEdit;
     }
 
     public function render(): View

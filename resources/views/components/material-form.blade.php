@@ -6,22 +6,25 @@
                     <h4 class="card-title mb-0 flex-grow-1">Input Data Supplier</h4>
                     <div class="flex-shrink-0">
                         <span class="text-end ml-auto fw-bold">Kode : </span>
-                        <span class="text-end kode-text mx-2 fw-bold">{{old('kode') ? old('kode'): config('constants.'.$form).'0000 00000 00000'}}</span>
+                        <span class="text-end kode-text mx-2 fw-bold">{{old('number') ? old('number'): config('constants.'.$form).'0000 00000 00000'}}</span>
                     </div>
                 </div>
                 <div class="card-body">
                     <form method="post" id="frm-<?=$form?>" {{$attributes->merge(['action'=> route('raw-material.store')])}}>
                         @csrf
+                        @if($editMode)
+                        @method('PATCH')
+                        @endif
                         <input type="hidden" id="number" name="number">
                         <div class="row">
                             <div class="col-md-4">
-                                <x-forms.select id="fabric" name="fabric_id" label="Fabric Code" class="form-select-sm select2 select-default" :list-value="$fabric">Select Fabric</x-forms.select>
+                                <x-forms.select id="fabric" name="fabric_id" label="Fabric Code" class="form-select-sm select2 select-default" :list-value="$fabric" :value="$editMode ? $dataEdit[0]['fabric_id']:''">Select Fabric</x-forms.select>
                             </div>
                             <div class="col-md-4">
-                                <x-forms.select id="color" name="color_id" label="Color Code" class="form-select-sm select2 select-default" :list-value="$warna">Select Color</x-forms.select>
+                                <x-forms.select id="color" name="color_id" label="Color Code" class="form-select-sm select2 select-default" :list-value="$warna" :value="$editMode ? $dataEdit[0]['color_id']:''">Select Color</x-forms.select>
                             </div>
                             <div class="col-md-4">
-                                <x-forms.select id="brand" name="brand_id" label="Brand Code" class="form-select-sm select2 select-default" :list-value="$brand">Select Brand</x-forms.select>
+                                <x-forms.select id="brand" name="brand_id" label="Brand Code" class="form-select-sm select2 select-default" :list-value="$brand" :value="$editMode ? $dataEdit[0]['brand_id']:''">Select Brand</x-forms.select>
                             </div>
                             <div class="mb-2">
                                 <label class="form-label" for="supplier">Supplier</label>
@@ -35,47 +38,52 @@
                                 @enderror
                             </div>
                             <div class="col-md-6">
-                                <x-forms.select id="pantone" name="pantone_id" label="Pantone Code" class="form-select-sm select2 select-default" :list-value="$pantone">Select Pantone Color</x-forms.select>
+                                <x-forms.select id="pantone" name="pantone_id" label="Pantone Code" class="form-select-sm select2 select-default" :list-value="$pantone" :value="$editMode ? $dataEdit[0]['pantone_id']:''">Select Pantone Color</x-forms.select>
                             </div>
                             <div class="col-md-6">
-                                <x-forms.select id="komposisi" name="komposisi_id" label="Composition" class="form-select-sm select2 select-default" :list-value="$komposisi">Select Composition</x-forms.select>
+                                <x-forms.select id="komposisi" name="komposisi_id" label="Composition" class="form-select-sm select2 select-default" :list-value="$komposisi" :value="$editMode ? $dataEdit[0]['komposisi_id']:''">Select Composition</x-forms.select>
                             </div>
-                            <x-forms.input id="item_name" name="item_name" label="Item Name" placeholder="Item Name"></x-forms.input>
-                            <x-forms.textarea id="item_desc" name="item_desc" label="Item Description" placeholder="Item Description" margin-bottom="mb-4"></x-forms.textarea>
+                            <x-forms.input id="item_name" name="item_name" label="Item Name" placeholder="Item Name" :value="$editMode ? $dataEdit[0]['item_name']:''"></x-forms.input>
+                            <x-forms.textarea id="item_desc" name="item_desc" label="Item Description" placeholder="Item Description" margin-bottom="mb-4" :value="$editMode ? $dataEdit[0]['item_desc']:''"></x-forms.textarea>
                             <div class="col-md-4">
-                                <x-forms.input id="gramasi" name="gramasi" label="Gramasi (GSM)" placeholder="Gramasi"></x-forms.input>
+                                <x-forms.input id="gramasi" name="gramasi" label="Gramasi (GSM)" placeholder="Gramasi" :value="$editMode ? $dataEdit[0]['gramasi']:''"></x-forms.input>
                             </div>
                             <div class="col md-4">
-                                <x-forms.input id="lebar" name="lebar" label="Lebar (Inch)" placeholder="Lebar"></x-forms.input>
+                                <x-forms.input id="lebar" name="lebar" label="Lebar (Inch)" placeholder="Lebar" :value="$editMode ? $dataEdit[0]['lebar']:''"></x-forms.input>
                             </div>
                             <div class="col-md-4">
-                                <x-forms.input type="number" id="susut" name="susut" label="Susut (%)" placeholder="Susut"></x-forms.input>
+                                <x-forms.input type="number" id="susut" name="susut" label="Susut (%)" placeholder="Susut" :value="$editMode ? $dataEdit[0]['susut']:''"></x-forms.input>
                             </div>
                             <div class="col-md-6">
-                                <x-forms.input id="finish" name="finish" label="Finish" placeholder="Finish"></x-forms.input>
+                                <x-forms.input id="finish" name="finish" label="Finish" placeholder="Finish" :value="$editMode ? $dataEdit[0]['finish']:''"></x-forms.input>
                             </div>
                             <div class="col-md-6">
-                                <x-forms.input id="lead_time" type="number" name="lead_time" label="Production Lead Time" placeholder="Lead Time"></x-forms.input>
+                                <x-forms.input id="lead_time" type="number" name="lead_time" label="Production Lead Time" placeholder="Lead Time" :value="$editMode ? $dataEdit[0]['lead_time']:''"></x-forms.input>
                             </div>
                             <div class="col-md-6">
-                                <x-forms.input id="moq" name="moq" type="number" label="MOQ / Greige" placeholder="MOQ / Greige"></x-forms.input>
+                                <x-forms.input id="moq" name="moq" type="number" label="MOQ / Greige" placeholder="MOQ / Greige" :value="$editMode ? $dataEdit[0]['moq']:''"></x-forms.input>
                             </div>
                             <div class="col-md-6">
-                                <x-forms.input id="moq_color" type="number" name="moq_color" label="MOQ / Col" placeholder="MOQ / Col"></x-forms.input>
+                                <x-forms.input id="moq_color" type="number" name="moq_color" label="MOQ / Col" placeholder="MOQ / Col" :value="$editMode ? $dataEdit[0]['moq_color']:''"></x-forms.input>
                             </div>
                             <div class="col-md-6">
-                                <x-forms.select id="measure" name="measure_id" label="Unit of Measure" class="form-select-sm select2 select-default" :list-value="$measure">Select UOM</x-forms.select>
+                                <x-forms.select id="measure" name="measure_id" label="Unit of Measure" class="form-select-sm select2 select-default" :list-value="$measure" :value="$editMode ? $dataEdit[0]['measure_id']:''">Select UOM</x-forms.select>
                             </div>
                             <div class="col-md-6">
                                 <x-forms.select id="ppn" name="ppn" label="PPN" class="form-select-sm select2 select-default">
                                     <option disabled selected value>-Select PPN-</option>
-                                    <option value="1" {{old('ppn') ? 'selected':''}}>PPN</option>
-                                    <option value="0" {{old('ppn') ? 'selected':''}}>Non PPN</option>
+                                    @if($editMode)
+                                    <option value="1" {{old('ppn')==1||$dataEdit[0]['ppn']==1 ? 'selected':''}}>PPN</option>
+                                    <option value="2" {{old('ppn')==2||$dataEdit[0]['ppn']==2 ? 'selected':''}}>Non PPN</option>
+                                    @else
+                                    <option value="1" {{old('ppn')==1 ? 'selected':''}}>PPN</option>
+                                    <option value="2" {{old('ppn')==2 ? 'selected':''}}>Non PPN</option>
+                                    @endif
                                 </x-forms.select>
                             </div>
                             <div class="text-end">
                                 <button type="submit" class="btn btn-success data-submit me-1">Save</button>
-                                <a href="{!! route('supplier.index') !!}" class="btn btn-outline-danger">Cancel</a>
+                                <a href="{!! route('raw-material.index') !!}" class="btn btn-outline-danger">Cancel</a>
                             </div>
                         </div>
                     </form>
@@ -85,33 +93,35 @@
     </div>
     @section('script')
     <script>
+        let formLoad = false;
         const brandEl = document.querySelector('#brand');
         const supplier = document.querySelector('#supplier');
         const item = document.querySelector('#item_name');
-        @if($form==='RM')
         const fabricEl = document.querySelector('#fabric');
         const colorEl = document.querySelector('#color');
         const pantoneEl = document.querySelector('#pantone');
         const komposisiEL = document.querySelector('#komposisi');
-        @endif
         const supplierEl = document.querySelector('#supplier');
 
         function generateCode(){
-            let fabric = fabricEl.options[fabricEl.selectedIndex].textContent.split(' - ');
-            let color = colorEl.options[colorEl.selectedIndex].textContent.split(' - ');
-            let brand = brandEl.options[brandEl.selectedIndex].textContent.split(' - ');
-            let supplier = supplierEl.options[supplierEl.selectedIndex].textContent.split(' - ');
-            let prefixCode = '{{config('constants.'.$form)}}'+fabric[0]+color[0]+brand[0]+supplier[0];
-            $.ajax({
-                url         : '{{route('raw-material.generate-code')}}',
-                type        : 'get',
-                data        : 'prefixCode='+prefixCode,
-                dataType    : 'json',
-                success     : function (response) {
-                    document.getElementById('number').value = response.kode;
-                    document.querySelector('.kode-text').innerHTML = response.kode;
-                }
-            });
+            if (!formLoad){
+                let fabric = fabricEl.options[fabricEl.selectedIndex].textContent.split(' - ');
+                let color = colorEl.options[colorEl.selectedIndex].textContent.split(' - ');
+                let brand = brandEl.options[brandEl.selectedIndex].textContent.split(' - ');
+                let supplier = supplierEl.options[supplierEl.selectedIndex].textContent.split(' - ');
+                let prefixCode = '{{config('constants.'.$form)}}'+fabric[0]+color[0]+brand[0]+supplier[0];
+                $.ajax({
+                    url         : '{{route('raw-material.generate-code')}}',
+                    type        : 'get',
+                    data        : 'prefixCode='+prefixCode,
+                    dataType    : 'json',
+                    success     : function (response) {
+                        document.getElementById('number').value = response.kode;
+                        document.querySelector('.kode-text').innerHTML = response.kode;
+                    }
+                });
+            }
+
         }
 
         function validateKode(){
@@ -173,6 +183,16 @@
             supplierEl.onchange = function () {
                 generateCode();
             }
+
+            @if($editMode)
+            formLoad = true;
+            const optionSupplier=new Option('{{$dataEdit[0]['supplier']['kode'].' - '.$dataEdit[0]['supplier']['name']}}','{{$dataEdit[0]['supplier_id']}}',true,true);
+            document.getElementById('supplier').appendChild(optionSupplier);
+            document.getElementById('supplier').dispatchEvent(new Event('change'));
+            document.getElementById('number').value = '{{$dataEdit[0]['kode']}}';
+            document.querySelector('.kode-text').innerHTML = '{{$dataEdit[0]['kode']}}';
+            formLoad=false;
+            @endif
         })
     </script>
     @endsection

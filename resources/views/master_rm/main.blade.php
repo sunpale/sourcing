@@ -3,7 +3,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header align-items-center d-flex">
-                    <h4 class="card-title mb-0 flex-grow-1">Data Supplier</h4>
+                    <h4 class="card-title mb-0 flex-grow-1">Data Raw Material</h4>
                     <div class="flex-shrink-0">
                         <a href="{!! route('raw-material.create') !!}" class="btn btn-sm btn-info waves-effect waves-light">
                             <i class="fal fa-file-plus"></i> Add new
@@ -102,7 +102,7 @@
             }).then(function (result) {
                 if(result.value){
                     url_redirect({
-                        url : baseUrl + '/master-data/supplier/'+id+'/edit',
+                        url : baseUrl + '/master-rm/raw-material/'+id+'/edit',
                         method  : "get"
                     });
                 }
