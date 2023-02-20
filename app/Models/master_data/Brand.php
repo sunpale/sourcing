@@ -2,9 +2,11 @@
 
 namespace App\Models\master_data;
 
+use App\Models\master_rm\Material;
 use App\Traits\CustomSoftDelete;
 use App\Traits\UserInput;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Brand extends Model
@@ -16,5 +18,10 @@ class Brand extends Model
     public function getFullBrandAttribute(): string
     {
         return $this->kode.' - '.$this->brand;
+    }
+
+    public function Material(): HasMany
+    {
+        return $this->hasMany(Material::class);
     }
 }
