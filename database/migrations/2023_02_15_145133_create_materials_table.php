@@ -30,7 +30,7 @@ return new class extends Migration {
             $table->string('finish',25)->nullable();
             $table->smallInteger('lead_time');
             $table->smallInteger('moq');
-            $table->smallInteger('moq_color');
+            $table->smallInteger('moq_color')->nullable();
             $table->tinyInteger('ppn');
             $table->tinyInteger('measure_id');
             $table->string('image_path',255)->nullable();
