@@ -12,4 +12,9 @@ class ColorAks extends Model
     use UserInput,CustomSoftDelete,SoftDeletes {CustomSoftDelete::runSoftDelete insteadof SoftDeletes;}
 
     protected $fillable = ['kode','color_desc','remarks'];
+
+    public function getFullColorAttribute(): string
+    {
+        return $this->kode.' - '.$this->color_desc;
+    }
 }
