@@ -78,7 +78,7 @@ Route::prefix('master-aksesoris')->middleware('auth:web')->group(function (){
 //region Product Group
     Route::resource('product-group', ProductGroupsController::class)->except(['create','show']);
 //endregion
-    Route::resource('aksesoris', AksesorisController::class);
+    Route::resource('aksesoris', AksesorisController::class)->names(['show' => 'aksesoris.data']);
 });
 
 //endregion
