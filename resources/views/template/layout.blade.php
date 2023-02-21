@@ -208,7 +208,7 @@
                                     <a href="{!! route('product-group.index') !!}" class="nav-link" data-key="t-toko"> Product Group </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{--{!! route('area.index') !!}--}}" class="nav-link" data-key="t-region"> Aksesoris </a>
+                                    <a href="{!! route('aksesoris.index') !!}" class="nav-link" data-key="t-region"> Aksesoris </a>
                                 </li>
                             </ul>
                         </div>
