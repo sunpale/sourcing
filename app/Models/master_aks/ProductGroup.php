@@ -3,6 +3,7 @@
 namespace App\Models\master_aks;
 
 use App\Models\master_data\Supplier;
+use App\Models\master_rm\Material;
 use App\Traits\CustomSoftDelete;
 use App\Traits\UserInput;
 use Illuminate\Database\Eloquent\Model;
@@ -13,10 +14,20 @@ class ProductGroup extends Model
 {
     use UserInput,CustomSoftDelete,SoftDeletes {CustomSoftDelete::runSoftDelete insteadof SoftDeletes;}
 
-    protected $fillable = ['group','remarks'];
+    protected $fillable = ['kode','group','remarks'];
+
+    public function getFullGroupAttribute(): string
+    {
+        return $this->kode.' - '.$this->group;
+    }
 
     public function Supplier(): HasMany
     {
         return $this->hasMany(Supplier::class,'product_group_id','id');
+    }
+
+    public function Material(): HasMany
+    {
+        return $this->hasMany(Material::class);
     }
 }

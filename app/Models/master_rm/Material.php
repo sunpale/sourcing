@@ -2,10 +2,12 @@
 
 namespace App\Models\master_rm;
 
+use App\Models\master_aks\ProductGroup;
 use App\Models\master_data\Brand;
 use App\Models\master_data\Measure;
 use App\Models\master_data\Supplier;
 use App\Models\master_warna\Color;
+use App\Models\master_warna\ColorAks;
 use App\Traits\CustomSoftDelete;
 use App\Traits\UserInput;
 use Illuminate\Database\Eloquent\Model;
@@ -49,5 +51,15 @@ class Material extends Model
     public function Measure(): BelongsTo
     {
         return $this->belongsTo(Measure::class);
+    }
+
+    public function ProductGroup(): BelongsTo
+    {
+        return $this->belongsTo(ProductGroup::class);
+    }
+
+    public function ColorAks() : BelongsTo
+    {
+        return $this->belongsTo(ColorAks::class);
     }
 }
