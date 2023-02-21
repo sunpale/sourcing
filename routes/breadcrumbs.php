@@ -101,4 +101,12 @@ Breadcrumbs::for('product-group',function (BreadcrumbTrail $trail){
     $trail->push('Product Group',route('product-group.index'));
 });
 //endregion
+Breadcrumbs::for('aksesoris',function (BreadcrumbTrail $trail){
+    $trail->parent('master-aks');
+    $trail->push('Aksesoris',route('aksesoris.index'));
+});
+Breadcrumbs::for('aksesoris.create',function (BreadcrumbTrail $trail){
+    $trail->parent('aksesoris');
+    $trail->push('New',route('aksesoris.index'));
+});
 //endregion

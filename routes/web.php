@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\master_aks\AksesorisController;
 use App\Http\Controllers\master_aks\ProductGroupsController;
 use App\Http\Controllers\master_data\BrandsController;
 use App\Http\Controllers\master_rm\MaterialsController;
@@ -77,6 +78,7 @@ Route::prefix('master-aksesoris')->middleware('auth:web')->group(function (){
 //region Product Group
     Route::resource('product-group', ProductGroupsController::class)->except(['create','show']);
 //endregion
+    Route::resource('aksesoris', AksesorisController::class);
 });
 
 //endregion
