@@ -54,7 +54,7 @@ class MaterialsController extends Controller
     {
         if(request()->ajax()){
             $query = Material::select(['kode','kode_infor','fabric_id','color_id','brand_id','supplier_id','komposisi_id','item_name','item_desc','measure_id'])
-                ->with(['fabric:id,description','color:id,description','brand:id,brand','supplier:id,name','komposisi:id,komposisi','measure:id,kode,measure_name']);
+                ->with(['fabric:id,description','color:id,description','brand:id,brand','supplier:id,name','komposisi:id,komposisi','measure:id,kode,measure_name'])->where('fabric_id','<>',null);
             return DataTables::eloquent($query)
                 ->addIndexColumn()->addColumn('responsive',function (){return '';})
                 ->addColumn('action',function ($row){
@@ -112,7 +112,7 @@ class MaterialsController extends Controller
 
     public function generateCode(Request $request){
         $kode = $this->createCode($request->prefixCode);
-        $result = ['kode'=>$kode];
+        $result = compact('kode');
         return response()->json($result);
     }
 }
