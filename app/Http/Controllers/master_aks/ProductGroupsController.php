@@ -11,14 +11,14 @@ class ProductGroupsController extends Controller
 {
     public function index()
     {
-        $group = ProductGroup::select(['id','group','remarks'])->get();
+        $group = ProductGroup::select(['id','kode','group','remarks'])->get();
         $data = ['productGroup'=>$group];
         return view('master_aks.product_group.main',$data);
     }
 
     public function store(ProductGroupRequest $request)
     {
-        ProductGroup::create($request->only(['group','remarks']));
+        ProductGroup::create($request->only(['kode','group','remarks']));
         return redirect()->route('product-group.index')->with('success',config('constants.SUCCESS_SAVE'));
     }
 
@@ -29,7 +29,7 @@ class ProductGroupsController extends Controller
 
     public function update(ProductGroupRequest $request, ProductGroup $productGroup)
     {
-        ProductGroup::where('id',$productGroup->id)->update($request->only(['group','remarks']));
+        ProductGroup::where('id',$productGroup->id)->update($request->only(['kode','group','remarks']));
         return redirect()->route('product-group.index')->with('success',config('constants.SUCCESS_UPDATE'));
     }
 

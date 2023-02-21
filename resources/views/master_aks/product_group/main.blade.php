@@ -17,6 +17,7 @@
                             <th></th>
                             <th class="text-center">No</th>
                             <th class="text-center">id</th>
+                            <th class="text-center">Kode</th>
                             <th class="text-center">Group Name</th>
                             <th class="text-center">Remarks</th>
                             <th class="text-center">Action</th>
@@ -28,6 +29,7 @@
                                 <td></td>
                                 <td></td>
                                 <td>{{$group->id}}</td>
+                                <td class="text-center">{{$group->kode}}</td>
                                 <td>{{$group->group}}</td>
                                 <td>{{$group->remarks}}</td>
                                 <td>
@@ -67,6 +69,7 @@
                         @csrf
                         <input type="hidden" name="number" id="number" value="{{old('number')??''}}">
                         <input type="hidden" name="old_kode" id="old_kode" value="{{old('old_kode')??''}}">
+                        <x-forms.input label="Code" id="kode" name="kode" placeholder="Code" maxlength="2"></x-forms.input>
                         <x-forms.input label="Group Name" id="group" name="group" placeholder="Group name"></x-forms.input>
                         <x-forms.textarea label="Remarks" id="remarks" name="remarks" placeholder="Remarks"></x-forms.textarea>
                         <div class="text-end">
@@ -81,6 +84,7 @@
     @section('script')
     <script>
         const modalGroup = bootstrap.Modal.getOrCreateInstance(document.getElementById('input-group'));
+        const Code = document.querySelector('#kode');
         function tableGroup(){
             const group = $('#tbl-group').DataTable();
             group.on('order.dt search.dt',function (){
@@ -142,10 +146,12 @@
                                 if(modalTable) modalTable.hide();
                             }
                             modalGroup.show();
-                            document.getElementById('group').focus();
+                            Code.focus();
                             document.getElementById('number').value = response.id;
+                            Code.value = response.kode;
                             document.getElementById('group').value = response.group;
                             document.getElementById('remarks').value = response.remarks;
+                            document.getElementById('old_kode').value = response.kode;
                             document.getElementById('frm-group').setAttribute('action','/master-aksesoris/product-group/'+id);
                             let methodEl = document.createElement('input');
                             methodEl.type = 'hidden';
@@ -178,8 +184,12 @@
             tableGroup();
 
             document.getElementById('input-group').addEventListener('shown.bs.modal',function (){
-                document.getElementById('group').focus();
+                Code.focus();
             })
+
+            Code.oninput = function () {
+                this.value = this.value.toUpperCase();
+            }
         });
     </script>
     @endsection
