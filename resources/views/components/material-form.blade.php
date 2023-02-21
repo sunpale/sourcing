@@ -10,7 +10,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form method="post" id="frm-<?=$form?>" {{$attributes->merge(['action'=> route('raw-material.store')])}}>
+                    <form {{$attributes->merge(['method'=>'POST'])}} id="frm-<?=$form?>" {{$attributes->merge(['action'=> route('raw-material.store')])}}>
                         @csrf
                         @if($editMode)
                         @method('PATCH')
@@ -108,12 +108,17 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="img_file" class="form-label">Photo</label>
-                                <input class="form-control form-control-sm" type="file" id="img_file" name="img_file">
+                                <input class="form-control form-control-sm @error('img_file') is-invalid @enderror" type="file" id="img_file" name="img_file">
+                                @error('img_file')
+                                <div class="invalid-feedback">
+                                    {{$errors->messages()['img_file'][0]}}
+                                </div>
+                                @enderror
                             </div>
                             @endif
                             <div class="text-end mt-5">
                                 <button type="submit" class="btn btn-success data-submit me-1">Save</button>
-                                <a href="{!! route('raw-material.index') !!}" class="btn btn-outline-danger">Cancel</a>
+                                <a href="{!! $form==='RM' ? route('raw-material.index') : route('aksesoris.index') !!}" class="btn btn-outline-danger">Cancel</a>
                             </div>
                         </div>
                     </form>
@@ -131,15 +136,25 @@
         const colorEl = document.querySelector('#color');
         const pantoneEl = document.querySelector('#pantone');
         const komposisiEL = document.querySelector('#komposisi');
+        @else
+        const groupEl = document.querySelector('#group');
+        const colorAksEl = document.querySelector('#color_aks');
         @endif
 
         function generateCode(){
             if (!formLoad){
-                let fabric = fabricEl.options[fabricEl.selectedIndex].textContent.split(' - ');
-                let color = colorEl.options[colorEl.selectedIndex].textContent.split(' - ');
                 let brand = brandEl.options[brandEl.selectedIndex].textContent.split(' - ');
                 let supplier = supplierEl.options[supplierEl.selectedIndex].textContent.split(' - ');
-                let prefixCode = '{{config('constants.'.$form)}}'+fabric[0]+color[0]+brand[0]+supplier[0];
+                let prefixCode = '';
+                @if($form==='RM')
+                let fabric = fabricEl.options[fabricEl.selectedIndex].textContent.split(' - ');
+                let color = colorEl.options[colorEl.selectedIndex].textContent.split(' - ');
+                prefixCode = '{{config('constants.'.$form)}}'+fabric[0]+color[0]+brand[0]+supplier[0];
+                @else
+                let group = groupEl.options[groupEl.selectedIndex].textContent.split(' - ');
+                let colorAks = colorAksEl.options[colorAksEl.selectedIndex].textContent.split(' - ');
+                prefixCode = '{{config('constants.'.$form)}}'+group[0]+colorAks[0]+brand[0]+supplier[0];
+                @endif
                 $.ajax({
                     url         : '{{route('raw-material.generate-code')}}',
                     type        : 'get',
@@ -156,9 +171,16 @@
 
         function validateKode(){
             let kode = document.querySelector('.kode-text').innerHTML;
+            @if($form==='RM')
             if (kode!=='10000 00000 00000'){
                 generateCode();
             }
+            @else
+            if (kode!=='20000 00000 00000'){
+                generateCode();
+            }
+            @endif
+
         }
 
         function getSupplier(){
@@ -198,12 +220,19 @@
             $('.select-default').select2();
             getSupplier();
 
-            @if($form==='rm')
+            @if($form==='RM')
             fabricEl.onchange = function (){
                 validateKode();
             }
 
             colorEl.onchange = function (){
+                validateKode();
+            }
+            @else
+            groupEl.onchange = function (){
+                validateKode();
+            }
+            colorAksEl.onchange = function () {
                 validateKode();
             }
             @endif
