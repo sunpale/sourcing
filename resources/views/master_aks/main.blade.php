@@ -42,10 +42,10 @@
             function tableAksesoris(){
                 const aksesoris = $('#tbl-aksesoris').DataTable({
                     serverSide: true,
-                    ajax: '{{route('raw-material.data',1)}}',
+                    ajax: '{{route('aksesoris.data',1)}}',
                     columns: [
                         {data: 'responsive',name:'responsive',searchable:false},
-                        {data: 'rownum',name:'rownum',searchable:false}, {data: 'kode',name: 'kode'}, {data: 'kode_infor',name: 'kode_infor'}, {data: 'fabric.description',name: 'fabric.description'},{data: 'color.description',name: 'color.description'}, {data: 'brand.brand',name: 'brand.brand'}, {data: 'supplier.name',name: 'supplier.name'},{data : 'item_name',name: 'item_name'},{data : 'item_desc',name: 'item_desc'},{data : 'komposisi.komposisi',name: 'komposisi.komposisi'},{data:'measure.kode',data:'measure.kode'},{data: 'action',name: 'action'}
+                        {data: 'rownum',name:'rownum',searchable:false}, {data: 'kode',name: 'kode'}, {data: 'kode_infor',name: 'kode_infor'}, {data: 'product_group.group',name: 'ProductGroup.group'},{data: 'color_aks.color_desc',name: 'ColorAks.color_desc'}, {data: 'brand.brand',name: 'brand.brand'}, {data: 'supplier.name',name: 'supplier.name'},{data : 'item_name',name: 'item_name'},{data : 'item_desc',name: 'item_desc'},{data:'measure.kode',data:'measure.kode'},{data: 'action',name: 'action'}
                     ],
                     columnDefs: [
                         {
@@ -56,22 +56,22 @@
                             targets: 0
                         },
                         {
-                            targets: [1,-1],
+                            targets: [1,-1,-2],
                             width: '3%',
                             className: 'text-center p-1'
                         },
                         {
-                            targets: [1,2],
+                            targets: [2,3],
                             width: '8%',
                             className: 'text-center'
                         },
                         {
-                            targets: [3,4,5],
+                            targets: [4,5,6,7],
                             width: '8%'
                         },
                         {
-                            targets: 6,
-                            width: '8%'
+                            targets: 8,
+                            width: '10%'
                         },
                         {
                             targets: 9,
@@ -82,7 +82,7 @@
                         $('[data-bs-toggle="tooltip"]').tooltip();
                     }
                 });
-                const tblAksesorisInput = $('#tbl-material_filter input');
+                const tblAksesorisInput = $('#tbl-aksesoris_filter input');
                 tblAksesorisInput.unbind();
                 tblAksesorisInput.bind('keyup', function (e) {
                     if (e.keyCode === 13){
@@ -101,7 +101,7 @@
                 }).then(function (result) {
                     if(result.value){
                         url_redirect({
-                            url : baseUrl + '/master-rm/raw-material/'+id+'/edit',
+                            url : baseUrl + '/master-aksesoris/aksesoris/'+id+'/edit',
                             method  : "get"
                         });
                     }
@@ -119,7 +119,7 @@
                 }).then((function (result) {
                     if(result.value){
                         url_redirect({
-                            url     : baseUrl + '/master-rm/raw-material/'+id,
+                            url     : baseUrl + '/master-aksesoris/aksesoris/'+id,
                             method  : "post",
                             data    : {"_token" : token[0].value,"_method":'DELETE'}
                         });
@@ -130,7 +130,7 @@
                 @if(Session::has('success'))
                 notifikasi('success','{{session('success')}}')
                 @endif
-                tableMaterial();
+                tableAksesoris();
             });
         </script>
     @endsection
