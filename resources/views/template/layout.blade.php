@@ -387,6 +387,10 @@
 @if($dropzone)
     <script src="{!! asset('src/libs/dropzone/dropzone-min.js') !!}"></script>
 @endif
+@if($cleavejs)
+    <script src="{!! asset('src/libs/cleave.js/cleave.min.js') !!}"></script>
+    <script src="{!! asset('src/libs/cleave.js/cleave-phone.id.js') !!}"></script>
+@endif
 @yield('script')
 <script>
     const btnlogout = document.getElementById('btnlogout');
