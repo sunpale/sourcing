@@ -15,7 +15,7 @@ class Supplier extends Model
 {
     use UserInput,CustomSoftDelete,SoftDeletes {CustomSoftDelete::runSoftDelete insteadof SoftDeletes;}
 
-    protected $fillable = ['kode','name','type','product_group_id','address'];
+    protected $fillable = ['kode','name','type','product_group_id','address','country','pic','phone','email'];
 
     public function ProductGroup(): BelongsTo
     {

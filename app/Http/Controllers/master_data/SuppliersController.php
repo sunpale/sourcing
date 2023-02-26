@@ -7,6 +7,7 @@ use App\Http\Requests\SupplierRequest;
 use App\Models\master_aks\ProductGroup;
 use App\Models\master_data\Supplier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
 
 class SuppliersController extends Controller
@@ -46,6 +47,13 @@ class SuppliersController extends Controller
     public function store(SupplierRequest $request)
     {
         $data = $request->except('_token');
+       /* $name = $request->name;
+        $abbreviation = preg_replace_callback('/\b(\w)\w*\b/',function ($matches){
+            return strtoupper($matches[1]);
+        },$name);
+        if (preg_match('/^(CV|PT)\b/', $name) || preg_match('/^\b\w{1,2}\b/', $name)) {
+            $abbreviation = substr($abbreviation, 1);
+        } Trial kode supplier*/
         $data['kode'] = $this->generateCode();
         if (!isset($request->product_group_id))
             $data['product_group_id'] = '1';
@@ -56,7 +64,7 @@ class SuppliersController extends Controller
     public function show(Request $request)
     {
         if($request->ajax()){
-            $query = Supplier::select(['id','kode','type','product_group_id','name','address'])->with('ProductGroup:id,group');
+            $query = Supplier::select(['id','kode','type','product_group_id','name','pic','phone','address'])->with('ProductGroup:id,group');
             return DataTables::eloquent($query)
                 ->addIndexColumn()->addColumn('responsive',function (){return '';})
                 ->addColumn('action',function ($row){

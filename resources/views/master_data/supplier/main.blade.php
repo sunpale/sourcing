@@ -23,6 +23,8 @@
                             <th class="text-center">Product Group ID</th>
                             <th class="text-center">Product Group</th>
                             <th class="text-center">Supplier Name</th>
+                            <th class="text-center">PIC</th>
+                            <th class="text-center">Phone</th>
                             <th class="text-center">Address</th>
                             <th class="text-center">Action</th>
                         </tr>
@@ -43,7 +45,7 @@
                 ajax: '{{route('supplier.data',1)}}',
                 columns: [
                     {data: 'responsive',name:'responsive',searchable:false},
-                    {data: 'rownum',name:'rownum',searchable:false}, {data: 'id',name: 'id',searchable:false}, {data: 'kode',name: 'kode'}, {data: 'type',name: 'type'},{data: 'product_group_id',name: 'product_group_id',searchable:false}, {data: 'product_group.group',name: 'ProductGroup.group'}, {data: 'name',name: 'name'},{data : 'address',name: 'address',searchable:false},{data: 'action',name: 'action'}
+                    {data: 'rownum',name:'rownum',searchable:false}, {data: 'id',name: 'id',searchable:false}, {data: 'kode',name: 'kode'}, {data: 'type',name: 'type'},{data: 'product_group_id',name: 'product_group_id',searchable:false}, {data: 'product_group.group',name: 'ProductGroup.group'}, {data: 'name',name: 'name'}, {data: 'pic',name: 'pic'}, {data: 'phone',name: 'phone'},{data : 'address',name: 'address',searchable:false},{data: 'action',name: 'action'}
                 ],
                 columnDefs: [
                     {
@@ -63,7 +65,7 @@
                         visible: false
                     },
                     {
-                        targets: [3,4],
+                        targets: [3,4,9],
                         width: '6%',
                         className: 'text-center'
                     },
@@ -74,6 +76,11 @@
                     {
                         targets: 7,
                         width: '25%'
+                    },
+                    {
+                        targets: 8,
+                        width: '5%',
+                        className: 'text-center'
                     }
                 ],
                 drawCallback: function () {
