@@ -34,7 +34,7 @@ class AksesorisController extends Controller
     public function store(AksesorisRequest $request){
         $data = $request->except(['_token','number']);
         $kodeGenerated = $request->number;
-        $prefix = substr($kodeGenerated,0,strlen($kodeGenerated)-3);
+        $prefix = substr($kodeGenerated,0,strlen($kodeGenerated)-4);
         $kode = $this->createCode($prefix);
         $data['kode'] = $kode;
         if ($request->hasFile('img_file') && $request->file('img_file')->isValid()){
@@ -81,8 +81,8 @@ class AksesorisController extends Controller
     {
         $data = $request->except(['_token','_method','number','img_file']);
         $kodeGenerated = $request->number;
-        $prefixOldKode = substr($aksesori->kode,0,strlen($aksesori->kode)-3);
-        $prefix = substr($kodeGenerated,0,strlen($kodeGenerated)-3);
+        $prefixOldKode = substr($aksesori->kode,0,strlen($aksesori->kode)-4);
+        $prefix = substr($kodeGenerated,0,strlen($kodeGenerated)-4);
         $kode = strcmp($prefix,$prefixOldKode) == 0 ? $aksesori->kode : $this->createCode($prefix);
         $data['kode'] = $kode;
         if ($request->hasFile('img_file') && $request->file('img_file')->isValid()){
@@ -117,14 +117,14 @@ class AksesorisController extends Controller
     private function createCode(string $prefix){
         $lastKode = Material::select('kode')->where('kode','LIKE','%'.$prefix.'%')->orderBy('created_at','desc')->withTrashed()->first();
         if(!isset($lastKode)){
-            return $prefix.'001';
+            return $prefix.'0001';
         }
-        $number = substr($lastKode->kode,11,4);
+        $number = substr($lastKode->kode,8,4);
         $id = intval($number);
         $id += 1;
         $idLength = strlen($id);
         $prefixCode='';
-        for ($i=$idLength;$i<3;$i++){
+        for ($i=$idLength;$i<4;$i++){
             $prefixCode .= '0';
         }
         return $prefix.$prefixCode.$id;

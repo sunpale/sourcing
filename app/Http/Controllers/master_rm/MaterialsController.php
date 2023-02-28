@@ -44,9 +44,21 @@ class MaterialsController extends Controller
     {
         $data = $request->except(['_token','number']);
         $kodeGenerated = $request->number;
-        $prefix = substr($kodeGenerated,0,strlen($kodeGenerated)-3);
-        $data['kode']=$this->createCode($prefix);
-        Material::create($data);
+        $prefix = substr($kodeGenerated,0,strlen($kodeGenerated)-4);
+        $kode = $this->createCode($prefix);
+        $data['kode'] = $kode;
+        if ($request->hasFile('img_file') && $request->file('img_file')->isValid()){
+            $path = 'private/rm/';
+            $data['image_path'] = $path;
+            $data['image_name'] = $kode;
+
+            if($this->save($data)){
+                $imageSource = $request->file('img_file');
+                $imageSource->storeAs($path,$kode.'.'.$imageSource->extension());
+            }
+        }else{
+            $this->save($data);
+        }
         return redirect()->route('raw-material.index')->with('success',config('constants.SUCCESS_SAVE'));
     }
 
@@ -55,7 +67,7 @@ class MaterialsController extends Controller
         if(request()->ajax()){
             $query = Material::select(['kode','kode_infor','fabric_id','color_id','brand_id','supplier_id','komposisi_id','item_name','item_desc','measure_id'])
                 ->with(['fabric:id,description','color:id,description','brand:id,brand','supplier:id,name','komposisi:id,komposisi','measure:id,kode,measure_name'])->where('fabric_id','<>',null);
-            return DataTables::eloquent($query)
+            return DataTables::eloquent($query)->order(function ($query){$query->orderBy('created_at','asc');})
                 ->addIndexColumn()->addColumn('responsive',function (){return '';})
                 ->addColumn('action',function ($row){
                     return '<div class="dropdown d-inline-block"><button class="btn btn-soft-primary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-equalizer-fill align-middle"></i></button><ul class="dropdown-menu dropdown-menu-end"><li><a href="#" data-bs-toggle="tooltip" data-placement="auto" title="Edit Data" class="dropdown-item" onclick=edit("'.$row->kode.'")><i class="ri-edit-fill"></i> Edit Data</a></li><li><a href="#" data-bs-toggle="tooltip" data-placement="auto" title="Hapus Data" class="dropdown-item" onclick=hapus("'.$row->kode.'")><i class="ri-close-circle-fill"></i> Hapus Data</a></li></ul></div>';
@@ -79,12 +91,24 @@ class MaterialsController extends Controller
 
     public function update(MaterialRequest $request, Material $raw_material)
     {
-        $data = $request->except(['_token','_method','number']);
+        $data = $request->except(['_token','_method','number','img_file']);
         $kodeGenerated = $request->number;
-        $prefixOldKode = substr($raw_material->kode,0,strlen($raw_material->kode)-3);
-        $prefix = substr($kodeGenerated,0,strlen($kodeGenerated)-3);
-        $data['kode']= strcmp($prefix,$prefixOldKode) == 0 ? $raw_material->kode : $this->createCode($prefix);
-        Material::where('kode',$raw_material->kode)->update($data);
+        $prefixOldKode = substr($raw_material->kode,0,strlen($raw_material->kode)-4);
+        $prefix = substr($kodeGenerated,0,strlen($kodeGenerated)-4);
+        $kode = strcmp($prefix,$prefixOldKode) == 0 ? $raw_material->kode : $this->createCode($prefix);
+        $data['kode'] = $kode;
+        if ($request->hasFile('img_file') && $request->file('img_file')->isValid()){
+            $path = 'private/rm';
+            $data['image_path'] = $path;
+            $data['image_name'] = $kode;
+
+            if ($this->change($data,$raw_material->kode)){
+                $imageSource = $request->file('img_file');
+                $imageSource->storeAs($path,$kode.'.'.$imageSource->extension());
+            }
+        }else{
+            $this->change($data,$raw_material->kode);
+        }
         return redirect()->route('raw-material.index')->with('success',config('constants.SUCCESS_UPDATE'));
     }
 
@@ -94,17 +118,25 @@ class MaterialsController extends Controller
         return redirect()->route('raw-material.index')->with('success',config('constants.SUCCESS_DELETE'));
     }
 
+    private function save(array $data){
+        return Material::create($data);
+    }
+
+    private function change(array $data,string $kode){
+        return Material::where('kode',$kode)->update($data);
+    }
+
     private function createCode(string $prefix){
         $lastKode = Material::select('kode')->where('kode','LIKE','%'.$prefix.'%')->orderBy('created_at','desc')->withTrashed()->first();
         if(!isset($lastKode)){
-            return $prefix.'001';
+            return $prefix.'0001';
         }
-        $number = substr($lastKode->kode,11,4);
+        $number = substr($lastKode->kode,8,4);
         $id = intval($number);
         $id += 1;
         $idLength = strlen($id);
         $prefixCode='';
-        for ($i=$idLength;$i<3;$i++){
+        for ($i=$idLength;$i<4;$i++){
             $prefixCode .= '0';
         }
         return $prefix.$prefixCode.$id;

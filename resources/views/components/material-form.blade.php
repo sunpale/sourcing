@@ -6,11 +6,11 @@
                     <h4 class="card-title mb-0 flex-grow-1">{{$form==='RM'?'Input Data Raw Material':'Input Data Akesoris'}}</h4>
                     <div class="flex-shrink-0">
                         <span class="text-end ml-auto fw-bold">Kode : </span>
-                        <span class="text-end kode-text mx-2 fw-bold">{{old('number') ? old('number'): config('constants.'.$form).'0000 00000 00000'}}</span>
+                        <span class="text-end kode-text mx-2 fw-bold">{{old('number') ? old('number'): config('constants.'.$form).'000 0000 0000'}}</span>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form {{$attributes->merge(['method'=>'POST'])}} id="frm-<?=$form?>" {{$attributes->merge(['action'=> route('raw-material.store')])}}>
+                    <form method="POST" id="frm-<?=$form?>" {{$attributes->merge(['action'=> route('raw-material.store')])}} enctype="multipart/form-data">
                         @csrf
                         @if($editMode)
                         @method('PATCH')
@@ -102,18 +102,15 @@
                                     @endif
                                 </x-forms.select>
                             </div>
+                            @if($form==='RM')
+                            <x-forms.input type="file" name="img_file" id="img_file" label="Photo" class="form-control-sm"></x-forms.input>
+                            @endif
                             @if($form==='AKS')
                             <div class="col-md-6">
                                 <x-forms.select id="color" name="color_id" label="Color MD" class="form-select-sm select2 select-default" :list-value="$warna" :value="$editMode ? $dataEdit[0]['color_id']:''">Select Color MD</x-forms.select>
                             </div>
                             <div class="col-md-6">
-                                <label for="img_file" class="form-label">Photo</label>
-                                <input class="form-control form-control-sm @error('img_file') is-invalid @enderror" type="file" id="img_file" name="img_file">
-                                @error('img_file')
-                                <div class="invalid-feedback">
-                                    {{$errors->messages()['img_file'][0]}}
-                                </div>
-                                @enderror
+                                <x-forms.input type="file" name="img_file" id="img_file" label="Photo" class="form-control-sm"></x-forms.input>
                             </div>
                             @endif
                             <div class="text-end mt-5">
@@ -144,16 +141,16 @@
         function generateCode(){
             if (!formLoad){
                 let brand = brandEl.options[brandEl.selectedIndex].textContent.split(' - ');
-                let supplier = supplierEl.options[supplierEl.selectedIndex].textContent.split(' - ');
+                /*let supplier = supplierEl.options[supplierEl.selectedIndex].textContent.split(' - ');*/
                 let prefixCode = '';
                 @if($form==='RM')
                 let fabric = fabricEl.options[fabricEl.selectedIndex].textContent.split(' - ');
                 let color = colorEl.options[colorEl.selectedIndex].textContent.split(' - ');
-                prefixCode = '{{config('constants.'.$form)}}'+fabric[0]+color[0]+brand[0]+supplier[0];
+                prefixCode = '{{config('constants.'.$form)}}'+fabric[0]+color[0]+brand[0];
                 @else
                 let group = groupEl.options[groupEl.selectedIndex].textContent.split(' - ');
                 let colorAks = colorAksEl.options[colorAksEl.selectedIndex].textContent.split(' - ');
-                prefixCode = '{{config('constants.'.$form)}}'+group[0]+colorAks[0]+brand[0]+supplier[0];
+                prefixCode = '{{config('constants.'.$form)}}'+group[0]+colorAks[0]+brand[0];
                 @endif
                 $.ajax({
                     url         : '{{route('raw-material.generate-code')}}',
@@ -172,11 +169,11 @@
         function validateKode(){
             let kode = document.querySelector('.kode-text').innerHTML;
             @if($form==='RM')
-            if (kode!=='10000 00000 00000'){
+            if (kode!=='1000 0000 0000'){
                 generateCode();
             }
             @else
-            if (kode!=='20000 00000 00000'){
+            if (kode!=='2000 0000 0000'){
                 generateCode();
             }
             @endif
@@ -238,10 +235,6 @@
             @endif
 
             brandEl.onchange = function (){
-                validateKode();
-            }
-
-            supplierEl.onchange = function () {
                 generateCode();
             }
 
