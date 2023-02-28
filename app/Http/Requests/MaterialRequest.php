@@ -28,7 +28,8 @@ class MaterialRequest extends FormRequest
             'moq'           => 'required|numeric',
             'moq_color'     => 'required|numeric',
             'ppn'           => 'required|numeric',
-            'measure_id'    => 'required|numeric'
+            'measure_id'    => 'required|numeric',
+            'img_file'      => 'image|mimes:jpg,jpeg|max:3072|nullable'
         ];
     }
 
