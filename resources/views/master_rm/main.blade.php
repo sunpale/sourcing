@@ -43,7 +43,7 @@
         function tableMaterial(){
             const material = $('#tbl-material').DataTable({
                 serverSide: true,
-                ajax: '{{route('raw-material.data',1)}}',
+                ajax: '{{route('raw-material.data')}}',
                 columns: [
                     {data: 'responsive',name:'responsive',searchable:false},
                     {data: 'rownum',name:'rownum',searchable:false}, {data: 'kode',name: 'kode'}, {data: 'kode_infor',name: 'kode_infor'}, {data: 'fabric.description',name: 'fabric.description'},{data: 'color.description',name: 'color.description'}, {data: 'brand.brand',name: 'brand.brand'}, {data: 'supplier.name',name: 'supplier.name'},{data : 'item_name',name: 'item_name'},{data : 'item_desc',name: 'item_desc'},{data : 'komposisi.komposisi',name: 'komposisi.komposisi'},{data:'measure.kode',data:'measure.kode'},{data: 'action',name: 'action'}
@@ -126,6 +126,10 @@
                     });
                 }
             }));
+        }
+
+        function view(id){
+            window.location.href = baseUrl + '/master-rm/raw-material/'+id
         }
         document.addEventListener('DOMContentLoaded',function (){
             @if(Session::has('success'))

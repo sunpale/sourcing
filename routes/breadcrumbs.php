@@ -33,6 +33,10 @@ Breadcrumbs::for('material.create',function (BreadcrumbTrail $trail){
     $trail->parent('material');
     $trail->push('New',route('raw-material.index'));
 });
+Breadcrumbs::for('material.view',function (BreadcrumbTrail $trail){
+    $trail->parent('material');
+    $trail->push('View Data',route('raw-material.index'));
+});
 //endregion
 //endregion
 

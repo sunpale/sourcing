@@ -38,7 +38,9 @@ Route::prefix('master-rm')->middleware('auth:web')->group(function (){
 //endregion
 //region material
     Route::get('/raw-material/generate-code',[MaterialsController::class,'generateCode'])->name('raw-material.generate-code');
-    Route::resource('raw-material', MaterialsController::class)->names(['show' => 'raw-material.data']);
+    Route::get('/raw-material/data',[MaterialsController::class,'data'])->name('raw-material.data');
+    Route::get('raw-material/view-image/{file}',[MaterialsController::class,'viewImage'])->name('raw-material.view-image');
+    Route::resource('raw-material',MaterialsController::class);
 //endregion
 });
 //endregion
