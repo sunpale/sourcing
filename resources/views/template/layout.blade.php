@@ -37,6 +37,9 @@
     @if($dropzone)
     <link rel="stylesheet" type="text/css" href="{!! asset('src/libs/dropzone/dropzone.css') !!}">
     @endif
+    @if($glightbox)
+    <link rel="stylesheet" type="text/css" href="{!! asset('src/libs/glightbox/css/glightbox.min.css') !!}">
+    @endif
 </head>
 <body>
 <!-- Begin page -->
@@ -390,6 +393,9 @@
 @if($cleavejs)
     <script src="{!! asset('src/libs/cleave.js/cleave.min.js') !!}"></script>
     <script src="{!! asset('src/libs/cleave.js/cleave-phone.id.js') !!}"></script>
+@endif
+@if($glightbox)
+    <script src="{!! asset('src/libs/glightbox/js/glightbox.min.js') !!}"></script>
 @endif
 @yield('script')
 <script>
