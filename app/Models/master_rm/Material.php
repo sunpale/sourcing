@@ -8,8 +8,10 @@ use App\Models\master_data\Measure;
 use App\Models\master_data\Supplier;
 use App\Models\master_warna\Color;
 use App\Models\master_warna\ColorAks;
+use App\Models\User;
 use App\Traits\CustomSoftDelete;
 use App\Traits\UserInput;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -61,5 +63,22 @@ class Material extends Model
     public function ColorAks() : BelongsTo
     {
         return $this->belongsTo(ColorAks::class);
+    }
+
+    public function User() : BelongsTo
+    {
+        return $this->belongsTo(User::class,'updated_by','id');
+    }
+
+    public function getUpdatedAtAttribute($value){
+        return Carbon::parse($value)->format('d/m/Y H:i');
+    }
+
+    public function getCreatedAtAttribute($value){
+        return Carbon::parse($value)->format('d/m/Y H:i');
+    }
+
+    public function getDeletedAtAttribute($value){
+        return Carbon::parse($value)->format('d/m/Y H:i');
     }
 }
