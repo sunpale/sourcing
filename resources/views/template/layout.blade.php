@@ -52,18 +52,18 @@
                     <div class="navbar-brand-box horizontal-logo">
                         <a href="/" class="logo logo-dark">
                             <span class="logo-sm">
-                                <img src="{!! asset('src/images/logo/logo-3second.png') !!}" alt="" class="logo-height-sm">
+                                <img src="{!! asset('src/images/logo/logo-light.png') !!}" alt="" class="logo-height-sm">
                             </span>
                             <span class="logo-lg">
-                                <img src="{!! asset('src/images/logo/logo-white.png') !!}" alt="" class="logo-height-lg">
+                                <img src="{!! asset('src/images/logo/logo-sm-light.png') !!}" alt="" class="logo-height-lg">
                             </span>
                         </a>
                         <a href="/" class="logo logo-light">
                             <span class="logo-sm">
-                                <img src="{!! asset('src/images/logo/logo-3second.png') !!}" alt="" class="logo-height-sm">
+                                <img src="{!! asset('src/images/logo/logo-light.png') !!}" alt="" class="logo-height-sm">
                             </span>
                             <span class="logo-lg">
-                                <img src="{!! asset('src/images/logo/logo-white.png') !!}" alt="" class="logo-height-lg">
+                                <img src="{!! asset('src/images/logo/logo-sm-light.png') !!}" alt="" class="logo-height-lg">
                             </span>
                         </a>
                     </div>
@@ -150,19 +150,19 @@
             <!-- Dark Logo-->
             <a href="/" class="logo logo-dark">
                 <span class="logo-sm">
-                    <img src="{!! asset('src/images/logo/logo-3second.png') !!}" alt="" class="logo-height-sm">
+                    <img src="{!! asset('src/images/logo/logo-white.png') !!}" alt="" class="logo-height-sm">
                 </span>
                 <span class="logo-lg">
-                    <img src="{!! asset('src/images/logo/logo-3second.png') !!}" alt="" class="logo-height-lg">
+                    <img src="{!! asset('src/images/logo/logo-sm-light.png') !!}" alt="" class="logo-height-lg">
                 </span>
             </a>
             <!-- Light Logo-->
             <a href="/" class="logo logo-light">
                 <span class="logo-sm">
-                    <img src="{!! asset('src/images/logo/logo-3second.png') !!}" alt="" class="logo-height-sm">
+                    <img src="{!! asset('src/images/logo/logo-white.png') !!}" alt="" class="logo-height-sm">
                 </span>
                 <span class="logo-lg">
-                    <img src="{!! asset('src/images/logo/logo-white.png') !!}" alt="" class="logo-height-lg">
+                    <img src="{!! asset('src/images/logo/logo-sm-light.png') !!}" alt="" class="logo-height-lg">
                 </span>
             </a>
             <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover" id="vertical-hover">
