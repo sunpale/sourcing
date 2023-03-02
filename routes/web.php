@@ -59,7 +59,6 @@ Route::prefix('master-warna')->middleware('auth:web')->group(function (){
 });
 //endregion
 
-
 //region Master Data
 Route::prefix('master-data')->middleware('auth:web')->group(function (){
 //region Brand
@@ -80,7 +79,9 @@ Route::prefix('master-aksesoris')->middleware('auth:web')->group(function (){
 //region Product Group
     Route::resource('product-group', ProductGroupsController::class)->except(['create','show']);
 //endregion
-    Route::resource('aksesoris', AksesorisController::class)->names(['show' => 'aksesoris.data']);
+    Route::get('/aksesoris/data',[AksesorisController::class,'data'])->name('aksesoris.data');
+    Route::get('/aksesoris/view-image/{file}',[AksesorisController::class,'viewImage'])->name('aksesoris.view-image');
+    Route::resource('aksesoris', AksesorisController::class);
 });
 
 //endregion

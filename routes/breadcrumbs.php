@@ -113,4 +113,8 @@ Breadcrumbs::for('aksesoris.create',function (BreadcrumbTrail $trail){
     $trail->parent('aksesoris');
     $trail->push('New',route('aksesoris.index'));
 });
+Breadcrumbs::for('aksesoris.view',function (BreadcrumbTrail $trail){
+    $trail->parent('aksesoris');
+    $trail->push('View Data',route('aksesoris.index'));
+});
 //endregion

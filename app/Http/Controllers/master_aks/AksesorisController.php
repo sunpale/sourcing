@@ -52,16 +52,22 @@ class AksesorisController extends Controller
         return redirect()->route('aksesoris.index')->with('success',config('constants.SUCCESS_SAVE'));
     }
 
-    public function show(){
+    public function show(Material $aksesori){
+        $data = ['aksesoris'=>$aksesori->with(['user:id,username','ProductGroup:id,group','color:id,description','brand:id,brand','supplier:id,name','ColorAks:id,color_desc','measure:id,kode,measure_name'])->where('kode',$aksesori->kode)->get()];
+        return view('master_aks.detail',$data);
+    }
+
+    public function data(){
         if(request()->ajax()){
             $query = Material::select(['kode','kode_infor','color_id','brand_id','product_group_id','supplier_id','color_aks_id','item_name','item_desc','measure_id'])
                 ->with(['ProductGroup:id,group','color:id,description','brand:id,brand','supplier:id,name','ColorAks:id,color_desc','measure:id,kode,measure_name'])->where('fabric_id',null);
             return DataTables::eloquent($query)->order(function ($query){$query->orderBy('created_at','asc');})
                 ->addIndexColumn()->addColumn('responsive',function (){return '';})
                 ->addColumn('action',function ($row){
-                    return '<div class="dropdown d-inline-block"><button class="btn btn-soft-primary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-equalizer-fill align-middle"></i></button><ul class="dropdown-menu dropdown-menu-end"><li><a href="#" data-bs-toggle="tooltip" data-placement="auto" title="Edit Data" class="dropdown-item" onclick=edit("'.$row->kode.'")><i class="ri-edit-fill"></i> Edit Data</a></li><li><a href="#" data-bs-toggle="tooltip" data-placement="auto" title="Hapus Data" class="dropdown-item" onclick=hapus("'.$row->kode.'")><i class="ri-close-circle-fill"></i> Hapus Data</a></li></ul></div>';
+                    return '<div class="dropdown d-inline-block"><button class="btn btn-soft-primary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-equalizer-fill align-middle"></i></button><ul class="dropdown-menu dropdown-menu-end"><li><a href="#" data-bs-toggle="tooltip" data-placement="auto" title="Edit Data" class="dropdown-item" onclick=edit("'.$row->kode.'")><i class="ri-edit-fill"></i> Edit Data</a></li><li><a href="#" data-bs-toggle="tooltip" data-placement="auto" title="Hapus Data" class="dropdown-item" onclick=hapus("'.$row->kode.'")><i class="ri-close-circle-fill"></i> Hapus Data</a></li><li><a href="#" data-bs-toggle="tooltip" data-placement="auto" title="View Detail" class="dropdown-item" onclick=view("'.$row->kode.'")><i class="ri-file-search-line"></i> View Detail</a></li></ul></div>';
                 })->make(true);
         }
+        return redirect()->route('aksesoris.index');
     }
 
     public function edit(Material $aksesori)
@@ -104,6 +110,11 @@ class AksesorisController extends Controller
     {
         Material::destroy($aksesori->kode);
         return redirect()->route('aksesoris.index')->with('success',config('constants.SUCCESS_DELETE'));
+    }
+
+    public function viewImage($filename){
+        $file = storage_path('app/private/aks/'.$filename);
+        return response()->file($file);
     }
 
     private function save(array $data){

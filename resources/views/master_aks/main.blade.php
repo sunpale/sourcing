@@ -126,6 +126,11 @@
                     }
                 }));
             }
+
+            function view(id){
+                window.location.href = baseUrl + '/master-aksesoris/aksesoris/'+id
+            }
+
             document.addEventListener('DOMContentLoaded',function (){
                 @if(Session::has('success'))
                 notifikasi('success','{{session('success')}}')
