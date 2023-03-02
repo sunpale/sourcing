@@ -6,7 +6,7 @@
                     <div class="bg-soft-primary position-relative">
                         <div class="card-body p-5">
                             <div class="text-center">
-                                <h3>Raw Material Detail</h3>
+                                <h3>{{$form==='RM'?'Raw Material Detail':'Aksesoris Detail'}}</h3>
                                 <p class="mb-0 text-muted">Last update: <span class="fw-bold">{{$material[0]['updated_at']}}</span> by <span class="fw-bold">{{$material[0]['user']['username']}}</span></p>
                             </div>
                         </div>
@@ -46,6 +46,7 @@
                                     <td class="fw-bold">Item Description</td>
                                     <td>{{$material[0]['item_desc']}}</td>
                                 </tr>
+                                @if($form==='RM')
                                 <tr>
                                     <td class="fw-bold">Gramasi</td>
                                     <td>{{$material[0]['gramasi']}}</td>
@@ -62,6 +63,16 @@
                                     <td class="fw-bold">Finish</td>
                                     <td>{{$material[0]['finish']}}</td>
                                 </tr>
+                                @else
+                                    <tr>
+                                        <td class="fw-bold">Product Group</td>
+                                        <td>{{$material[0]['product_group']['group']}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Accessories Color</td>
+                                        <td>{{$material[0]['color_aks']['color_desc']}}</td>
+                                    </tr>
+                                @endif
                                 <tr>
                                     <td class="fw-bold">UOM</td>
                                     <td>{{$material[0]['measure']['measure_name']}}</td>
@@ -69,7 +80,11 @@
                                 <tr>
                                     <td class="fw-bold">Image</td>
                                     <td>
+                                        @if($form==='RM')
                                         <a class="image-popup" href="{{route('raw-material.view-image',$material[0]['image_name']??'')}}"><img src="{{route('raw-material.view-image',$material[0]['image_name']??'')}}" class="img-fluid img-thumbnail w-25"></a>
+                                        @else
+                                        <a class="image-popup" href="{{route('aksesoris.view-image',$material[0]['image_name']??'')}}"><img src="{{route('aksesoris.view-image',$material[0]['image_name']??'')}}" class="img-fluid img-thumbnail w-25"></a>
+                                        @endif
                                     </td>
                                 </tr>
                             </table>
@@ -84,12 +99,14 @@
                         </div>
                         <div class="table-responsive mb-3">
                             <table class="table table-borderless table-striped">
+                                @if($form==='RM')
                                 <tr>
                                     <td class="fw-bold">Fabric</td>
                                     <td>{{$material[0]['fabric']['description']}}</td>
                                     <td class="fw-bold">Color MD</td>
                                     <td>{{$material[0]['color']['description']}}</td>
                                 </tr>
+                                @endif
                                 <tr>
                                     <td class="fw-bold">Brand</td>
                                     <td>{{$material[0]['brand']['brand']}}</td>
@@ -99,12 +116,22 @@
                                 <tr>
                                     <td class="fw-bold">Lead Time</td>
                                     <td>{{$material[0]['lead_time']}}</td>
+                                    @if($form==='RM')
                                     <td class="fw-bold">MOQ / Greig</td>
                                     <td>{{$material[0]['moq']}}</td>
+                                    @else
+                                    <td class="fw-bold">MOQ</td>
+                                    <td>{{$material[0]['moq']}}</td>
+                                    @endif
                                 </tr>
                                 <tr>
+                                    @if($form==='RM')
                                     <td class="fw-bold">MOQ / Color</td>
                                     <td>{{$material[0]['moq_color']}}</td>
+                                    @else
+                                    <td class="fw-bold">Color MD</td>
+                                    <td>{{$material[0]['color']['description']}}</td>
+                                    @endif
                                     <td class="fw-bold">PPN</td>
                                     <td>{{$material[0]['ppn']==1?'PPN':'Non PPN'}}</td>
                                 </tr>
