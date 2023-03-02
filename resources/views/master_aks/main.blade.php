@@ -42,7 +42,7 @@
             function tableAksesoris(){
                 const aksesoris = $('#tbl-aksesoris').DataTable({
                     serverSide: true,
-                    ajax: '{{route('aksesoris.data',1)}}',
+                    ajax: '{{route('aksesoris.data')}}',
                     columns: [
                         {data: 'responsive',name:'responsive',searchable:false},
                         {data: 'rownum',name:'rownum',searchable:false}, {data: 'kode',name: 'kode'}, {data: 'kode_infor',name: 'kode_infor'}, {data: 'product_group.group',name: 'ProductGroup.group'},{data: 'color_aks.color_desc',name: 'ColorAks.color_desc'}, {data: 'brand.brand',name: 'brand.brand'}, {data: 'supplier.name',name: 'supplier.name'},{data : 'item_name',name: 'item_name'},{data : 'item_desc',name: 'item_desc'},{data:'measure.kode',data:'measure.kode'},{data: 'action',name: 'action'}
