@@ -22,7 +22,7 @@ class AksesorisRequest extends FormRequest
             'ppn'               => 'required|numeric',
             'measure_id'        => 'required|numeric',
             'color_id'          => 'required|numeric',
-            'img_file'          => 'image|mimes:jpg,jpeg|max:3072|nullable'
+            'img_file'          => 'image|mimes:jpg,jpeg|max:1024|nullable'
         ];
     }
 
