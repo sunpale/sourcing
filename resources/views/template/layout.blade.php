@@ -253,29 +253,25 @@
                             <i class="mdi mdi-tape-measure"></i> <span data-key="t-widgets">Unit of Measure</span>
                         </a>
                     </li>
-                    {{-- <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">Compliance</span>
-                     </li>
-
-                     <li class="nav-item">
-                         <a class="nav-link menu-link" href="#sidebarAudit" data-bs-toggle="collapse" role="button"
-                            aria-expanded="false" aria-controls="sidebarAudit">
-                             <i class="ri-pencil-ruler-2-line"></i> <span data-key="t-base-ui">Audit</span>
-                         </a>
-                         <div class="collapse menu-dropdown mega-dropdown-menu" id="sidebarAudit">
-                             <div class="row">
-                                 <div class="col-lg-4">
-                                     <ul class="nav nav-sm flex-column">
-                                         <li class="nav-item">
-                                             <a href="--}}{{--{{route('audit.index')}}--}}{{--" class="nav-link" data-key="t-alerts">Data</a>
-                                         </li>
-                                         <li class="nav-item">
-                                             <a href="--}}{{--{{route('audit.start')}}--}}{{--" class="nav-link" data-key="t-badges">Input</a>
-                                         </li>
-                                     </ul>
-                                 </div>
-                             </div>
-                         </div>
-                     </li>--}}
+                    @role('Super Admin')
+                    <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">User Management</span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{route('role.index')}}" aria-expanded="false">
+                            <i class="ri-team-fill"></i> <span data-key="t-widgets">Role</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{route('permission.index')}}" aria-expanded="false">
+                            <i class="ri-spy-line"></i> <span data-key="t-widgets">Permission</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{route('measure.index')}}" aria-expanded="false">
+                            <i class="ri-shield-user-line"></i> <span data-key="t-widgets">User</span>
+                        </a>
+                    </li>
+                    @endrole
                 </ul>
             </div>
             <!-- Sidebar -->
