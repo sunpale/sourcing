@@ -41,7 +41,7 @@
                     <div class="text-center mt-sm-5 mb-4 text-white-50">
                         <div>
                             <a href="#" class="d-inline-block auth-logo">
-                                <img src="{!! asset('src/images/logo/logo-white.png') !!}" alt="" height="40">
+                                <img src="{!! asset('src/images/logo/logo-sm-light.png') !!}" alt="" height="40">
                             </a>
                         </div>
                         <p class="mt-3 fs-15 fw-medium">Digital Compliance</p>
