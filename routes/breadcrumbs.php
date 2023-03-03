@@ -7,6 +7,25 @@ Breadcrumbs::for('main',function (BreadcrumbTrail $trail){
     $trail->push('Home',route('main'));
 });
 
+//region User Management
+Breadcrumbs::for('user-management',function (BreadcrumbTrail $trail){
+    $trail->parent('main');
+    $trail->push('User Management');
+});
+//region Role
+Breadcrumbs::for('role',function (BreadcrumbTrail $trail){
+    $trail->parent('user-management');
+    $trail->push('Role',route('role.index'));
+});
+//endregion
+//region Role
+Breadcrumbs::for('permission',function (BreadcrumbTrail $trail){
+    $trail->parent('user-management');
+    $trail->push('Permission',route('permission.index'));
+});
+//endregion
+//endregion
+
 //region Master RM
 Breadcrumbs::for('master-rm',function (BreadcrumbTrail $trail){
     $trail->parent('main');

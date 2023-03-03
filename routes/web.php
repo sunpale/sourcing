@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\auth\RoleController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\master_aks\AksesorisController;
 use App\Http\Controllers\master_aks\ProductGroupsController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\master_rm\KomposisiController;
 use App\Http\Controllers\master_warna\ColorAksController;
 use App\Http\Controllers\master_warna\ColorsController;
 use App\Http\Controllers\master_warna\PantonesController;
+use App\Http\Controllers\PermissionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,7 +29,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [MainController::class,'index'])->name('main')->middleware('auth:web');
 //region Master RM
-Route::prefix('master-rm')->middleware('auth:web')->group(function (){
+Route::prefix('master-rm')->middleware(['auth','role:Admin Master'])->group(function (){
 //region Fabric
     Route::get('fabric/generate-code',[FabricsController::class,'generateCode'])->name('fabric.generate-code');
     Route::resource('fabric', FabricsController::class)->except(['create','show']);
@@ -84,4 +86,15 @@ Route::prefix('master-aksesoris')->middleware('auth:web')->group(function (){
     Route::resource('aksesoris', AksesorisController::class);
 });
 
+//endregion
+
+//Region Auth
+Route::prefix('auth')->middleware(['auth','role:Super Admin'])->group(function (){
+//region Role
+    Route::resource('role', RoleController::class)->except(['create','show']);
+// endregion
+//region Permission
+    Route::resource('permission', PermissionController::class)->except(['create','show']);
+//endregion
+});
 //endregion
