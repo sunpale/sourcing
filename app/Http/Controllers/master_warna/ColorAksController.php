@@ -43,7 +43,7 @@ class ColorAksController extends Controller
         $data = $request->except(['_token','number']);
         $data['kode'] = $this->generateCode();
         ColorAks::create($data);
-        return redirect()->route('warna-aksesoris.index')->with('success',config('constants.SUCCESS_SAVE'));
+        return redirect()->route('master-warna.warna-aksesoris.index')->with('success',config('constants.SUCCESS_SAVE'));
     }
 
     public function edit(ColorAks $warna_aksesori)
@@ -54,12 +54,12 @@ class ColorAksController extends Controller
     public function update(ColorAksRequest $request, ColorAks $warna_aksesori)
     {
         ColorAks::where('id',$warna_aksesori->id)->update($request->except(['_token','number','_method']));
-        return redirect()->route('warna-aksesoris.index')->with('success',config('constants.SUCCESS_UPDATE'));
+        return redirect()->route('master-warna.warna-aksesoris.index')->with('success',config('constants.SUCCESS_UPDATE'));
     }
 
     public function destroy(ColorAks $warna_aksesori)
     {
         ColorAks::destroy($warna_aksesori->id);
-        return redirect()->route('warna-aksesoris.index')->with('success',config('constants.SUCCESS_DELETE'));
+        return redirect()->route('master-warna.warna-aksesoris.index')->with('success',config('constants.SUCCESS_DELETE'));
     }
 }

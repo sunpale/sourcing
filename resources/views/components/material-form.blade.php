@@ -10,7 +10,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form method="POST" id="frm-<?=$form?>" {{$attributes->merge(['action'=> route('raw-material.store')])}} enctype="multipart/form-data">
+                    <form method="POST" id="frm-<?=$form?>" {{$attributes->merge(['action'=> route('master-rm.raw-material.store')])}} enctype="multipart/form-data">
                         @csrf
                         @if($editMode)
                         @method('PATCH')
@@ -115,7 +115,7 @@
                             @endif
                             <div class="text-end mt-5">
                                 <button type="submit" class="btn btn-success data-submit me-1">Save</button>
-                                <a href="{!! $form==='RM' ? route('raw-material.index') : route('aksesoris.index') !!}" class="btn btn-outline-danger">Cancel</a>
+                                <a href="{!! $form==='RM' ? route('master-rm.raw-material.index') : route('master-aks.aksesoris.index') !!}" class="btn btn-outline-danger">Cancel</a>
                             </div>
                         </div>
                     </form>
@@ -153,7 +153,7 @@
                 prefixCode = '{{config('constants.'.$form)}}'+group[0]+colorAks[0]+brand[0];
                 @endif
                 $.ajax({
-                    url         : '{{route('raw-material.generate-code')}}',
+                    url         : '{{route('master-rm.raw-material.generate-code')}}',
                     type        : 'get',
                     data        : 'prefixCode='+prefixCode,
                     dataType    : 'json',

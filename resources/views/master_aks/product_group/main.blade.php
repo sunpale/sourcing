@@ -65,7 +65,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="{{route('product-group.store')}}" id="frm-group">
+                    <form method="post" action="{{route('master-aks.product-group.store')}}" id="frm-group">
                         @csrf
                         <input type="hidden" name="number" id="number" value="{{old('number')??''}}">
                         <input type="hidden" name="old_kode" id="old_kode" value="{{old('old_kode')??''}}">

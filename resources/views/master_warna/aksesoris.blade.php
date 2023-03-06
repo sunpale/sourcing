@@ -65,7 +65,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="{{route('warna-aksesoris.store')}}" id="frm-warna-aks">
+                    <form method="post" action="{{route('master-warna.warna-aksesoris.store')}}" id="frm-warna-aks">
                         @csrf
                         <input type="hidden" name="number" id="number" value="{{old('number')??''}}">
                         <x-forms.input label="Color Name" id="color_desc" name="color_desc" placeholder="Color Name"></x-forms.input>

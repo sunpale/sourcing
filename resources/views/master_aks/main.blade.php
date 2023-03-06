@@ -5,7 +5,7 @@
                 <div class="card-header align-items-center d-flex">
                     <h4 class="card-title mb-0 flex-grow-1">Data Aksesoris</h4>
                     <div class="flex-shrink-0">
-                        <a href="{!! route('aksesoris.create') !!}" class="btn btn-sm btn-info waves-effect waves-light">
+                        <a href="{!! route('master-aks.aksesoris.create') !!}" class="btn btn-sm btn-info waves-effect waves-light">
                             <i class="fal fa-file-plus"></i> Add new
                         </a>
                     </div>
@@ -42,7 +42,7 @@
             function tableAksesoris(){
                 const aksesoris = $('#tbl-aksesoris').DataTable({
                     serverSide: true,
-                    ajax: '{{route('aksesoris.data')}}',
+                    ajax: '{{route('master-aks.aksesoris.data')}}',
                     columns: [
                         {data: 'responsive',name:'responsive',searchable:false},
                         {data: 'rownum',name:'rownum',searchable:false}, {data: 'kode',name: 'kode'}, {data: 'kode_infor',name: 'kode_infor'}, {data: 'product_group.group',name: 'ProductGroup.group'},{data: 'color_aks.color_desc',name: 'ColorAks.color_desc'}, {data: 'brand.brand',name: 'brand.brand'}, {data: 'supplier.name',name: 'supplier.name'},{data : 'item_name',name: 'item_name'},{data : 'item_desc',name: 'item_desc'},{data:'measure.kode',data:'measure.kode'},{data: 'action',name: 'action'}

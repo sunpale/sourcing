@@ -81,9 +81,9 @@
                                     <td class="fw-bold">Image</td>
                                     <td>
                                         @if($form==='RM')
-                                        <a class="image-popup" href="{{route('raw-material.view-image',$material[0]['image_name']??'')}}"><img src="{{route('raw-material.view-image',$material[0]['image_name']??'')}}" class="img-fluid img-thumbnail w-25"></a>
+                                        <a class="image-popup" href="{{route('master-rm.raw-material.view-image',$material[0]['image_name']??'')}}"><img src="{{route('master-rm.raw-material.view-image',$material[0]['image_name']??'')}}" class="img-fluid img-thumbnail w-25"></a>
                                         @else
-                                        <a class="image-popup" href="{{route('aksesoris.view-image',$material[0]['image_name']??'')}}"><img src="{{route('aksesoris.view-image',$material[0]['image_name']??'')}}" class="img-fluid img-thumbnail w-25"></a>
+                                        <a class="image-popup" href="{{route('master-aks.aksesoris.view-image',$material[0]['image_name']??'')}}"><img src="{{route('master-aks.aksesoris.view-image',$material[0]['image_name']??'')}}" class="img-fluid img-thumbnail w-25"></a>
                                         @endif
                                     </td>
                                 </tr>

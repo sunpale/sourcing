@@ -63,7 +63,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="{{route('fabric.store')}}" id="frm-fabric">
+                    <form method="post" action="{{route('master-rm.fabric.store')}}" id="frm-fabric">
                         @csrf
                         <input type="hidden" name="number" id="number" value="{{old('number')??''}}">
                         <input type="hidden" name="old_kode" id="old_kode" value="{{old('old_kode')??''}}">
@@ -196,7 +196,7 @@
                     document.getElementById('kode').value = document.getElementById('old_kode').value;
                 }else {
                     $.ajax({
-                        url         : '{{route('fabric.generate-code')}}',
+                        url         : '{{route('master-rm.fabric.generate-code')}}',
                         type        : 'get',
                         data        : 'prefix=' + this.value,
                         dataType    : 'json',

@@ -63,7 +63,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="{{route('pantone.store')}}" id="frm-pantone">
+                    <form method="post" action="{{route('master-warna.pantone.store')}}" id="frm-pantone">
                         @csrf
                         <input type="hidden" name="number" id="number" value="{{old('number')??''}}">
                         <input type="hidden" name="old_kode" id="old_kode" value="{{old('old_kode')??''}}">

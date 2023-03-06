@@ -63,7 +63,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="{{route('komposisi.store')}}" id="frm-komposisi">
+                    <form method="post" action="{{route('master-rm.komposisi.store')}}" id="frm-komposisi">
                         @csrf
                         <input type="hidden" name="number" id="number" value="{{old('number')??''}}">
                         <x-forms.input label="Komposisi" id="komposisi" name="komposisi" placeholder="Komposisi"></x-forms.input>

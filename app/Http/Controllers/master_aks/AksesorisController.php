@@ -49,7 +49,7 @@ class AksesorisController extends Controller
         }else{
             $this->save($data);
         }
-        return redirect()->route('aksesoris.index')->with('success',config('constants.SUCCESS_SAVE'));
+        return redirect()->route('master-aks.aksesoris.index')->with('success',config('constants.SUCCESS_SAVE'));
     }
 
     public function show(Material $aksesori){
@@ -67,7 +67,7 @@ class AksesorisController extends Controller
                     return '<div class="dropdown d-inline-block"><button class="btn btn-soft-primary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-equalizer-fill align-middle"></i></button><ul class="dropdown-menu dropdown-menu-end"><li><a href="#" data-bs-toggle="tooltip" data-placement="auto" title="Edit Data" class="dropdown-item" onclick=edit("'.$row->kode.'")><i class="ri-edit-fill"></i> Edit Data</a></li><li><a href="#" data-bs-toggle="tooltip" data-placement="auto" title="Hapus Data" class="dropdown-item" onclick=hapus("'.$row->kode.'")><i class="ri-close-circle-fill"></i> Hapus Data</a></li><li><a href="#" data-bs-toggle="tooltip" data-placement="auto" title="View Detail" class="dropdown-item" onclick=view("'.$row->kode.'")><i class="ri-file-search-line"></i> View Detail</a></li></ul></div>';
                 })->make(true);
         }
-        return redirect()->route('aksesoris.index');
+        return redirect()->route('master-aks.aksesoris.index');
     }
 
     public function edit(Material $aksesori)
@@ -103,13 +103,13 @@ class AksesorisController extends Controller
         }else{
             $this->change($data,$aksesori->kode);
         }
-        return redirect()->route('aksesoris.index')->with('success',config('constants.SUCCESS_UPDATE'));
+        return redirect()->route('master-aks.aksesoris.index')->with('success',config('constants.SUCCESS_UPDATE'));
     }
 
     public function destroy(Material $aksesori)
     {
         Material::destroy($aksesori->kode);
-        return redirect()->route('aksesoris.index')->with('success',config('constants.SUCCESS_DELETE'));
+        return redirect()->route('master-aks.aksesoris.index')->with('success',config('constants.SUCCESS_DELETE'));
     }
 
     public function viewImage($filename){

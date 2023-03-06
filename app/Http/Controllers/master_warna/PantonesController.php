@@ -19,7 +19,7 @@ class PantonesController extends Controller
     public function store(PantoneRequest $request)
     {
         Pantone::create($request->only(['kode','pantone']));
-        return redirect()->route('pantone.index')->with('success',config('constants.SUCCESS_SAVE'));
+        return redirect()->route('master-warna.pantone.index')->with('success',config('constants.SUCCESS_SAVE'));
     }
 
     public function edit(Pantone $pantone)
@@ -30,12 +30,12 @@ class PantonesController extends Controller
     public function update(PantoneRequest $request, Pantone $pantone)
     {
         Pantone::where('id',$pantone->id)->update($request->only(['kode','pantone']));
-        return redirect()->route('pantone.index')->with('success',config('constants.SUCCESS_UPDATE'));
+        return redirect()->route('master-warna.pantone.index')->with('success',config('constants.SUCCESS_UPDATE'));
     }
 
     public function destroy(Pantone $pantone)
     {
         Pantone::destroy($pantone->id);
-        return redirect()->route('pantone.index')->with('success',config('constants.SUCCESS_DELETE'));
+        return redirect()->route('master-warna.pantone.index')->with('success',config('constants.SUCCESS_DELETE'));
     }
 }

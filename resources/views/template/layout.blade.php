@@ -181,19 +181,19 @@
                     </li> <!-- end Dashboard Menu -->
                     <li class="menu-title"><span data-key="t-master">Master Data</span></li>
                     <li class="nav-item">
-                        <a class="nav-link menu-link" href="#sidebarMasterMaterial" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarMasterMaterial">
+                        <a class="nav-link menu-link" href="#sidebarMasterMaterial" data-bs-toggle="collapse" role="button" aria-expanded="{{Route::is('master-rm.*')?'true':'false'}}" aria-controls="sidebarMasterMaterial">
                             <i class="ri-apps-2-line"></i> <span data-key="t-apps">Master Raw Material</span>
                         </a>
-                        <div class="collapse menu-dropdown" id="sidebarMasterMaterial">
+                        <div class="collapse menu-dropdown {{Route::is('master-rm.*')?'show':''}}" id="sidebarMasterMaterial">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="{!! route('fabric.index') !!}" class="nav-link" data-key="t-fabric"> Jenis Fabric </a>
+                                    <a href="{!! route('master-rm.fabric.index') !!}" class="nav-link {{Route::is('master-rm.fabric.index')?'active':''}}" data-key="t-fabric"> Jenis Fabric </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{!! route('komposisi.index') !!}" class="nav-link" data-key="t-komposisi"> Komposisi </a>
+                                    <a href="{!! route('master-rm.komposisi.index') !!}" class="nav-link {{Route::is('master-rm.komposisi.index')?'active':''}}" data-key="t-komposisi"> Komposisi </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{!! route('raw-material.index') !!}" class="nav-link" data-key="t-aspek"> Raw Material </a>
+                                    <a href="{!! route('master-rm.raw-material.index') !!}" class="nav-link" data-key="t-aspek"> Raw Material </a>
                                 </li>
                             </ul>
                         </div>
@@ -201,17 +201,17 @@
 
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="#sidebarMasterAksesoris" data-bs-toggle="collapse" role="button"
-                           aria-expanded="false" aria-controls="sidebarMasterAksesoris">
+                           aria-expanded="{{Route::is('master-aks.*')?'true':'false'}}" aria-controls="sidebarMasterAksesoris">
                             <i class="ri-pantone-fill"></i> <span
                                 data-key="t-authentication">Master Aksesoris</span>
                         </a>
-                        <div class="collapse menu-dropdown" id="sidebarMasterAksesoris">
+                        <div class="collapse menu-dropdown {{Route::is('master-aks.*')?'show':''}}" id="sidebarMasterAksesoris">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="{!! route('product-group.index') !!}" class="nav-link" data-key="t-toko"> Product Group </a>
+                                    <a href="{!! route('master-aks.product-group.index') !!}" class="nav-link {{Route::is('master-aks.product-group.index')?'active':''}}" data-key="t-toko"> Product Group </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{!! route('aksesoris.index') !!}" class="nav-link" data-key="t-region"> Aksesoris </a>
+                                    <a href="{!! route('master-aks.aksesoris.index') !!}" class="nav-link {{Route::is('master-aks.aksesoris*')?'active':''}}" data-key="t-region"> Aksesoris </a>
                                 </li>
                             </ul>
                         </div>
@@ -219,37 +219,37 @@
 
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="#sidebarMasterWarna" data-bs-toggle="collapse" role="button"
-                           aria-expanded="false" aria-controls="sidebarMasterWarna">
+                           aria-expanded="{{Route::is('master-warna.*')?'true':'false'}}" aria-controls="sidebarMasterWarna">
                             <i class="ri-palette-line"></i> <span
                                 data-key="t-authentication">Master Warna</span>
                         </a>
-                        <div class="collapse menu-dropdown" id="sidebarMasterWarna">
+                        <div class="collapse menu-dropdown {{Route::is('master-warna.*')?'show':''}}" id="sidebarMasterWarna">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="{!! route('warna.index') !!}" class="nav-link" data-key="t-warna"> Warna MD </a>
+                                    <a href="{!! route('master-warna.warna.index') !!}" class="nav-link {{Route::is('master-warna.warna.index')?'active':''}}" data-key="t-warna"> Warna MD </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{!! route('pantone.index') !!}" class="nav-link" data-key="t-region"> Pantone </a>
+                                    <a href="{!! route('master-warna.pantone.index') !!}" class="nav-link {{Route::is('master-warna.pantone.index')?'active':''}}" data-key="t-region"> Pantone </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{!! route('warna-aksesoris.index') !!}" class="nav-link" data-key="t-region"> Warna Aksesoris </a>
+                                    <a href="{!! route('master-warna.warna-aksesoris.index') !!}" class="nav-link {{Route::is('master-warna.warna-aksesoris.index')?'active':''}}" data-key="t-region"> Warna Aksesoris </a>
                                 </li>
                             </ul>
                         </div>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link menu-link" href="{!! route('brands.index') !!}" aria-expanded="false">
+                        <a class="nav-link menu-link {{Route::is('brands.index') ? 'active':''}}" href="{!! route('brands.index') !!}" aria-expanded="false">
                             <i class="icon-3second"></i> <span data-key="t-widgets">Brands</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link menu-link" href="{!! route('supplier.index') !!}" aria-expanded="false">
+                        <a class="nav-link menu-link {{Route::is('supplier*') ? 'active':''}}" href="{!! route('supplier.index') !!}" aria-expanded="false">
                             <i class="mdi mdi-truck-delivery"></i> <span data-key="t-widgets">Supplier</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link menu-link" href="{{route('measure.index')}}" aria-expanded="false">
+                        <a class="nav-link menu-link {{Route::is('measure.index') ? 'active':''}}" href="{{route('measure.index')}}" aria-expanded="false">
                             <i class="mdi mdi-tape-measure"></i> <span data-key="t-widgets">Unit of Measure</span>
                         </a>
                     </li>

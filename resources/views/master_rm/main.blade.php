@@ -5,7 +5,7 @@
                 <div class="card-header align-items-center d-flex">
                     <h4 class="card-title mb-0 flex-grow-1">Data Raw Material</h4>
                     <div class="flex-shrink-0">
-                        <a href="{!! route('raw-material.create') !!}" class="btn btn-sm btn-info waves-effect waves-light">
+                        <a href="{!! route('master-rm.raw-material.create') !!}" class="btn btn-sm btn-info waves-effect waves-light">
                             <i class="fal fa-file-plus"></i> Add new
                         </a>
                     </div>
@@ -43,7 +43,7 @@
         function tableMaterial(){
             const material = $('#tbl-material').DataTable({
                 serverSide: true,
-                ajax: '{{route('raw-material.data')}}',
+                ajax: '{{route('master-rm.raw-material.data')}}',
                 columns: [
                     {data: 'responsive',name:'responsive',searchable:false},
                     {data: 'rownum',name:'rownum',searchable:false}, {data: 'kode',name: 'kode'}, {data: 'kode_infor',name: 'kode_infor'}, {data: 'fabric.description',name: 'fabric.description'},{data: 'color.description',name: 'color.description'}, {data: 'brand.brand',name: 'brand.brand'}, {data: 'supplier.name',name: 'supplier.name'},{data : 'item_name',name: 'item_name'},{data : 'item_desc',name: 'item_desc'},{data : 'komposisi.komposisi',name: 'komposisi.komposisi'},{data:'measure.kode',data:'measure.kode'},{data: 'action',name: 'action'}

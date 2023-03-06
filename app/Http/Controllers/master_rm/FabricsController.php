@@ -41,7 +41,7 @@ class FabricsController extends Controller
     public function store(FabricRequest $request)
     {
         Fabric::create($request->only(['kode','description']));
-        return redirect()->route('fabric.index')->with('success',config('constants.SUCCESS_SAVE'));
+        return redirect()->route('master-rm.fabric.index')->with('success',config('constants.SUCCESS_SAVE'));
     }
 
     public function edit(Fabric $fabric)
@@ -52,12 +52,12 @@ class FabricsController extends Controller
     public function update(FabricRequest $request, Fabric $fabric)
     {
        Fabric::where('id',$fabric->id)->update($request->only(['kode','description']));
-        return redirect()->route('fabric.index')->with('success',config('constants.SUCCESS_UPDATE'));
+        return redirect()->route('master-rm.fabric.index')->with('success',config('constants.SUCCESS_UPDATE'));
     }
 
     public function destroy(Fabric $fabric)
     {
         Fabric::destroy($fabric->id);
-        return redirect()->route('fabric.index')->with('success',config('constants.SUCCESS_DELETE'));
+        return redirect()->route('master-rm.fabric.index')->with('success',config('constants.SUCCESS_DELETE'));
     }
 }

@@ -34,27 +34,27 @@ Breadcrumbs::for('master-rm',function (BreadcrumbTrail $trail){
 //region Fabric
 Breadcrumbs::for('fabric',function (BreadcrumbTrail $trail){
     $trail->parent('master-rm');
-    $trail->push('Jenis Fabric',route('fabric.index'));
+    $trail->push('Jenis Fabric',route('master-rm.fabric.index'));
 });
 //endregion
 //region Komposisi
 Breadcrumbs::for('komposisi',function (BreadcrumbTrail $trail){
     $trail->parent('master-rm');
-    $trail->push('Komposisi',route('komposisi.index'));
+    $trail->push('Komposisi',route('master-rm.komposisi.index'));
 });
 //endregion
 //region material
 Breadcrumbs::for('material',function (BreadcrumbTrail $trail){
     $trail->parent('master-rm');
-    $trail->push('Raw Material',route('raw-material.index'));
+    $trail->push('Raw Material',route('master-rm.raw-material.index'));
 });
 Breadcrumbs::for('material.create',function (BreadcrumbTrail $trail){
     $trail->parent('material');
-    $trail->push('New',route('raw-material.index'));
+    $trail->push('New',route('master-rm.raw-material.index'));
 });
 Breadcrumbs::for('material.view',function (BreadcrumbTrail $trail){
     $trail->parent('material');
-    $trail->push('View Data',route('raw-material.index'));
+    $trail->push('View Data',route('master-rm.raw-material.index'));
 });
 //endregion
 //endregion
@@ -67,19 +67,19 @@ Breadcrumbs::for('master-warna',function (BreadcrumbTrail $trail){
 //region Warna MD
 Breadcrumbs::for('warna',function (BreadcrumbTrail $trail){
     $trail->parent('master-warna');
-    $trail->push('warna',route('warna.index'));
+    $trail->push('warna',route('master-warna.warna.index'));
 });
 //endregion
 //region Warna Pantone
 Breadcrumbs::for('pantone',function (BreadcrumbTrail $trail){
     $trail->parent('master-warna');
-    $trail->push('Warna Pantone',route('pantone.index'));
+    $trail->push('Warna Pantone',route('master-warna.pantone.index'));
 });
 //endregion
 //region Warna Aksesoris
 Breadcrumbs::for('warna-aks',function (BreadcrumbTrail $trail){
     $trail->parent('master-warna');
-    $trail->push('Warna Aksesoris',route('warna-aksesoris.index'));
+    $trail->push('Warna Aksesoris',route('master-warna.warna-aksesoris.index'));
 });
 //endregion
 //endregion
@@ -121,19 +121,19 @@ Breadcrumbs::for('master-aks',function (BreadcrumbTrail $trail){
 //region Product Group
 Breadcrumbs::for('product-group',function (BreadcrumbTrail $trail){
     $trail->parent('master-aks');
-    $trail->push('Product Group',route('product-group.index'));
+    $trail->push('Product Group',route('master-aks.product-group.index'));
 });
 //endregion
 Breadcrumbs::for('aksesoris',function (BreadcrumbTrail $trail){
     $trail->parent('master-aks');
-    $trail->push('Aksesoris',route('aksesoris.index'));
+    $trail->push('Aksesoris',route('master-aks.aksesoris.index'));
 });
 Breadcrumbs::for('aksesoris.create',function (BreadcrumbTrail $trail){
     $trail->parent('aksesoris');
-    $trail->push('New',route('aksesoris.index'));
+    $trail->push('New',route('master-aks.aksesoris.index'));
 });
 Breadcrumbs::for('aksesoris.view',function (BreadcrumbTrail $trail){
     $trail->parent('aksesoris');
-    $trail->push('View Data',route('aksesoris.index'));
+    $trail->push('View Data',route('master-aks.aksesoris.index'));
 });
 //endregion
