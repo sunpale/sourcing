@@ -257,12 +257,12 @@
                     <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">User Management</span>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link menu-link" href="{{route('role.index')}}" aria-expanded="false">
+                        <a class="nav-link menu-link {{Route::is('role.index')?'active':''}}" href="{{route('role.index')}}" aria-expanded="false">
                             <i class="ri-team-fill"></i> <span data-key="t-widgets">Role</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link menu-link" href="{{route('permission.index')}}" aria-expanded="false">
+                        <a class="nav-link menu-link {{Route::is('permission.index')?'active':''}}" href="{{route('permission.index')}}" aria-expanded="false">
                             <i class="ri-spy-line"></i> <span data-key="t-widgets">Permission</span>
                         </a>
                     </li>
