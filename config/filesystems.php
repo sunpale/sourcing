@@ -36,6 +36,23 @@ return [
             'throw' => false,
         ],
 
+        'media' => [
+            'driver' => 'local',
+            'root'   => storage_path('app/private/images'),
+            'url'    => env('APP_URL').'/images'
+        ],
+
+        'media-thumb' => [
+            'driver'    => 'local',
+            'root'      => storage_path('app/private/images-conversions'),
+            'url'       => env('APP_URL').'/images/conversions'
+        ],
+
+        'media-archieved' => [
+            'driver'    => 'local',
+            'root'      => storage_path('app/private/images-archieved'),
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
