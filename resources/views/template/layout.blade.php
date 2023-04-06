@@ -253,6 +253,11 @@
                             <i class="mdi mdi-tape-measure"></i> <span data-key="t-widgets">Unit of Measure</span>
                         </a>
                     </li>
+                    <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">Bill of Material</span>
+                    </li>
+                    <a class="nav-link menu-link {{Route::is('bom.articles.index') ? 'active':''}}" href="{{route('bom.articles.index')}}" aria-expanded="false">
+                        <i class="ri-shirt-fill"></i><span data-ket="t-widgets">Article</span>
+                    </a>
                     @role('Super Admin')
                     <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">User Management</span>
                     </li>
