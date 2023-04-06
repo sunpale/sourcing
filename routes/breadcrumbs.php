@@ -137,3 +137,20 @@ Breadcrumbs::for('aksesoris.view',function (BreadcrumbTrail $trail){
     $trail->push('View Data',route('master-aks.aksesoris.index'));
 });
 //endregion
+
+//region BOM
+Breadcrumbs::for('bom',function (BreadcrumbTrail $trail){
+    $trail->parent('main');
+    $trail->push('Bill of Material');
+});
+//region Article
+Breadcrumbs::for('article',function (BreadcrumbTrail $trail){
+    $trail->parent('bom');
+    $trail->push('Article');
+});
+Breadcrumbs::for('article.create',function (BreadcrumbTrail $trail){
+    $trail->parent('article');
+    $trail->push('New');
+});
+//endregion
+//endregion

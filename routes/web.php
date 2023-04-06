@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\auth\PermissionController;
 use App\Http\Controllers\auth\RoleController;
+use App\Http\Controllers\BOM\ArticlesController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\master_aks\AksesorisController;
 use App\Http\Controllers\master_aks\ProductGroupsController;
@@ -28,6 +29,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [MainController::class,'index'])->name('main')->middleware('auth:web');
+Route::get('/images/{path}/{file}',[MainController::class,'viewImage']);
+Route::get('/images/conversions/{path}/{file}',[MainController::class,'viewThumbnail']);
 //region Master RM
 Route::prefix('master-rm')->middleware(['auth','permission:create-master'])->name('master-rm.')->group(function (){
 //region Fabric
@@ -84,6 +87,15 @@ Route::prefix('master-aksesoris')->middleware('auth:web')->name('master-aks.')->
     Route::get('/aksesoris/data',[AksesorisController::class,'data'])->name('aksesoris.data');
     Route::get('/aksesoris/view-image/{file}',[AksesorisController::class,'viewImage'])->name('aksesoris.view-image');
     Route::resource('aksesoris', AksesorisController::class);
+});
+//endregion
+
+//region BOM
+Route::prefix('bom')->middleware('auth:web')->name('bom.')->group(function (){
+//region Article
+    Route::get('/articles/data',[ArticlesController::class,'data'])->name('articles.data');
+    Route::resource('articles', ArticlesController::class);
+//endregion
 });
 //endregion
 
