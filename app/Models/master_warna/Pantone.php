@@ -2,9 +2,11 @@
 
 namespace App\Models\master_warna;
 
+use App\Models\BOM\Article;
 use App\Traits\CustomSoftDelete;
 use App\Traits\UserInput;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Pantone extends Model
@@ -16,5 +18,10 @@ class Pantone extends Model
     public function getFullPantoneAttribute(): string
     {
         return $this->kode.' - '.$this->pantone;
+    }
+
+    public function Article(): HasMany
+    {
+        return $this->hasMany(Article::class);
     }
 }
