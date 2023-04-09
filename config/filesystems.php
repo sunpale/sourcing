@@ -48,9 +48,9 @@ return [
             'url'       => env('APP_URL').'/images/conversions'
         ],
 
-        'media-archieved' => [
+        'media-archived' => [
             'driver'    => 'local',
-            'root'      => storage_path('app/private/images-archieved'),
+            'root'      => storage_path('app/private/images-archived'),
         ],
 
         'public' => [
