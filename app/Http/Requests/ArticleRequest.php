@@ -13,7 +13,7 @@ class ArticleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'kode' => ['required',new AlphaNumericSpaceDotRule(),'max:16'],
+            'kode' => ['required','unique:articles,kode',new AlphaNumericSpaceDotRule(),'max:16'],
             'name' => ['required',new AlphaNumericSpaceRule(),'max:50'],
             'pantone_id' => ['required', 'integer'],
             'brand_id' => ['required', 'integer'],
