@@ -13,8 +13,8 @@ return new class extends Migration
             DB::connection()->setSchemaGrammar(new CustomSqlServerGrammar());
         }
         Schema::create('media', function (Blueprint $table) {
-            $table->id();
-
+            /*$table->id();*/
+            $table->bigInteger('id')->primary()->unique();
             $table->morphs('model');
             $table->uuid('uuid')->nullable()->unique();
             $table->string('collection_name');
