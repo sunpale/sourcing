@@ -12,8 +12,7 @@ class ArticleRequest extends FormRequest
 {
     public function rules(): array
     {
-        return [
-            'kode' => ['required','unique:articles,kode',new AlphaNumericSpaceDotRule(),'max:16'],
+        $rules = [
             'name' => ['required',new AlphaNumericSpaceRule(),'max:50'],
             'pantone_id' => ['required', 'integer'],
             'brand_id' => ['required', 'integer'],
@@ -21,5 +20,11 @@ class ArticleRequest extends FormRequest
             'designer' => ['required',new AlpaSpaceRule(),'max:50'],
             'img_file' => 'image|mimes:jpg,jpeg,png|max:1024|nullable'
         ];
+        if (empty($this->input('number'))){
+            $rules['kode'] = ['required','unique:articles,kode',new AlphaNumericSpaceDotRule(),'max:16'];
+        }else{
+            $rules['kode'] = ['required',new AlphaNumericSpaceDotRule(),'max:16'];
+        }
+        return $rules;
     }
 }
