@@ -31,7 +31,8 @@ class ArticlesController extends Controller
     public function create(){
         $brand = Brand::where('kode','!=',99)->pluck('brand','id');
         $pantone = Pantone::all()->pluck('full_pantone','id');
-        return view('bom.article.create',compact('brand','pantone'));
+        $editMode = false;
+        return view('bom.article.create',compact('brand','pantone','editMode'));
     }
 
     /**
@@ -74,11 +75,30 @@ class ArticlesController extends Controller
         return $article;
     }
 
+    public function edit(Article $article)
+    {
+        $brand = Brand::where('kode','!=',99)->pluck('brand','id');
+        $pantone = Pantone::all()->pluck('full_pantone','id');
+        $editMode = true;
+        return view('bom.article.create',compact('brand','pantone','article','editMode'));
+    }
+
+    /**
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
     public function update(ArticleRequest $request, Article $article)
     {
-        $article->update($request->validated());
+        Article::where('id',$article->id)->update($request->except('_token','number','img_file','_method'));
+        if ($request->hasFile('img_file') && $request->file('img_file')->isValid()){
+            $image = $request->file('img_file');
+            $filename = $request->kode.'.'.$image->extension();
+            $article->media()->delete();
+            $article->addMediaFromRequest('img_file')->usingName($request->kode)->usingFileName($filename)->storingConversionsOnDisk('media-thumb')->toMediaCollection('articles');
 
-        return $article;
+
+        }
+        return redirect()->route('bom.articles.index')->with('success',config('constants.SUCCESS_UPDATE'));
     }
 
     public function destroy(Article $article)

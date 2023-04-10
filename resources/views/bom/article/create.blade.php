@@ -1,6 +1,9 @@
 <x-layout breadcrumbs="article.create" :select2="true" :cleavejs="true">
-    <form method="post" id="frm-article" action="{{ route('bom.articles.store') }}" enctype="multipart/form-data">
+    <form method="post" id="frm-article" action="{{ $editMode ? route('bom.articles.update',$article->id):route('bom.articles.store') }}" enctype="multipart/form-data">
         @csrf
+        @if($editMode)
+        @method('PATCH')
+        @endif
         <div class="row">
             <div class="col-lg-8">
                 <div class="card">
@@ -10,23 +13,23 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-lg-6">
-                                <input type="hidden" name="number" id="number">
-                                <x-forms.input id="kode" name="kode" label="Article Code" placeholder="Article Code"></x-forms.input>
+                                <input type="hidden" name="number" id="number" value="{{$editMode ? $article->id:''}}">
+                                <x-forms.input id="kode" name="kode" label="Article Code" placeholder="Article Code" :value="$editMode ? $article->kode:''"></x-forms.input>
                             </div>
                             <div class="col-lg-6">
-                                <x-forms.input id="modul" name="modul" label="Modul" placeholder="Modul"></x-forms.input>
+                                <x-forms.input id="modul" name="modul" label="Modul" placeholder="Modul" :value="$editMode ? $article->modul:''"></x-forms.input>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
-                                <x-forms.select id="brand" name="brand_id" label="Brand" class="form-select-sm select2" :list-value="$brand->toArray()">Select Brand</x-forms.select>
+                                <x-forms.select id="brand" name="brand_id" label="Brand" class="form-select-sm select2" :list-value="$brand->toArray()" :value="$editMode ? $article->brand_id:''">Select Brand</x-forms.select>
                             </div>
                             <div class="col-lg-6">
-                                <x-forms.select id="color" name="pantone_id" label="Color" class="form-select-sm select2" :list-value="$pantone->toArray()">Select Pantone Color</x-forms.select>
+                                <x-forms.select id="color" name="pantone_id" label="Color" class="form-select-sm select2" :list-value="$pantone->toArray()" :value="$editMode ? $article->pantone_id:''">Select Pantone Color</x-forms.select>
                             </div>
                         </div>
-                        <x-forms.input name="name" id="name" label="Article Name" placeholder="Article Name"></x-forms.input>
-                        <x-forms.input name="designer" id="designer" label="Designer" placeholder="Designer"></x-forms.input>
+                        <x-forms.input name="name" id="name" label="Article Name" placeholder="Article Name" :value="$editMode ? $article->name:''"></x-forms.input>
+                        <x-forms.input name="designer" id="designer" label="Designer" placeholder="Designer" :value="$editMode ? $article->designer:''"></x-forms.input>
                         <x-forms.input type="file" accept="image/png,image/jpeg" name="img_file" id="img_file" label="Upload Photo" margin-bottom="mb-4"></x-forms.input>
                         <div class="text-end">
                             <button type="submit" class="btn btn-success data-submit me-1">Save</button>
@@ -43,7 +46,16 @@
                     </div>
                     <div class="card-body">
                         <div class="text-center mb-4 mt-2">
+                            @if($editMode)
+                                @if($article->getMedia('articles')->count()==0)
+                                    <img class="img-thumbnail h-75 w-75 img-preview" src="{{asset('src/images/default.png')}}" height="12px">
+                                @else
+                                    <img class="img-thumbnail h-75 w-75 img-preview" src="{{$article->getFirstMediaUrl('articles')}}" height="12px">
+                                @endif
+                            @else
                             <img class="img-thumbnail h-75 w-75 img-preview" src="{{asset('src/images/default.png')}}" height="12px">
+                            @endif
+
                         </div>
                     </div>
                 </div>

@@ -83,7 +83,6 @@
                             let id = $(this).attr('id');
                             let ids = id.split('_');
                             if(ids[0]==='image-popup'){
-                                console.log(id)
                                 let lightbox=GLightbox({selector:"#"+id})
                             }
                         });
@@ -97,6 +96,23 @@
                 tblArticleInput.bind('keyup', function (e) {
                     if (e.keyCode === 13){
                         article.search(this.value).draw();
+                    }
+                });
+            }
+
+            function edit(id){
+                Swal.fire({
+                    title: "{!! config('constants.CONFIRM_TITLE_EDIT') !!}",
+                    text: "{!! config('constants.WARNING_MESSAGE') !!}",
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonText: "Yes"
+                }).then(function (result) {
+                    if(result.value){
+                        url_redirect({
+                            url : baseUrl + '/bom/articles/'+id+'/edit',
+                            method  : "get"
+                        });
                     }
                 });
             }
