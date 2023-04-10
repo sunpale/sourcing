@@ -94,7 +94,7 @@ Route::prefix('master-aksesoris')->middleware('auth:web')->name('master-aks.')->
 Route::prefix('bom')->middleware('auth:web')->name('bom.')->group(function (){
 //region Article
     Route::get('/articles/data',[ArticlesController::class,'data'])->name('articles.data');
-    Route::resource('articles', ArticlesController::class);
+    Route::resource('articles', ArticlesController::class)->except('show');
 //endregion
 });
 //endregion
