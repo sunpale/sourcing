@@ -70,11 +70,6 @@ class ArticlesController extends Controller
         return redirect()->route('bom.articles.index');
     }
 
-    public function show(Article $article)
-    {
-        return $article;
-    }
-
     public function edit(Article $article)
     {
         $brand = Brand::where('kode','!=',99)->pluck('brand','id');
@@ -95,8 +90,6 @@ class ArticlesController extends Controller
             $filename = $request->kode.'.'.$image->extension();
             $article->media()->delete();
             $article->addMediaFromRequest('img_file')->usingName($request->kode)->usingFileName($filename)->storingConversionsOnDisk('media-thumb')->toMediaCollection('articles');
-
-
         }
         return redirect()->route('bom.articles.index')->with('success',config('constants.SUCCESS_UPDATE'));
     }
