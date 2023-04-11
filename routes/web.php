@@ -32,7 +32,7 @@ Route::get('/', [MainController::class,'index'])->name('main')->middleware('auth
 Route::get('/images/{path}/{file}',[MainController::class,'viewImage']);
 Route::get('/images/conversions/{path}/{file}',[MainController::class,'viewThumbnail']);
 //region Master RM
-Route::prefix('master-rm')->middleware(['auth','permission:create-master'])->name('master-rm.')->group(function (){
+Route::prefix('master-rm')->middleware(['auth'/*,'permission:create-master'*/])->name('master-rm.')->group(function (){
 //region Fabric
     Route::get('fabric/generate-code',[FabricsController::class,'generateCode'])->name('fabric.generate-code');
     Route::resource('fabric', FabricsController::class)->except(['create','show']);
