@@ -60,6 +60,7 @@ class FortifyServiceProvider extends ServiceProvider
         });
 
         Fortify::loginView(static fn() => view('auth.login'));
+        Fortify::registerView(static fn() => view('auth.register'));
 
         Fortify::authenticateUsing(function (Request $request) {
             $user = User::where('username', $request->username)->first();
