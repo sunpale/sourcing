@@ -2,12 +2,14 @@
 
 use App\Http\Controllers\auth\PermissionController;
 use App\Http\Controllers\auth\RoleController;
-use App\Http\Controllers\BOM\ArticlesController;
+use App\Http\Controllers\BOM\BomsController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\master_aks\AksesorisController;
 use App\Http\Controllers\master_aks\ProductGroupsController;
+use App\Http\Controllers\master_data\ArticlesController;
 use App\Http\Controllers\master_data\BrandsController;
 use App\Http\Controllers\master_data\MeasuresController;
+use App\Http\Controllers\master_data\SizeController;
 use App\Http\Controllers\master_data\SuppliersController;
 use App\Http\Controllers\master_rm\FabricsController;
 use App\Http\Controllers\master_rm\KomposisiController;
@@ -76,6 +78,13 @@ Route::prefix('master-data')->middleware('auth:web')->group(function (){
     Route::resource('supplier', SuppliersController::class)->names(['show' => 'supplier.data']);
     Route::get('data-supplier',[SuppliersController::class,'getSupplier'])->name('suppliers.data-supplier');
 //endregion
+//region Article
+    Route::get('/articles/data',[ArticlesController::class,'data'])->name('articles.data');
+    Route::resource('articles', ArticlesController::class)->except('show');
+//endregion
+//region Aricle Size
+    Route::resource('article-size', SizeController::class)->except(['show','create']);
+//endregion
 });
 //endregion
 
@@ -92,10 +101,8 @@ Route::prefix('master-aksesoris')->middleware('auth:web')->name('master-aks.')->
 
 //region BOM
 Route::prefix('bom')->middleware('auth:web')->name('bom.')->group(function (){
-//region Article
-    Route::get('/articles/data',[ArticlesController::class,'data'])->name('articles.data');
-    Route::resource('articles', ArticlesController::class)->except('show');
-//endregion
+    Route::get('/',[BomsController::class,'index'])->name('index');
+
 });
 //endregion
 
