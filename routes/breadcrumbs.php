@@ -111,6 +111,22 @@ Breadcrumbs::for('supplier.create',function (BreadcrumbTrail $trail){
     $trail->push('New',route('supplier.create'));
 });
 //endregion
+//region Article
+Breadcrumbs::for('article',function (BreadcrumbTrail $trail){
+    $trail->parent('master-data');
+    $trail->push('Article');
+});
+Breadcrumbs::for('article.create',function (BreadcrumbTrail $trail){
+    $trail->parent('article');
+    $trail->push('New');
+});
+//endregion
+//region Article Size
+Breadcrumbs::for('size',function (BreadcrumbTrail $trail){
+    $trail->parent('master-data');
+    $trail->push('Article Size');
+});
+//endregion
 //endregion
 
 //region Master Aksesoris
@@ -143,14 +159,4 @@ Breadcrumbs::for('bom',function (BreadcrumbTrail $trail){
     $trail->parent('main');
     $trail->push('Bill of Material');
 });
-//region Article
-Breadcrumbs::for('article',function (BreadcrumbTrail $trail){
-    $trail->parent('bom');
-    $trail->push('Article');
-});
-Breadcrumbs::for('article.create',function (BreadcrumbTrail $trail){
-    $trail->parent('article');
-    $trail->push('New');
-});
-//endregion
 //endregion
