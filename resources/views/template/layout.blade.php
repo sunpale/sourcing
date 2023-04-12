@@ -244,6 +244,16 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link menu-link {{Route::is('articles.index') ? 'active':''}}" href="{{route('articles.index')}}" aria-expanded="false">
+                            <i class="ri-shirt-fill"></i><span data-ket="t-widgets">Articles</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link menu-link {{Route::is('article-size.index') ? 'active':''}}" href="{{route('article-size.index')}}" aria-expanded="false">
+                            <i class="mdi mdi-size-xl fs-21"></i><span data-ket="t-widgets">Article Size</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link menu-link {{Route::is('supplier*') ? 'active':''}}" href="{!! route('supplier.index') !!}" aria-expanded="false">
                             <i class="mdi mdi-truck-delivery"></i> <span data-key="t-widgets">Supplier</span>
                         </a>
@@ -255,8 +265,9 @@
                     </li>
                     <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">Bill of Material</span>
                     </li>
-                    <a class="nav-link menu-link {{Route::is('bom.articles.index') ? 'active':''}}" href="{{route('bom.articles.index')}}" aria-expanded="false">
-                        <i class="ri-shirt-fill"></i><span data-ket="t-widgets">Article</span>
+
+                    <a class="nav-link menu-link {{Route::is('bom.index') ? 'active':''}}" href="{{route('bom.index')}}" aria-expanded="false">
+                        <i class="ri-book-read-line"></i><span data-ket="t-widgets">BOM</span>
                     </a>
                     @role('Super Admin')
                     <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">User Management</span>
