@@ -1,5 +1,5 @@
 <x-layout breadcrumbs="article.create" :select2="true" :cleavejs="true">
-    <form method="post" id="frm-article" action="{{ $editMode ? route('bom.articles.update',$article->id):route('bom.articles.store') }}" enctype="multipart/form-data">
+    <form method="post" id="frm-article" action="{{ $editMode ? route('articles.update',$article->id):route('articles.store') }}" enctype="multipart/form-data">
         @csrf
         @if($editMode)
         @method('PATCH')
@@ -33,7 +33,7 @@
                         <x-forms.input type="file" accept="image/png,image/jpeg" name="img_file" id="img_file" label="Upload Photo" margin-bottom="mb-4"></x-forms.input>
                         <div class="text-end">
                             <button type="submit" class="btn btn-success data-submit me-1">Save</button>
-                            <a href="{!! route('bom.articles.index') !!}" class="btn btn-outline-danger">Cancel</a>
+                            <a href="{!! route('articles.index') !!}" class="btn btn-outline-danger">Cancel</a>
                         </div>
                     </div>
                 </div>

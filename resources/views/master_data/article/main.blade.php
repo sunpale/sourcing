@@ -5,7 +5,7 @@
                 <div class="card-header align-items-center d-flex">
                     <h4 class="card-title mb-0 flex-grow-1">Data Article</h4>
                     <div class="flex-shrink-0">
-                        <a href="{!! route('bom.articles.create') !!}" class="btn btn-sm btn-info waves-effect waves-light">
+                        <a href="{!! route('articles.create') !!}" class="btn btn-sm btn-info waves-effect waves-light">
                             <i class="fal fa-file-plus"></i> Add new
                         </a>
                     </div>
@@ -39,7 +39,7 @@
             function tableArticle(){
                 const article = $('#tbl-article').DataTable({
                     serverSide: true,
-                    ajax: '{{route('bom.articles.data')}}',
+                    ajax: '{{route('articles.data')}}',
                     columns: [
                         {data: 'responsive',name:'responsive',searchable:false},
                         {data: 'rownum',name:'rownum',searchable:false}, {data: 'kode',name: 'kode'}, {data: 'brand.brand',name: 'brand.brand'},{data: 'modul',name: 'modul'}, {data: 'name',name: 'name'}, {data: 'pantone.pantone',name: 'pantone.pantone'},{data : 'designer',name: 'designer'},{data : 'image',name: 'image',searchable: false},{data: 'action',name: 'action', searchable: false}

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\BOM;
+namespace App\Http\Controllers\master_data;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ArticleRequest;
-use App\Models\BOM\Article;
 use App\Models\CustomMedia;
+use App\Models\master_data\Article;
 use App\Models\master_data\Brand;
 use App\Models\master_warna\Pantone;
 use App\Services\ImageManipulation\ImageManipulationService;
@@ -25,14 +25,14 @@ class ArticlesController extends Controller
     public function index()
     {
         $articles = Article::all();
-        return view('bom.article.main',compact('articles'));
+        return view('master_data.article.main',compact('articles'));
     }
 
     public function create(){
         $brand = Brand::where('kode','!=',99)->pluck('brand','id');
         $pantone = Pantone::all()->pluck('full_pantone','id');
         $editMode = false;
-        return view('bom.article.create',compact('brand','pantone','editMode'));
+        return view('master_data.article.create',compact('brand','pantone','editMode'));
     }
 
     /**

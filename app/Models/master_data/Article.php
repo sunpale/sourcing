@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Models\BOM;
+namespace App\Models\master_data;
 
-use App\Models\master_data\Brand;
 use App\Models\master_warna\Pantone;
 use App\Traits\CustomSoftDelete;
 use App\Traits\UserInput;
