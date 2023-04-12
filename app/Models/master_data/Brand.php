@@ -2,7 +2,6 @@
 
 namespace App\Models\master_data;
 
-use App\Models\BOM\Article;
 use App\Models\master_rm\Material;
 use App\Traits\CustomSoftDelete;
 use App\Traits\UserInput;

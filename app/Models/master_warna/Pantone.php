@@ -2,7 +2,7 @@
 
 namespace App\Models\master_warna;
 
-use App\Models\BOM\Article;
+use App\Models\master_data\Article;
 use App\Traits\CustomSoftDelete;
 use App\Traits\UserInput;
 use Illuminate\Database\Eloquent\Model;
