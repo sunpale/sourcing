@@ -159,4 +159,8 @@ Breadcrumbs::for('bom',function (BreadcrumbTrail $trail){
     $trail->parent('main');
     $trail->push('Bill of Material');
 });
+Breadcrumbs::for('bom.create',function (BreadcrumbTrail $trail){
+    $trail->parent('bom');
+    $trail->push('New Bill of Material');
+});
 //endregion
