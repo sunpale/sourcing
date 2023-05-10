@@ -11,7 +11,6 @@ class ArticleSizeSeeder extends Seeder
     public function run(): void
     {
         Size::insert([
-            'id'        => 1,
             'size'      => 'All Size',
             'remarks'   => 'General Size for All Article',
             'created_by' => 1,
