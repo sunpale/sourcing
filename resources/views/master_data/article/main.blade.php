@@ -110,7 +110,7 @@
                 }).then(function (result) {
                     if(result.value){
                         url_redirect({
-                            url : baseUrl + '/bom/articles/'+id+'/edit',
+                            url : baseUrl + '/master-data/articles/'+id+'/edit',
                             method  : "get"
                         });
                     }
@@ -128,7 +128,7 @@
                 }).then((function (result) {
                     if(result.value){
                         url_redirect({
-                            url     : baseUrl + '/bom/articles/'+id,
+                            url     : baseUrl + '/master-data/articles/'+id,
                             method  : "post",
                             data    : {"_token" : token[0].value,"_method":'DELETE'}
                         });
