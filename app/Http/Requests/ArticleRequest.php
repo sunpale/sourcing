@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use App\Rules\AlpaSpaceRule;
 use App\Rules\AlphaNumericPunctRule;
-use App\Rules\AlphaNumericSpaceDotRule;
 use App\Rules\AlphaNumericSpaceRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -21,9 +20,9 @@ class ArticleRequest extends FormRequest
             'img_file' => 'image|mimes:jpg,jpeg,png|max:1024|nullable'
         ];
         if (empty($this->input('number'))){
-            $rules['kode'] = ['required','unique:articles,kode',new AlphaNumericSpaceDotRule(),'max:16'];
+            $rules['kode'] = ['required','unique:articles,kode','numeric','max_digits:16'];
         }else{
-            $rules['kode'] = ['required',new AlphaNumericSpaceDotRule(),'max:16'];
+            $rules['kode'] = ['required','numeric','max_digits:16'];
         }
         return $rules;
     }
