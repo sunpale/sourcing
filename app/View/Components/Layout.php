@@ -24,7 +24,9 @@ class Layout extends Component
 
     public bool $glightbox;
 
-    public function __construct(string|null $breadcrumbs = null, string|null $title = null, bool|null $datatable = null, bool|null $select2 = null, bool|null $datatableButton = null, bool|null $datatableSelect = null, bool|null $datatableRowGroup = null, bool|null $sweetalert = null, bool|null $toastify = null, bool|null $freezeUi = null, bool|null $flatpickr = null, bool|null $dropzone = null, bool|null $jquery = null, bool|null $cleavejs = null, bool|null $glightbox = null)
+    public bool $jsvalidation;
+
+    public function __construct(string|null $breadcrumbs = null, string|null $title = null, bool|null $datatable = null, bool|null $select2 = null, bool|null $datatableButton = null, bool|null $datatableSelect = null, bool|null $datatableRowGroup = null, bool|null $sweetalert = null, bool|null $toastify = null, bool|null $freezeUi = null, bool|null $flatpickr = null, bool|null $dropzone = null, bool|null $jquery = null, bool|null $cleavejs = null, bool|null $glightbox = null, bool|null $jsvalidation = null)
     {
         $jquery ??= false;
         $freezeUi ??= false;
@@ -41,6 +43,7 @@ class Layout extends Component
         $dropzone ??=false;
         $cleavejs ??=false;
         $glightbox ??=false;
+        $jsvalidation ??=false;
         $this->title = $title;
         $this->breadcrumbs = $breadcrumbs;
         $this->datatable = $datatable;
@@ -56,6 +59,7 @@ class Layout extends Component
         $this->dropzone = $dropzone;
         $this->cleavejs = $cleavejs;
         $this->glightbox = $glightbox;
+        $this->jsvalidation = $jsvalidation;
     }
 
     public function render(): View
