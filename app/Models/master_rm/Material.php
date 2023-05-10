@@ -2,6 +2,7 @@
 
 namespace App\Models\master_rm;
 
+use App\Models\BOM\Bom_detail;
 use App\Models\master_aks\ProductGroup;
 use App\Models\master_data\Brand;
 use App\Models\master_data\Measure;
@@ -14,6 +15,7 @@ use App\Traits\UserInput;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Material extends Model
@@ -68,6 +70,11 @@ class Material extends Model
     public function User() : BelongsTo
     {
         return $this->belongsTo(User::class,'updated_by','id');
+    }
+
+    public function BomDetail() :HasMany
+    {
+        return $this->hasMany(Bom_detail::class,'material_id','id');
     }
 
     public function getUpdatedAtAttribute($value){
