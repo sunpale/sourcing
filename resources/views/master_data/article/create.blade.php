@@ -89,9 +89,8 @@
             document.addEventListener('DOMContentLoaded',function (){
                 $('select').select2();
                 var kode = new Cleave('#kode', {
-                    blocks: [1,6,2],
-                    delimiter : '.',
-                    uppercase : true
+                    blocks: [16],
+                    numericOnly:true
                 });
                 document.querySelector("#img_file").addEventListener("change", function () {
                     let image = document.querySelector('#img_file');
