@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\auth\PermissionController;
 use App\Http\Controllers\auth\RoleController;
+use App\Http\Controllers\BOM\BomDetailsController;
 use App\Http\Controllers\BOM\BomsController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\master_aks\AksesorisController;
@@ -47,6 +48,7 @@ Route::prefix('master-rm')->middleware(['auth'/*,'permission:create-master'*/])-
     Route::get('/raw-material/generate-code',[MaterialsController::class,'generateCode'])->name('raw-material.generate-code');
     Route::get('/raw-material/data',[MaterialsController::class,'data'])->name('raw-material.data');
     Route::get('raw-material/view-image/{file}',[MaterialsController::class,'viewImage'])->name('raw-material.view-image');
+    Route::get('/raw-material/data-materials',[MaterialsController::class,'getMaterials'])->name('raw-material.data-materials');
     Route::resource('raw-material',MaterialsController::class);
 //endregion
 });
@@ -80,6 +82,8 @@ Route::prefix('master-data')->middleware('auth:web')->group(function (){
 //endregion
 //region Article
     Route::get('/articles/data',[ArticlesController::class,'data'])->name('articles.data');
+    Route::get('/articles/data-article',[ArticlesController::class,'getArticles'])->name('articles.data-articles');
+    Route::get('/articles/find-article/{article}',[ArticlesController::class,'findArticle'])->name('articles.find-article');
     Route::resource('articles', ArticlesController::class)->except('show');
 //endregion
 //region Aricle Size
@@ -100,10 +104,9 @@ Route::prefix('master-aksesoris')->middleware('auth:web')->name('master-aks.')->
 //endregion
 
 //region BOM
-Route::prefix('bom')->middleware('auth:web')->name('bom.')->group(function (){
-    Route::get('/',[BomsController::class,'index'])->name('index');
-
-});
+Route::get('/bom/data',[BomsController::class,'data'])->name('bom.data');
+Route::get('/bom/find-detail/{bom}',[BomsController::class,'findBom'])->name('bom.find-detail');
+Route::resource('bom',BomsController::class)->middleware('auth:web');
 //endregion
 
 //Region Auth
