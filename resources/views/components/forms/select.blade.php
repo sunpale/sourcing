@@ -1,5 +1,7 @@
 <div class="{{$marginBottom}}">
+    @if(strlen($label)>0)
     <label class="form-label" for="{{$id}}">{{$label}}</label>
+    @endif
     <select {{$attributes->merge(['class'=>'form-select'.($errors->has($name) ? ' is-invalid' : '')])}} id="{{$id}}" name="{{$name}}">
         @if(count($listValue)==0)
             {{$slot}}
