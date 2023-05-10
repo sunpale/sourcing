@@ -2,11 +2,13 @@
 
 namespace App\Models\master_data;
 
+use App\Models\BOM\Bom;
 use App\Models\master_warna\Pantone;
 use App\Traits\CustomSoftDelete;
 use App\Traits\UserInput;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Kra8\Snowflake\HasShortflakePrimary;
 use Spatie\Image\Exceptions\InvalidManipulation;
@@ -38,5 +40,10 @@ class Article extends Model implements HasMedia
     public function Brand(): BelongsTo
     {
         return $this->belongsTo(Brand::class);
+    }
+
+    public function Bom(): HasMany
+    {
+        return $this->hasMany(Bom::class);
     }
 }
