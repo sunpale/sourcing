@@ -159,4 +159,39 @@ class MaterialsController extends Controller
         $result = compact('kode');
         return response()->json($result);
     }
+
+    public function getMaterials(Request $request){
+        /*get data pencarian dan jumlah halaman dari komponen select2*/
+        $search = $request->search;
+        $halaman = $request->page;
+        $searchData = empty($search) ? "" : $search;
+        /*$type = $request->type;*/
+        /*end*/
+        /*Set jumlah data per halaman*/
+        $pageLoad = 25;
+        /*End*/
+        /*Cek jumlah halaman, kemudian dikurang satu (offset data di mulai dari 0)*/
+        if($halaman==1){
+            $page=0;
+        }else{
+            /*Jika halaman lebih dari 1, maka setelah dikurang satu dikalikan jumlah data per halaman untuk mendapatkan data offset halaman berikutnya*/
+            $page=($halaman-1)*$pageLoad;
+            /*end*/
+        }
+        /*end*/
+        /*Memanggil data dan jumlah data dari database*/
+        $dataItem=Material::select(['id','kode','item_name'])->where('kode','LIKE','%'.$searchData.'%')->limit($pageLoad)->offset($page)->get();
+        $dataCount=Material::select(['id','kode','item_name'])->where('kode','LIKE','%'.$searchData.'%')->count();
+        /*End*/
+
+        /*Mengubah hasil data dari database sesuai dengan format dari select2*/
+        $result=array();
+        foreach ($dataItem as $item){
+            $result[] = array("id" => $item->id,"text"=>$item->kode.' - '.$item->item_name);
+        }
+        $resultQuery['items']=$result;
+        $resultQuery['total_count']=$dataCount;
+        /*End*/
+        return response()->json($resultQuery);
+    }
 }
