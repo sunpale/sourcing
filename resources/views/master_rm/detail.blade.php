@@ -1,1 +1,1 @@
-<x-material-form-view :material="$rm->toArray()"></x-material-form-view>
+<x-material-form-view :material="$rm->toArray()" :image-url="$image"></x-material-form-view>
