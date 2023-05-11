@@ -1,3 +1,3 @@
-<x-material-form :form="'RM'" :fabric="$dataFabric->toArray()" :warna="$dataWarna->toArray()" :brand="$dataBrand->toArray()" :pantone="$dataPantone->toArray()" :komposisi="$dataKomposisi->toArray()" :measure="$dataMeasure->toArray()">
+<x-material-form :form="'RM'" :fabric="$fabric->toArray()" :warna="$warna->toArray()" :brand="$brand->toArray()" :pantone="$pantone->toArray()" :komposisi="$komposisi->toArray()" :measure="$measure->toArray()">
 
 </x-material-form>

@@ -1,3 +1,3 @@
-<x-material-form :form="'RM'" :fabric="$dataFabric->toArray()" :warna="$dataWarna->toArray()" :brand="$dataBrand->toArray()" :pantone="$dataPantone->toArray()" :komposisi="$dataKomposisi->toArray()" :measure="$dataMeasure->toArray()" :edit-mode="true" :data-edit="$dataRm->toArray()" action="{{route('master-rm.raw-material.update',$dataRm[0]['kode'])}}">
+<x-material-form :form="'RM'" :fabric="$fabric->toArray()" :warna="$warna->toArray()" :brand="$brand->toArray()" :pantone="$pantone->toArray()" :komposisi="$komposisi->toArray()" :measure="$measure->toArray()" :edit-mode="true" :data-edit="$material->toArray()" action="{{route('master-rm.raw-material.update',$material[0]['id'])}}">
 
 </x-material-form>
