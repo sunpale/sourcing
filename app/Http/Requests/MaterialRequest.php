@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Rules\AlpaSpaceRule;
 use App\Rules\AlphaNumericPunctRule;
 use App\Rules\AlphaNumericSpaceRule;
+use App\Rules\FormatDecimalRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class MaterialRequest extends FormRequest
@@ -29,6 +30,7 @@ class MaterialRequest extends FormRequest
             'moq_color'     => 'required|numeric',
             'ppn'           => 'required|numeric',
             'measure_id'    => 'required|numeric',
+            'unit_price'    => ['required',new FormatDecimalRule()],
             'img_file'      => 'image|mimes:jpg,jpeg|max:1024|nullable'
         ];
     }
