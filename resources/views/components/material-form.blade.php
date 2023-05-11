@@ -1,4 +1,4 @@
-<x-layout :breadcrumbs="$form==='RM'? 'material.create':'aksesoris.create'" :select2="true">
+<x-layout :breadcrumbs="$form==='RM'? 'material.create':'aksesoris.create'" :select2="true" :cleavejs="true">
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
@@ -15,7 +15,7 @@
                         @if($editMode)
                         @method('PATCH')
                         @endif
-                        <input type="hidden" id="number" name="number">
+                        <input type="hidden" id="number" name="number" value="{{old('number')?old('number'):config('constants.'.$form).'000 0000'}}">
                         <div class="row">
                             @if($form==='RM')
                             <div class="col-md-4">
@@ -71,11 +71,11 @@
                             <div class="col-md-6">
                                 <x-forms.input id="finish" name="finish" label="Finish" placeholder="Finish" :value="$editMode ? $dataEdit[0]['finish']:''"></x-forms.input>
                             </div>
-                            @endif
+                            {{--@endif--}}
                             <div class="col-md-6">
                                 <x-forms.input id="lead_time" type="number" name="lead_time" label="Production Lead Time" placeholder="Lead Time" :value="$editMode ? $dataEdit[0]['lead_time']:''"></x-forms.input>
                             </div>
-                            @if($form==='RM')
+                            {{--@if($form==='RM')--}}
                             <div class="col-md-6">
                                 <x-forms.input id="moq" name="moq" type="number" label="MOQ / Greige" placeholder="MOQ / Greige" :value="$editMode ? $dataEdit[0]['moq']:''"></x-forms.input>
                             </div>
@@ -83,8 +83,14 @@
                                 <x-forms.input id="moq_color" type="number" name="moq_color" label="MOQ / Col" placeholder="MOQ / Col" :value="$editMode ? $dataEdit[0]['moq_color']:''"></x-forms.input>
                             </div>
                             @else
-                            <div class="col-md-6">
+                            <div class="col-md-4">
+                                <x-forms.input id="lead_time" type="number" name="lead_time" label="Production Lead Time" placeholder="Lead Time" :value="$editMode ? $dataEdit[0]['lead_time']:''"></x-forms.input>
+                            </div>
+                            <div class="col-md-4">
                                 <x-forms.input id="moq" name="moq" type="number" label="MOQ" placeholder="MOQ" :value="$editMode ? $dataEdit[0]['moq']:''"></x-forms.input>
+                            </div>
+                            <div class="col-md-4">
+                                <x-forms.select id="color" name="color_id" label="Color MD" class="form-select-sm select2 select-default" :list-value="$warna" :value="$editMode ? $dataEdit[0]['color_id']:''">Select Color MD</x-forms.select>
                             </div>
                             @endif
                             <div class="col-md-6">
@@ -102,17 +108,12 @@
                                     @endif
                                 </x-forms.select>
                             </div>
-                            @if($form==='RM')
-                            <x-forms.input type="file" name="img_file" id="img_file" label="Photo" class="form-control-sm"></x-forms.input>
-                            @endif
-                            @if($form==='AKS')
                             <div class="col-md-6">
-                                <x-forms.select id="color" name="color_id" label="Color MD" class="form-select-sm select2 select-default" :list-value="$warna" :value="$editMode ? $dataEdit[0]['color_id']:''">Select Color MD</x-forms.select>
+                                <x-forms.input name="unit_price" id="unit_price" label="Unit Price" class="form-control-sm text-end" :value="$editMode ? $dataEdit[0]['unit_price']:''"></x-forms.input>
                             </div>
                             <div class="col-md-6">
                                 <x-forms.input type="file" name="img_file" id="img_file" label="Photo" class="form-control-sm"></x-forms.input>
                             </div>
-                            @endif
                             <div class="text-end mt-5">
                                 <button type="submit" class="btn btn-success data-submit me-1">Save</button>
                                 <a href="{!! $form==='RM' ? route('master-rm.raw-material.index') : route('master-aks.aksesoris.index') !!}" class="btn btn-outline-danger">Cancel</a>
@@ -238,7 +239,11 @@
         document.addEventListener('DOMContentLoaded',function (){
             $('.select-default').select2();
             getSupplier();
-
+            const cleave = new Cleave('#unit_price', {
+                numeral: true,
+                numeralDecimalMark: ',',
+                delimiter: '.'
+            });
             @if($form==='RM')
             fabricEl.onchange = function (){
                 validateKode();

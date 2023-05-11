@@ -78,10 +78,14 @@
                                     <td>{{$material[0]['measure']['measure_name']}}</td>
                                 </tr>
                                 <tr>
+                                    <td class="fw-bold">Unit Price</td>
+                                    <td>{{number_format($material[0]['unit_price'],'0',',','.')}}</td>
+                                </tr>
+                                <tr>
                                     <td class="fw-bold">Image</td>
                                     <td>
                                         @if($form==='RM')
-                                        <a class="image-popup" href="{{route('master-rm.raw-material.view-image',$material[0]['image_name']??'')}}"><img src="{{route('master-rm.raw-material.view-image',$material[0]['image_name']??'')}}" class="img-fluid img-thumbnail w-25"></a>
+                                        <a class="image-popup" href="{{strlen($imageUrl) > 0 ? $imageUrl : asset('src/images/default.png')}}"><img src="{{strlen($imageUrl) > 0 ? $imageUrl : asset('src/images/default.png')}}" class="img-fluid img-thumbnail w-25"></a>
                                         @else
                                         <a class="image-popup" href="{{route('master-aks.aksesoris.view-image',$material[0]['image_name']??'')}}"><img src="{{route('master-aks.aksesoris.view-image',$material[0]['image_name']??'')}}" class="img-fluid img-thumbnail w-25"></a>
                                         @endif
@@ -144,7 +148,7 @@
     </div>
     @section('script')
     <script>
-        let lightbox=GLightbox({selector:".image-popup",title:'{{$material[0]['kode']}} - {{$material[0]['item_name']}}'})
+        let lightbox=GLightbox({selector:".image-popup",title:'{{strlen($imageUrl) > 0 ? $material[0]['kode'].' - '. $material[0]['item_name']:'No Image'}}'})
     </script>
     @endsection
 </x-layout>
