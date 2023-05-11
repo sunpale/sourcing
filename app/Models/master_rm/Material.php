@@ -17,15 +17,28 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Kra8\Snowflake\HasShortflakePrimary;
+use Spatie\Image\Exceptions\InvalidManipulation;
+use Spatie\Image\Image;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Material extends Model
+class Material extends Model implements HasMedia
 {
-    use UserInput,CustomSoftDelete,SoftDeletes {CustomSoftDelete::runSoftDelete insteadof SoftDeletes;}
+    use HasShortflakePrimary,UserInput,InteractsWithMedia,CustomSoftDelete,SoftDeletes {CustomSoftDelete::runSoftDelete insteadof SoftDeletes;}
 
-    protected $primaryKey = 'kode';
-    protected $keyType = 'string';
     public $incrementing = false;
-    protected $fillable = ['kode','kode_infor','fabric_id','color_id','brand_id','supplier_id','pantone_id','product_group_id','color_aks_id','komposisi_id','item_name','item_desc','gramasi','lebar','susut','finish','lead_time','moq','moq_color','ppn','measure_id','image_path','image_name'];
+    protected $fillable = ['kode','kode_infor','fabric_id','color_id','brand_id','supplier_id','pantone_id','product_group_id','color_aks_id','komposisi_id','item_name','item_desc','gramasi','lebar','susut','finish','lead_time','moq','moq_color','ppn','measure_id','unit_price'];
+
+    /**
+     * @throws InvalidManipulation
+     */
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $ImageInstance = Image::load($media->getPath());
+        $this->addMediaConversion('thumb')->width($ImageInstance->getWidth()*0.1)->sharpen(10);
+    }
 
     public function Fabric(): BelongsTo
     {
