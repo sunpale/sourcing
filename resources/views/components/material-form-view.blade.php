@@ -87,7 +87,7 @@
                                         @if($form==='RM')
                                         <a class="image-popup" href="{{strlen($imageUrl) > 0 ? $imageUrl : asset('src/images/default.png')}}"><img src="{{strlen($imageUrl) > 0 ? $imageUrl : asset('src/images/default.png')}}" class="img-fluid img-thumbnail w-25"></a>
                                         @else
-                                        <a class="image-popup" href="{{route('master-aks.aksesoris.view-image',$material[0]['image_name']??'')}}"><img src="{{route('master-aks.aksesoris.view-image',$material[0]['image_name']??'')}}" class="img-fluid img-thumbnail w-25"></a>
+                                        <a class="image-popup" href="{{strlen($imageUrl) > 0 ? $imageUrl : asset('src/images/default.png')}}"><img src="{{strlen($imageUrl) > 0 ? $imageUrl : asset('src/images/default.png')}}" class="img-fluid img-thumbnail w-25"></a>
                                         @endif
                                     </td>
                                 </tr>

@@ -1,3 +1,3 @@
-<x-material-form :form="'AKS'" :group="$dataGroup->toArray()" :warna="$dataWarna->toArray()" :brand="$dataBrand->toArray()" :measure="$dataMeasure->toArray()" :warna-aks="$dataWarnaAks->toArray()" :edit-mode="true" :data-edit="$dataAks->toArray()" action="{{route('master-aks.aksesoris.update',$dataAks[0]['kode'])}}">
+<x-material-form :form="'AKS'" :group="$group->toArray()" :warna="$warnaAks->toArray()" :brand="$brand->toArray()" :measure="$measure->toArray()" :warna-aks="$warnaAks->toArray()" :edit-mode="true" :data-edit="$aks->toArray()" action="{{route('master-aks.aksesoris.update',$aks[0]['id'])}}">
 
 </x-material-form>

@@ -55,39 +55,39 @@
                                 <x-forms.select id="komposisi" name="komposisi_id" label="Composition" class="form-select-sm select2 select-default" :list-value="$komposisi" :value="$editMode ? $dataEdit[0]['komposisi_id']:''">Select Composition</x-forms.select>
                             </div>
                             @endif
-                            <x-forms.input id="item_name" name="item_name" label="Item Name" placeholder="Item Name" :value="$editMode ? $dataEdit[0]['item_name']:''"></x-forms.input>
+                            <x-forms.input class="form-control-sm" id="item_name" name="item_name" label="Item Name" placeholder="Item Name" :value="$editMode ? $dataEdit[0]['item_name']:''"></x-forms.input>
                             <x-forms.textarea id="item_desc" name="item_desc" label="Item Description" placeholder="Item Description" margin-bottom="mb-4" :value="$editMode ? $dataEdit[0]['item_desc']:''"></x-forms.textarea>
 
                             @if($form==='RM')
                             <div class="col-md-4">
-                                <x-forms.input id="gramasi" name="gramasi" label="Gramasi (GSM)" placeholder="Gramasi" :value="$editMode ? $dataEdit[0]['gramasi']:''"></x-forms.input>
+                                <x-forms.input class="form-control-sm" id="gramasi" name="gramasi" label="Gramasi (GSM)" placeholder="Gramasi" :value="$editMode ? $dataEdit[0]['gramasi']:''"></x-forms.input>
                             </div>
                             <div class="col md-4">
-                                <x-forms.input id="lebar" name="lebar" label="Lebar (Inch)" placeholder="Lebar" :value="$editMode ? $dataEdit[0]['lebar']:''"></x-forms.input>
+                                <x-forms.input class="form-control-sm" id="lebar" name="lebar" label="Lebar (Inch)" placeholder="Lebar" :value="$editMode ? $dataEdit[0]['lebar']:''"></x-forms.input>
                             </div>
                             <div class="col-md-4">
-                                <x-forms.input type="number" id="susut" name="susut" label="Susut (%)" placeholder="Susut" :value="$editMode ? $dataEdit[0]['susut']:''"></x-forms.input>
+                                <x-forms.input class="form-control-sm" type="number" id="susut" name="susut" label="Susut (%)" placeholder="Susut" :value="$editMode ? $dataEdit[0]['susut']:''"></x-forms.input>
                             </div>
                             <div class="col-md-6">
-                                <x-forms.input id="finish" name="finish" label="Finish" placeholder="Finish" :value="$editMode ? $dataEdit[0]['finish']:''"></x-forms.input>
+                                <x-forms.input class="form-control-sm" id="finish" name="finish" label="Finish" placeholder="Finish" :value="$editMode ? $dataEdit[0]['finish']:''"></x-forms.input>
                             </div>
                             {{--@endif--}}
                             <div class="col-md-6">
-                                <x-forms.input id="lead_time" type="number" name="lead_time" label="Production Lead Time" placeholder="Lead Time" :value="$editMode ? $dataEdit[0]['lead_time']:''"></x-forms.input>
+                                <x-forms.input class="form-control-sm" id="lead_time" type="number" name="lead_time" label="Production Lead Time" placeholder="Lead Time" :value="$editMode ? $dataEdit[0]['lead_time']:''"></x-forms.input>
                             </div>
                             {{--@if($form==='RM')--}}
                             <div class="col-md-6">
-                                <x-forms.input id="moq" name="moq" type="number" label="MOQ / Greige" placeholder="MOQ / Greige" :value="$editMode ? $dataEdit[0]['moq']:''"></x-forms.input>
+                                <x-forms.input class="form-control-sm" id="moq" name="moq" type="number" label="MOQ / Greige" placeholder="MOQ / Greige" :value="$editMode ? $dataEdit[0]['moq']:''"></x-forms.input>
                             </div>
                             <div class="col-md-6">
-                                <x-forms.input id="moq_color" type="number" name="moq_color" label="MOQ / Col" placeholder="MOQ / Col" :value="$editMode ? $dataEdit[0]['moq_color']:''"></x-forms.input>
+                                <x-forms.input class="form-control-sm" id="moq_color" type="number" name="moq_color" label="MOQ / Col" placeholder="MOQ / Col" :value="$editMode ? $dataEdit[0]['moq_color']:''"></x-forms.input>
                             </div>
                             @else
                             <div class="col-md-4">
-                                <x-forms.input id="lead_time" type="number" name="lead_time" label="Production Lead Time" placeholder="Lead Time" :value="$editMode ? $dataEdit[0]['lead_time']:''"></x-forms.input>
+                                <x-forms.input class="form-control-sm" id="lead_time" type="number" name="lead_time" label="Production Lead Time" placeholder="Lead Time" :value="$editMode ? $dataEdit[0]['lead_time']:''"></x-forms.input>
                             </div>
                             <div class="col-md-4">
-                                <x-forms.input id="moq" name="moq" type="number" label="MOQ" placeholder="MOQ" :value="$editMode ? $dataEdit[0]['moq']:''"></x-forms.input>
+                                <x-forms.input class="form-control-sm" id="moq" name="moq" type="number" label="MOQ" placeholder="MOQ" :value="$editMode ? $dataEdit[0]['moq']:''"></x-forms.input>
                             </div>
                             <div class="col-md-4">
                                 <x-forms.select id="color" name="color_id" label="Color MD" class="form-select-sm select2 select-default" :list-value="$warna" :value="$editMode ? $dataEdit[0]['color_id']:''">Select Color MD</x-forms.select>
@@ -109,10 +109,10 @@
                                 </x-forms.select>
                             </div>
                             <div class="col-md-6">
-                                <x-forms.input name="unit_price" id="unit_price" label="Unit Price" class="form-control-sm text-end" :value="$editMode ? $dataEdit[0]['unit_price']:''"></x-forms.input>
+                                <x-forms.input class="form-control-sm" name="unit_price" id="unit_price" label="Unit Price" class="form-control-sm text-end" :value="$editMode ? $dataEdit[0]['unit_price']:''"></x-forms.input>
                             </div>
                             <div class="col-md-6">
-                                <x-forms.input type="file" name="img_file" id="img_file" label="Photo" class="form-control-sm"></x-forms.input>
+                                <x-forms.input class="form-control-sm" type="file" name="img_file" id="img_file" label="Photo" class="form-control-sm"></x-forms.input>
                             </div>
                             <div class="text-end mt-5">
                                 <button type="submit" class="btn btn-success data-submit me-1">Save</button>
