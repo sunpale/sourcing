@@ -167,6 +167,13 @@
 .profile-user-wid {
     margin-top: -26px;
 }
+/*region Modal header*/
+.modal-header {
+    border-bottom: 1px solid var(--vz-border-color);
+    padding: .5rem 1.25rem !important;
+    background-color: var(--vz-card-cap-bg-cust);
+}
+/*endregion*/
 /*region Card Header Size and background*/
 .card-header{
     padding: .6rem 1rem;
