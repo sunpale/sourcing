@@ -52,24 +52,6 @@ class AksesorisController extends Controller
             Material::create($data);
         }
         return redirect()->route('master-aks.aksesoris.index')->with('success',config('constants.SUCCESS_SAVE'));
-        /*$data = $request->except(['_token','number']);
-        $kodeGenerated = $request->number;
-        $prefix = substr($kodeGenerated,0,strlen($kodeGenerated)-4);
-        $kode = $this->createCode($prefix);
-        $data['kode'] = $kode;
-        if ($request->hasFile('img_file') && $request->file('img_file')->isValid()){
-            $path = 'private/aks/';
-            $data['image_path'] = $path;
-            $data['image_name'] = $kode;
-
-            if ($this->save($data)){
-                $imageSource = $request->file('img_file');
-                $imageSource->storeAs($path,$kode.'.'.$imageSource->extension());
-            }
-        }else{
-            $this->save($data);
-        }
-        return redirect()->route('master-aks.aksesoris.index')->with('success',config('constants.SUCCESS_SAVE'));*/
     }
 
     public function show(Material $aksesori){
