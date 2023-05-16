@@ -127,6 +127,12 @@ Breadcrumbs::for('size',function (BreadcrumbTrail $trail){
     $trail->push('Article Size');
 });
 //endregion
+//region Jasa
+Breadcrumbs::for('services',function (BreadcrumbTrail $trail){
+    $trail->parent('master-data');
+    $trail->push('Jasa');
+});
+//endregion
 //endregion
 
 //region Master Aksesoris

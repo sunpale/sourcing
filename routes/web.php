@@ -10,6 +10,7 @@ use App\Http\Controllers\master_aks\ProductGroupsController;
 use App\Http\Controllers\master_data\ArticlesController;
 use App\Http\Controllers\master_data\BrandsController;
 use App\Http\Controllers\master_data\MeasuresController;
+use App\Http\Controllers\master_data\ServiceController;
 use App\Http\Controllers\master_data\SizeController;
 use App\Http\Controllers\master_data\SuppliersController;
 use App\Http\Controllers\master_rm\FabricsController;
@@ -88,6 +89,9 @@ Route::prefix('master-data')->middleware('auth:web')->group(function (){
 //endregion
 //region Aricle Size
     Route::resource('article-size', SizeController::class)->except(['show','create']);
+//endregion
+//region Jasa
+    Route::resource('services', ServiceController::class)->except(['create','show']);
 //endregion
 });
 //endregion
