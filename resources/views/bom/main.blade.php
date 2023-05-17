@@ -90,6 +90,7 @@
                             })
                                 .then(response => response.json())
                                 .then(data => {
+                                    let ratio;
                                     let childTable = '<div class="row p-3"><div class=col-md-12><table id="tbl-bom-detail" class="table table-sm table-bordered table-hover table-striped align-middle table-nowrap mb-0 w-100 caption-top">' +
                                         '<caption class="p-0"> Bom Item</caption>' +
                                         '<thead class="table-light">' +
@@ -106,11 +107,12 @@
                                     let rowNum=0
                                     for (let i=0;i<data.result.length;i++){
                                         rowNum+=1;
+                                        ratio = data.result[i].ratio==='0' ? '':data.result[i].ratio;
                                         childTable +=
                                             '<tr>' +
                                             '<td class="text-center">'+rowNum+'</td>' +
                                             '<td class="text-center">'+data.result[i].size['size']+'</td>' +
-                                            '<td class="text-center">'+data.result[i].ratio+'</td>' +
+                                            '<td class="text-center">'+ratio+'</td>' +
                                             '<td class="text-center">'+data.result[i].product_group['group']+'</td>' +
                                             '<td class="text-center">'+data.result[i].material['item_name']+'</td>' +
                                             '<td class="text-center">'+parseFloat(data.result[i].cons).toFixed(4)+'</td></tr>';
