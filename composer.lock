@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7022621e9d8a04315022d36528da80a2",
+    "content-hash": "9a9caee51aa94b3af50d1df95aa86095",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -114,6 +114,97 @@
                 }
             ],
             "time": "2023-01-15T23:15:59+00:00"
+        },
+        {
+            "name": "cybercog/laravel-eloquent-flag",
+            "version": "6.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cybercog/laravel-eloquent-flag.git",
+                "reference": "e40a5d6e1518edb6d0bf44d1ca2525e690e138d0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cybercog/laravel-eloquent-flag/zipball/e40a5d6e1518edb6d0bf44d1ca2525e690e138d0",
+                "reference": "e40a5d6e1518edb6d0bf44d1ca2525e690e138d0",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^9.0|^10.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.0",
+                "orchestra/testbench": "^7.0|^8.0",
+                "phpunit/phpunit": "^9.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Cog\\Flag\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anton Komarev",
+                    "email": "anton@komarev.com",
+                    "homepage": "https://komarev.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel Eloquent boolean & timestamp flagged attributes behavior.",
+            "homepage": "https://komarev.com/sources/laravel-eloquent-flag",
+            "keywords": [
+                "accepted",
+                "activated",
+                "active",
+                "approved",
+                "boolean",
+                "closed",
+                "cog",
+                "cybercog",
+                "deactivated",
+                "ended",
+                "expired",
+                "expiry",
+                "flag",
+                "inactive",
+                "kept",
+                "laravel",
+                "opened",
+                "persisted",
+                "published",
+                "scopes",
+                "state",
+                "status",
+                "timestamp",
+                "toggle",
+                "trait",
+                "unaccepted",
+                "unapproved",
+                "unkept",
+                "unpublished",
+                "unverified",
+                "verified"
+            ],
+            "support": {
+                "docs": "https://github.com/cybercog/laravel-eloquent-flag/wiki",
+                "email": "open@cybercog.su",
+                "issues": "https://github.com/cybercog/laravel-eloquent-flag/issues",
+                "source": "https://github.com/cybercog/laravel-eloquent-flag",
+                "wiki": "https://github.com/cybercog/laravel-eloquent-flag/wiki"
+            },
+            "funding": [
+                {
+                    "url": "https://paypal.me/antonkomarev",
+                    "type": "custom"
+                }
+            ],
+            "time": "2023-02-25T14:35:15+00:00"
         },
         {
             "name": "dasprid/enum",
