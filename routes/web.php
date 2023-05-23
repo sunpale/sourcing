@@ -83,7 +83,7 @@ Route::prefix('master-data')->middleware('auth:web')->group(function (){
 //endregion
 //region Article
     Route::get('/articles/data',[ArticlesController::class,'data'])->name('articles.data');
-    Route::get('/articles/data-article',[ArticlesController::class,'getArticles'])->name('articles.data-articles');
+    Route::get('/articles/data-article',[ArticlesController::class,'getArticlesForBom'])->name('articles.data-articles');
     Route::get('/articles/find-article/{article}',[ArticlesController::class,'findArticle'])->name('articles.find-article');
     Route::resource('articles', ArticlesController::class)->except('show');
 //endregion

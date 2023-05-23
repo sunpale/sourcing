@@ -106,7 +106,7 @@ class ArticlesController extends Controller
         return redirect()->route('articles.index')->with('success',config('constants.SUCCESS_DELETE'));
     }
 
-    public function getArticles(Request $request){
+    public function getArticlesForBom(Request $request){
         /*get data pencarian dan jumlah halaman dari komponen select2*/
         $search = $request->search;
         $halaman = $request->page;
@@ -126,8 +126,8 @@ class ArticlesController extends Controller
         }
         /*end*/
         /*Memanggil data dan jumlah data dari database*/
-        $dataItem=Article::select(['id','kode','name'])->where('kode','LIKE','%'.$searchData.'%')->limit($pageLoad)->offset($page)->get();
-        $dataCount=Article::select(['id','kode','name'])->where('kode','LIKE','%'.$searchData.'%')->count();
+        $dataItem=Article::select(['id','kode','name'])->where('kode','LIKE','%'.$searchData.'%')->where('bom_release',FALSE)->limit($pageLoad)->offset($page)->get();
+        $dataCount=Article::select(['id','kode','name'])->where('kode','LIKE','%'.$searchData.'%')->where('bom_release',FALSE)->count();
         /*End*/
 
         /*Mengubah hasil data dari database sesuai dengan format dari select2*/
