@@ -34,14 +34,13 @@ class BomsController extends Controller
             'revision'      => 0,
             'status'        => 0
         ];
-
         $bom = Bom::create($data);
         $detailBody=array();
         $detailAks = [];
         if (isset($request->body_size)){
             for ($i=0;$i<count($request->body_size);$i++){
                 $detailBody[$i] = array(
-                    'id' => $id->next(),
+                    'id' => $id->short(),
                     'bom_id' => $bom->id,
                     'material_id' => $request->body_item[$i+1],
                     'product_group_id' => $request->body_group[$i+1],
@@ -51,6 +50,7 @@ class BomsController extends Controller
                 );
             }
         }
+
         if (isset($request->aks_size)){
             for ($i=0;$i<count($request->aks_size);$i++){
                 $detailAks[$i] = array(
@@ -66,7 +66,6 @@ class BomsController extends Controller
         }
 
         $detail = array_merge($detailBody,$detailAks);
-
         if ($bom){
             Bom_detail::insert($detail);
         }
