@@ -92,7 +92,7 @@
                                 </tr>
                                 </thead>
                                 <tbody id="body">
-                                <tr id="1" class="items">
+                                <tr id="body-row-1" class="items">
                                     <th scope="row" class="body-id text-center">1</th>
                                     <td class="text-start">
                                         <x-forms.select class="form-select-sm" id="body-size1" name="body_size[1]" :list-value="$size->toArray()">Size</x-forms.select>
@@ -108,7 +108,7 @@
                                         {{--<strong><a href="javascript:void(0)" id="image1">View Image</a></strong>--}}
                                     </td>
                                     <td><x-forms.input class="form-control-sm" id="body-cons1" name="body_cons[1]"></x-forms.input></td>
-                                    <td class="product-removal">
+                                    <td class="body-removal">
                                         <a href="javascript:void(0)" class="btn btn-xs btn-danger" id="btndelete1"><i class="ri-delete-bin-2-line"></i> </a>
                                     </td>
                                 </tr>
@@ -152,7 +152,7 @@
                                 </tr>
                                 </thead>
                                 <tbody id="aks">
-                                <tr id="1" class="items">
+                                <tr id="aks-row-1" class="items">
                                     <th scope="row" class="aks-id text-center">1</th>
                                     <td class="text-start">
                                         <x-forms.select class="form-select-sm" id="aks-size1" name="aks_size[1]" :list-value="$size->toArray()">Size</x-forms.select>
@@ -168,7 +168,7 @@
                                         {{--<strong><a href="javascript:void(0)" id="image1">View Image</a></strong>--}}
                                     </td>
                                     <td><x-forms.input class="form-control-sm" id="aks-cons1" name="aks_cons[1]"></x-forms.input></td>
-                                    <td class="product-removal">
+                                    <td class="aks-removal">
                                         <a href="javascript:void(0)" class="btn btn-xs btn-danger" id="btndelete1"><i class="ri-delete-bin-2-line"></i> </a>
                                     </td>
                                 </tr>
@@ -337,10 +337,9 @@
             }
             function new_body_row() {
                 count_body++;
-                console.log(count_body);
                 SetBodyAttributeElement(count_body);
-                let e = Object.assign(document.createElement('tr'),{id:count_body,className:'items'});
-                e.innerHTML = ('<tr><th scope="row" class="body-id text-center">' + count_body + '</th><td class="text-start">' + BodySizeClone.outerHTML + '</td><td>' + BodyRatioClone.outerHTML + '</td><td>' + BodyGroupClone.outerHTML + '</td><td>' + BodyItemClone.outerHTML + '</td><td>' + BodyConsClone.outerHTML + '</td><td class="product-removal"><a href="javascript:void(0)" class="btn btn-xs btn-danger" id="btndelete1"><i class="ri-delete-bin-2-line"></i></a></td>');
+                let e = Object.assign(document.createElement('tr'),{id:'body-row-'+count_body,className:'items'});
+                e.innerHTML = ('<tr><th scope="row" class="body-id text-center">' + count_body + '</th><td class="text-start">' + BodySizeClone.outerHTML + '</td><td>' + BodyRatioClone.outerHTML + '</td><td>' + BodyGroupClone.outerHTML + '</td><td>' + BodyItemClone.outerHTML + '</td><td>' + BodyConsClone.outerHTML + '</td><td class="body-removal"><a href="javascript:void(0)" class="btn btn-xs btn-danger" id="btndelete'+count_body+'"><i class="ri-delete-bin-2-line"></i></a></td>');
                 document.getElementById('body').appendChild(e);
                 getMaterials(count_body,'body');
                 init_select(count_body,'body');
@@ -349,8 +348,8 @@
             function new_aks_row() {
                 count_aks++;
                 SetAksAttributeElement(count_aks);
-                let e = Object.assign(document.createElement('tr'),{id:count_aks,className:'items'});
-                e.innerHTML = ('<tr><th scope="row" class="body-id text-center">' + count_aks + '</th><td class="text-start">' + AksSizeClone.outerHTML + '</td><td>' + AksRatioClone.outerHTML + '</td><td>' +AksGroupClone.outerHTML + '</td><td>' + AksItemClone.outerHTML + '</td><td>' + AksConsClone.outerHTML + '</td><td class="product-removal"><a href="javascript:void(0)" class="btn btn-xs btn-danger" id="btndelete1"><i class="ri-delete-bin-2-line"></i></a></td>');
+                let e = Object.assign(document.createElement('tr'),{id:'aks-row-'+count_aks,className:'items'});
+                e.innerHTML = ('<tr><th scope="row" class="aks-id text-center">' + count_aks + '</th><td class="text-start">' + AksSizeClone.outerHTML + '</td><td>' + AksRatioClone.outerHTML + '</td><td>' +AksGroupClone.outerHTML + '</td><td>' + AksItemClone.outerHTML + '</td><td>' + AksConsClone.outerHTML + '</td><td class="aks-removal"><a href="javascript:void(0)" class="btn btn-xs btn-danger" id="btndelete'+count_body+'"><i class="ri-delete-bin-2-line"></i></a></td>');
                 document.getElementById('aks').appendChild(e);
                 getMaterials(count_aks,'aks')
                 init_select(count_aks,'aks');
@@ -358,7 +357,7 @@
             }
 
             function remove(section) {
-                Array.from(document.querySelectorAll(".product-removal a")).forEach(function (e) {
+                Array.from(document.querySelectorAll("."+section+"-removal a")).forEach(function (e) {
                     e.addEventListener("click", function (e) {
                         removeItem(e);
                         resetRow(section);
@@ -372,17 +371,43 @@
 
             function resetRow(section) {
                 if(section==='body'){
-                    Array.from(document.getElementById("body").querySelectorAll("tr")).forEach(function (e, t) {
+                    Array.from(document.getElementById("body").querySelectorAll("tr")).forEach(function (e,t){
                         t += 1;
-                        e.querySelector(".body-id").innerHTML = t;
+                        e.querySelector('.body-id').innerHTML = t;
                         count_body = t;
-                    })
-                }else{
-                    Array.from(document.getElementById("aks").querySelectorAll("tr")).forEach(function (e, t) {
+                        let row = e.getAttribute('id').split('-')[2];
+                        document.getElementById(e.getAttribute('id')).setAttribute('id','body-row-'+t);
+                        document.getElementById('body-size'+row).setAttribute('name','body_size['+t+']');
+                        document.getElementById('body-size'+row).setAttribute('id','body-size'+t);
+                        document.getElementById('body-ratio'+row).setAttribute('name','body_ratio['+t+']');
+                        document.getElementById('body-ratio'+row).setAttribute('id','body-ratio'+t);
+                        document.getElementById('body-group'+row).setAttribute('name','body_group['+t+']');
+                        document.getElementById('body-group'+row).setAttribute('id','body-group'+t);
+                        document.getElementById('body-item'+row).setAttribute('name','body_item['+t+']');
+                        document.getElementById('body-item'+row).setAttribute('id','body-item'+t);
+                        document.getElementById('body-cons'+row).setAttribute('name','body_cons['+t+']');
+                        document.getElementById('body-cons'+row).setAttribute('id','body-cons'+t);
+                    });
+                    count_body = count_body===1?0:count_body;
+                }else if(section==='aks'){
+                    Array.from(document.getElementById("aks").querySelectorAll("tr")).forEach(function (e,t){
                         t += 1;
-                        e.querySelector(".aks-id").innerHTML = t;
+                        e.querySelector('.aks-id').innerHTML = t;
                         count_aks = t;
-                    })
+                        let row = e.getAttribute('id').split('-')[2];
+                        document.getElementById(e.getAttribute('id')).setAttribute('id','aks-row-'+t);
+                        document.getElementById('aks-size'+row).setAttribute('name','aks_size['+t+']');
+                        document.getElementById('aks-size'+row).setAttribute('id','aks-size'+t);
+                        document.getElementById('aks-ratio'+row).setAttribute('name','aks_ratio['+t+']');
+                        document.getElementById('aks-ratio'+row).setAttribute('id','aks-ratio'+t);
+                        document.getElementById('aks-group'+row).setAttribute('name','aks_group['+t+']');
+                        document.getElementById('aks-group'+row).setAttribute('id','aks-group'+t);
+                        document.getElementById('aks-item'+row).setAttribute('name','aks_item['+t+']');
+                        document.getElementById('aks-item'+row).setAttribute('id','aks-item'+t);
+                        document.getElementById('aks-cons'+row).setAttribute('name','aks_cons['+t+']');
+                        document.getElementById('aks-cons'+row).setAttribute('id','aks-cons'+t);
+                    });
+                    count_aks = count_aks===1?0:count_aks;
                 }
             }
 
@@ -393,7 +418,8 @@
                 getMaterials(1,'aks')
                 init_select(1,'body');
                 init_select(1,'aks');
-                remove();
+                remove('body');
+                remove('aks');
             })
         </script>
     @endsection
