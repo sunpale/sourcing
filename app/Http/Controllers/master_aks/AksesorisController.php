@@ -131,11 +131,15 @@ class AksesorisController extends Controller
             $prefixCode .= '0';
         }
         return $prefix.$prefixCode.$id;
-    }/*
+    }
 
-    public function generateCode(Request $request){
-        $kode = $this->createCode($request->prefixCode);
-        $result = compact('kode');
+    public function getImageAndPrice($kode){
+        $price = Material::select(['id','unit_price'])->where('id',$kode)->get();
+        $image = $price[0]->getFirstMediaUrl('accessories');
+        $result = array(
+            'price' => $price[0]->unit_price,
+            'image' => $image
+        );
         return response()->json($result);
-    }*/
+    }
 }

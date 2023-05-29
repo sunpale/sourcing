@@ -1,4 +1,4 @@
-<x-layout breadcrumbs="bom.create" :select2="true" :jsvalidation="true">
+<x-layout breadcrumbs="bom.create" :select2="true" :jsvalidation="true" :glightbox="true">
     <form method="post" action="{{route('bom.store')}}" id="frmBom">
         @csrf
         <div class="row">
@@ -92,34 +92,34 @@
                                 </tr>
                                 </thead>
                                 <tbody id="body">
-                                <tr id="body-row-1" class="items">
-                                    <th scope="row" class="body-id text-center">1</th>
-                                    <td class="text-start">
-                                        <x-forms.select class="form-select-sm" id="body-size1" name="body_size[1]" :list-value="$size->toArray()">Size</x-forms.select>
-                                    </td>
-                                    <td>
-                                        <x-forms.input class="form-control-sm text-center" id="body-ratio1" name="body_ratio[1]" :value="0"></x-forms.input>
-                                    </td>
-                                    <td>
-                                        <x-forms.select class="form-select-sm" id="body-group1" name="body_group[1]" :list-value="$productGroup->whereIn('group',['Body','Rib'])->pluck('group','id')->toArray()">Select Group</x-forms.select>
-                                    </td>
-                                    <td>
-                                        <x-forms.select class="form-select-sm items-select" id="body-item1" name="body_item[1]"></x-forms.select>
-                                        {{--<strong><a href="javascript:void(0)" id="image1">View Image</a></strong>--}}
-                                    </td>
-                                    <td><x-forms.input class="form-control-sm" id="body-cons1" name="body_cons[1]"></x-forms.input></td>
-                                    <td class="body-removal">
-                                        <a href="javascript:void(0)" class="btn btn-xs btn-danger" id="btndelete1"><i class="ri-delete-bin-2-line"></i> </a>
-                                    </td>
-                                </tr>
+                                    <tr id="body-row-1" class="items">
+                                        <th scope="row" class="body-id text-center">1</th>
+                                        <td class="text-start">
+                                            <x-forms.select class="form-select-sm" id="body-size1" name="body_size[1]" :list-value="$size->toArray()">Size</x-forms.select>
+                                        </td>
+                                        <td>
+                                            <x-forms.input class="form-control-sm text-center" id="body-ratio1" name="body_ratio[1]" :value="0"></x-forms.input>
+                                        </td>
+                                        <td>
+                                            <x-forms.select class="form-select-sm" id="body-group1" name="body_group[1]" :list-value="$productGroup->whereIn('group',['Body','Rib'])->pluck('group','id')->toArray()" onchange="init_item(1,'body')">Select Group</x-forms.select>
+                                        </td>
+                                        <td>
+                                            <x-forms.select class="form-select-sm items-select" id="body-item1" name="body_item[1]" onchange="getImagePrice(1,'body')"></x-forms.select>
+                                            <strong class="body-price1 sembunyi"></strong>
+                                        </td>
+                                        <td><x-forms.input class="form-control-sm" id="body-cons1" name="body_cons[1]"></x-forms.input></td>
+                                        <td class="body-removal">
+                                            <a href="javascript:void(0)" class="btn btn-xs btn-danger" id="btn-body-delete1"><i class="ri-delete-bin-2-line"></i> </a>
+                                        </td>
+                                    </tr>
                                 </tbody>
                                 <tbody>
-                                <tr id="newForm" style="display: none;"><td class="d-none" colspan="5"><p>Add New Form</p></td></tr>
-                                <tr>
-                                    <td colspan="5">
-                                        <a href="javascript:new_body_row()" id="add-item" class="btn btn-soft-secondary fw-medium"><i class="ri-add-fill me-1 align-bottom"></i> Add Item</a>
-                                    </td>
-                                </tr>
+                                    <tr id="newForm" style="display: none;"><td class="d-none" colspan="5"><p>Add New Form</p></td></tr>
+                                    <tr>
+                                        <td colspan="5">
+                                            <a href="javascript:new_body_row()" id="add-item" class="btn btn-soft-secondary fw-medium"><i class="ri-add-fill me-1 align-bottom"></i> Add Item</a>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                             <!--end table-->
@@ -161,15 +161,15 @@
                                         <x-forms.input class="form-control-sm text-center" id="aks-ratio1" name="aks_ratio[1]" :value="0"></x-forms.input>
                                     </td>
                                     <td>
-                                        <x-forms.select class="form-select-sm" id="aks-group1" name="aks_group[1]" :list-value="$productGroup->whereNotIn('group',['Body','Rib'])->pluck('group','id')->toArray()">Select Group</x-forms.select>
+                                        <x-forms.select class="form-select-sm" id="aks-group1" name="aks_group[1]"  :list-value="$productGroup->whereNotIn('group',['Body','Rib'])->pluck('group','id')->toArray()" onchange="init_item(1,'aks')">Select Group</x-forms.select>
                                     </td>
                                     <td>
-                                        <x-forms.select class="form-select-sm items-select" id="aks-item1" name="aks_item[1]"></x-forms.select>
-                                        {{--<strong><a href="javascript:void(0)" id="image1">View Image</a></strong>--}}
+                                        <x-forms.select class="form-select-sm items-select" id="aks-item1" name="aks_item[1]" onchange="getImagePrice(1,'aks')"></x-forms.select>
+                                        <strong class="aks-price1 sembunyi"></strong>
                                     </td>
                                     <td><x-forms.input class="form-control-sm" id="aks-cons1" name="aks_cons[1]"></x-forms.input></td>
                                     <td class="aks-removal">
-                                        <a href="javascript:void(0)" class="btn btn-xs btn-danger" id="btndelete1"><i class="ri-delete-bin-2-line"></i> </a>
+                                        <a href="javascript:void(0)" class="btn btn-xs btn-danger" id="btn-aks-delete1"><i class="ri-delete-bin-2-line"></i> </a>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -219,7 +219,6 @@
             const AksConsClone = AksConsNode.cloneNode(true);
             const AksRatioNode = document.getElementById('aks-ratio1');
             const AksRatioClone = AksRatioNode.cloneNode(true);
-
 
             function getArticles(){
                 $('#article').select2({
@@ -274,6 +273,9 @@
             }
 
             function getMaterials(row,section){
+                let group = document.getElementById(section+'-group'+row);
+                document.getElementById(section+'-item'+row).selectedIndex = -1;
+                document.getElementById(section+'-item'+row).dispatchEvent(new Event('change'));
                 $('#'+section+'-item'+row).select2({
                     ajax : {
                         url         : '{{route('master-rm.raw-material.data-materials')}}',
@@ -284,6 +286,7 @@
                             return {
                                 search      : params.term,
                                 page        : params.page || 1,
+                                group       : group.value
                             }
                         },
                         processResults : function (data, params) {
@@ -312,8 +315,10 @@
                 BodyRatioClone.setAttribute('name','body_ratio['+number+']');
                 BodyGroupClone.setAttribute('id','body-group'+number);
                 BodyGroupClone.setAttribute('name','body_group['+number+']');
+                BodyGroupClone.setAttribute('onchange','init_item('+number+',"body")');
                 BodyItemClone.setAttribute('id','body-item'+number);
                 BodyItemClone.setAttribute('name','body_item['+number+']');
+                BodyItemClone.setAttribute('onchange','getImagePrice('+number+',"body")');
                 BodyConsClone.setAttribute('id','body-cons'+number);
                 BodyConsClone.setAttribute('name','body_cons['+number+']');
             }
@@ -323,8 +328,10 @@
                 AksSizeClone.setAttribute('name','aks_size['+number+']');
                 AksGroupClone.setAttribute('id','aks-group'+number);
                 AksGroupClone.setAttribute('name','aks_group['+number+']');
+                AksGroupClone.setAttribute('onchange','init_item('+number+',"aks")');
                 AksItemClone.setAttribute('id','aks-item'+number);
                 AksItemClone.setAttribute('name','aks_item['+number+']');
+                AksItemClone.setAttribute('onchange','getImagePrice('+number+',"aks")');
                 AksConsClone.setAttribute('id','aks-cons'+number);
                 AksConsClone.setAttribute('name','aks_cons['+number+']');
                 AksRatioClone.setAttribute('id','aks-ratio'+number);
@@ -335,29 +342,33 @@
                 $('#'+section+'-size'+row).select2();
                 $('#'+section+'-group'+row).select2();
             }
+
+            function init_item(row,section){
+                getMaterials(row,section);
+            }
+
             function new_body_row() {
                 count_body++;
                 SetBodyAttributeElement(count_body);
                 let e = Object.assign(document.createElement('tr'),{id:'body-row-'+count_body,className:'items'});
-                e.innerHTML = ('<tr><th scope="row" class="body-id text-center">' + count_body + '</th><td class="text-start">' + BodySizeClone.outerHTML + '</td><td>' + BodyRatioClone.outerHTML + '</td><td>' + BodyGroupClone.outerHTML + '</td><td>' + BodyItemClone.outerHTML + '</td><td>' + BodyConsClone.outerHTML + '</td><td class="body-removal"><a href="javascript:void(0)" class="btn btn-xs btn-danger" id="btndelete'+count_body+'"><i class="ri-delete-bin-2-line"></i></a></td>');
+                e.innerHTML = ('<tr><th scope="row" class="body-id text-center">' + count_body + '</th><td class="text-start">' + BodySizeClone.outerHTML + '</td><td>' + BodyRatioClone.outerHTML + '</td><td>' + BodyGroupClone.outerHTML + '</td><td><div class="mb-2">' + BodyItemClone.outerHTML + '</div><strong class="body-price'+count_body+' sembunyi"></strong></td><td>' + BodyConsClone.outerHTML + '</td><td class="body-removal"><a href="javascript:void(0)" class="btn btn-xs btn-danger" id="btn-body-delete'+count_body+'"><i class="ri-delete-bin-2-line"></i></a></td>');
                 document.getElementById('body').appendChild(e);
-                getMaterials(count_body,'body');
                 init_select(count_body,'body');
                 remove('body');
             }
+
             function new_aks_row() {
                 count_aks++;
                 SetAksAttributeElement(count_aks);
                 let e = Object.assign(document.createElement('tr'),{id:'aks-row-'+count_aks,className:'items'});
-                e.innerHTML = ('<tr><th scope="row" class="aks-id text-center">' + count_aks + '</th><td class="text-start">' + AksSizeClone.outerHTML + '</td><td>' + AksRatioClone.outerHTML + '</td><td>' +AksGroupClone.outerHTML + '</td><td>' + AksItemClone.outerHTML + '</td><td>' + AksConsClone.outerHTML + '</td><td class="aks-removal"><a href="javascript:void(0)" class="btn btn-xs btn-danger" id="btndelete'+count_body+'"><i class="ri-delete-bin-2-line"></i></a></td>');
+                e.innerHTML = ('<tr><th scope="row" class="aks-id text-center">' + count_aks + '</th><td class="text-start">' + AksSizeClone.outerHTML + '</td><td>' + AksRatioClone.outerHTML + '</td><td>' +AksGroupClone.outerHTML + '</td><td><div class="mb-2">' + AksItemClone.outerHTML + '</div><strong class="aks-price'+count_aks+' sembunyi"></strong> </td><td>' + AksConsClone.outerHTML + '</td><td class="aks-removal"><a href="javascript:void(0)" class="btn btn-xs btn-danger" id="btn-aks-delete'+count_aks+'"><i class="ri-delete-bin-2-line"></i></a></td>');
                 document.getElementById('aks').appendChild(e);
-                getMaterials(count_aks,'aks')
                 init_select(count_aks,'aks');
                 remove('aks');
             }
 
             function remove(section) {
-                Array.from(document.querySelectorAll("."+section+"-removal a")).forEach(function (e) {
+                Array.from(document.querySelectorAll("."+section+"-removal a.btn-danger")).forEach(function (e) {
                     e.addEventListener("click", function (e) {
                         removeItem(e);
                         resetRow(section);
@@ -382,13 +393,28 @@
                         document.getElementById('body-ratio'+row).setAttribute('name','body_ratio['+t+']');
                         document.getElementById('body-ratio'+row).setAttribute('id','body-ratio'+t);
                         document.getElementById('body-group'+row).setAttribute('name','body_group['+t+']');
+                        document.getElementById('body-group'+row).setAttribute('onchange','init_item('+t+',"body")');
                         document.getElementById('body-group'+row).setAttribute('id','body-group'+t);
                         document.getElementById('body-item'+row).setAttribute('name','body_item['+t+']');
+                        document.getElementById('body-item'+row).setAttribute('onchange','getImagePrice('+t+',"body")');
                         document.getElementById('body-item'+row).setAttribute('id','body-item'+t);
                         document.getElementById('body-cons'+row).setAttribute('name','body_cons['+t+']');
                         document.getElementById('body-cons'+row).setAttribute('id','body-cons'+t);
+                        document.getElementById('btn-body-delete'+row).setAttribute('id','btn-body-delete'+t);
+                        document.querySelector('.body-price'+row).setAttribute('class','body-price'+t);
+                        if(document.getElementById('btn-body-delete'+t).nextElementSibling!==null){
+                            document.getElementById('btn-body-image'+row).setAttribute('id','btn-body-image'+t);
+                        }
+                        init_select(t,'body');
+                        /*mencegah data item hilang*/
+                        let item = document.getElementById('body-item'+t)
+                        const optionItem=new Option(item.options[item.selectedIndex].textContent,item.value,true,true);
+                        init_item(t,'body');
+                        item.appendChild(optionItem);
+                        item.dispatchEvent(new Event('change'));
+
                     });
-                    count_body = count_body===1?0:count_body;
+                    count_body = document.getElementById('body').firstElementChild===null ? 0:count_body;
                 }else if(section==='aks'){
                     Array.from(document.getElementById("aks").querySelectorAll("tr")).forEach(function (e,t){
                         t += 1;
@@ -401,25 +427,68 @@
                         document.getElementById('aks-ratio'+row).setAttribute('name','aks_ratio['+t+']');
                         document.getElementById('aks-ratio'+row).setAttribute('id','aks-ratio'+t);
                         document.getElementById('aks-group'+row).setAttribute('name','aks_group['+t+']');
+                        document.getElementById('aks-group'+row).setAttribute('onchange','init_item('+t+',"aks")');
                         document.getElementById('aks-group'+row).setAttribute('id','aks-group'+t);
                         document.getElementById('aks-item'+row).setAttribute('name','aks_item['+t+']');
+                        document.getElementById('aks-item'+row).setAttribute('onchange','getImagePrice('+t+',"aks")');
                         document.getElementById('aks-item'+row).setAttribute('id','aks-item'+t);
                         document.getElementById('aks-cons'+row).setAttribute('name','aks_cons['+t+']');
                         document.getElementById('aks-cons'+row).setAttribute('id','aks-cons'+t);
+                        document.getElementById('btn-aks-delete'+row).setAttribute('id','btn-aks-delete'+t);
+                        document.querySelector('.aks-price'+row).setAttribute('class','aks-price'+t);
+                        if(document.getElementById('btn-aks-delete'+t).nextElementSibling!==null){
+                            document.getElementById('btn-aks-image'+row).setAttribute('id','btn-aks-image'+t);
+                        }
+                        init_select(t,'aks');
+                        /*mencegah data item hilang*/
+                        let item = document.getElementById('aks-item'+t)
+                        const optionItem=new Option(item.options[item.selectedIndex].textContent,item.value,true,true);
+                        init_item(t,'aks');
+                        item.appendChild(optionItem);
+                        item.dispatchEvent(new Event('change'));
                     });
-                    count_aks = count_aks===1?0:count_aks;
+                    count_aks = document.getElementById('aks').firstElementChild===null ? 0:count_aks;
                 }
+            }
+
+            function getImagePrice(row,section){
+                let url = section==='body' ? baseUrl + '/master-rm/raw-material/image-url/' : baseUrl + '/master-aksesoris/aksesoris/image-url/';
+                let id = document.getElementById(section+'-item'+row);
+                if(id.value==='')return;
+                fetch(url+id.value,{
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if(data.image!==''){
+                            if(document.getElementById('btn-'+section+'-delete'+row).nextElementSibling!==null){
+                                document.getElementById('btn-'+section+'-image'+row).remove();
+                            }
+
+                            document.querySelector('#btn-'+section+'-delete'+row).insertAdjacentHTML('afterend','<a href="'+data.image+'" class="btn btn-xs btn-info mx-1" id="btn-'+section+'-image'+row+'"><i class="ri-image-line"></i> </a>');
+                            let lightbox=GLightbox({selector:"#btn-"+section+"-image"+row});
+                        }else {
+                            if(document.getElementById('btn-'+section+'-delete'+row).nextElementSibling!==null){
+                                document.getElementById('btn-'+section+'-image'+row).remove();
+                            }
+                        }
+                        document.querySelector('.'+section+'-price'+row).innerHTML = 'Unit Price : ' + data.price;
+                        document.querySelector('.'+section+'-price'+row).classList.remove('sembunyi');
+                    })
+                    .catch(error => console.error(error));
             }
 
             document.addEventListener('DOMContentLoaded',function (){
                 document.querySelector('html').setAttribute('data-sidebar-size','sm');
                 getArticles();
-                getMaterials(1,'body');
-                getMaterials(1,'aks')
                 init_select(1,'body');
                 init_select(1,'aks');
                 remove('body');
                 remove('aks');
+                /*localStorage.setItem('count_body',1);
+                localStorage.setItem('count_aks',1);*/
             })
         </script>
     @endsection

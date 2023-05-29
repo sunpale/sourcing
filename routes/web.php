@@ -48,7 +48,7 @@ Route::prefix('master-rm')->middleware(['auth'/*,'permission:create-master'*/])-
 //region material
     Route::get('/raw-material/generate-code',[MaterialsController::class,'generateCode'])->name('raw-material.generate-code');
     Route::get('/raw-material/data',[MaterialsController::class,'data'])->name('raw-material.data');
-    Route::get('raw-material/view-image/{file}',[MaterialsController::class,'viewImage'])->name('raw-material.view-image');
+    Route::get('raw-material/image-url/{file}',[MaterialsController::class,'getImageAndPrice'])->name('raw-material.image-url');
     Route::get('/raw-material/data-materials',[MaterialsController::class,'getMaterials'])->name('raw-material.data-materials');
     Route::resource('raw-material',MaterialsController::class);
 //endregion
@@ -102,7 +102,8 @@ Route::prefix('master-aksesoris')->middleware('auth:web')->name('master-aks.')->
     Route::resource('product-group', ProductGroupsController::class)->except(['create','show']);
 //endregion
     Route::get('/aksesoris/data',[AksesorisController::class,'data'])->name('aksesoris.data');
-    Route::get('/aksesoris/view-image/{file}',[AksesorisController::class,'viewImage'])->name('aksesoris.view-image');
+    /*Route::get('/aksesoris/view-image/{file}',[AksesorisController::class,'viewImage'])->name('aksesoris.view-image');*/
+    Route::get('aksesoris/image-url/{file}',[AksesorisController::class,'getImageAndPrice'])->name('aksesoris.image-url');
     Route::resource('aksesoris', AksesorisController::class);
 });
 //endregion

@@ -148,6 +148,7 @@ class MaterialsController extends Controller
         /*get data pencarian dan jumlah halaman dari komponen select2*/
         $search = $request->search;
         $halaman = $request->page;
+        $group = $request->group;
         $searchData = empty($search) ? "" : $search;
         /*$type = $request->type;*/
         /*end*/
@@ -164,8 +165,8 @@ class MaterialsController extends Controller
         }
         /*end*/
         /*Memanggil data dan jumlah data dari database*/
-        $dataItem=Material::select(['id','kode','item_name'])->where('kode','LIKE','%'.$searchData.'%')->limit($pageLoad)->offset($page)->get();
-        $dataCount=Material::select(['id','kode','item_name'])->where('kode','LIKE','%'.$searchData.'%')->count();
+        $dataItem=Material::select(['id','kode','item_name'])->where('product_group_id',$group)->where('kode','LIKE','%'.$searchData.'%')->orWhere('product_group_id',$group)->where('item_name','LIKE','%'.$searchData.'%')->limit($pageLoad)->offset($page)->get();
+        $dataCount=Material::select(['id','kode','item_name'])->where('product_group_id',$group)->where('kode','LIKE','%'.$searchData.'%')->orWhere('product_group_id',$group)->where('item_name','LIKE','%'.$searchData.'%')->count();
         /*End*/
 
         /*Mengubah hasil data dari database sesuai dengan format dari select2*/
@@ -177,5 +178,15 @@ class MaterialsController extends Controller
         $resultQuery['total_count']=$dataCount;
         /*End*/
         return response()->json($resultQuery);
+    }
+
+    public function getImageAndPrice($kode){
+        $price = Material::select(['id','unit_price'])->where('id',$kode)->get();
+        $image = $price[0]->getFirstMediaUrl('raw material');
+        $result = array(
+            'price' => $price[0]->unit_price,
+            'image' => $image
+        );
+        return response()->json($result);
     }
 }
