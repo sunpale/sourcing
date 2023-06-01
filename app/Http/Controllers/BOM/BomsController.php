@@ -8,6 +8,7 @@ use App\Models\BOM\Bom;
 use App\Models\BOM\Bom_detail;
 use App\Models\master_aks\ProductGroup;
 use App\Models\master_data\Size;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -34,7 +35,12 @@ class BomsController extends Controller
             'revision'      => 0,
             'status'        => 0
         ];
+        DB::beginTransaction();
         $bom = Bom::create($data);
+        if (!$bom){
+            DB::rollBack();
+            return redirect()->route('bom.index')->with('failed',config('constants.FAILED_SAVE'));
+        }
         $detailBody=array();
         $detailAks = [];
         if (isset($request->body_size)){
@@ -66,10 +72,12 @@ class BomsController extends Controller
         }
 
         $detail = array_merge($detailBody,$detailAks);
-        if ($bom){
-            Bom_detail::insert($detail);
+        if (Bom_detail::insert($detail)){
+            DB::commit();
+            return redirect()->route('bom.index')->with('success',config('constants.SUCCESS_SAVE'));
         }
-        return redirect()->route('bom.index')->with('success',config('constants.SUCCESS_SAVE'));
+        DB::rollBack();
+        return redirect()->route('bom.index')->with('failed',config('constants.FAILED_SAVE'));
     }
 
     public function data(Request $request){
