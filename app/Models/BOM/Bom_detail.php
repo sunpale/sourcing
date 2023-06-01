@@ -13,7 +13,7 @@ class Bom_detail extends Model
 {
     use HasShortflakePrimary;
     public $timestamps = false;
-    protected $fillable = ['bom_id','material_id','size_id','ratio','cons','product_group_id'];
+    protected $fillable = ['bom_id','material_id','size_id','ratio','cons','product_group_id','price'];
 
     public function Material() :BelongsTo
     {
