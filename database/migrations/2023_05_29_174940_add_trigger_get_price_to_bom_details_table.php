@@ -10,16 +10,10 @@ return new class extends Migration {
         if (env('DB_CONNECTION')==='sqlsrv') {
             DB::unprepared('CREATE TRIGGER [dbo].[set_price]
 ON [dbo].[bom_details]
-INSTEAD OF INSERT
+FOR INSERT
 AS
 BEGIN
-	DECLARE @materialId BIGINT;
-	DECLARE @price DECIMAL;
-
-	SELECT @materialId = material_id FROM INSERTED bom_details;
-	SELECT @price = (SELECT unit_price FROM materials WHERE id = @materialId);
-
-	INSERT INTO sourcing.dbo.bom_details(id,bom_id,material_id,product_group_id,size_id,ratio,cons,price) SELECT t.id,t.bom_id,t.material_id,t.product_group_id,t.size_id,t.ratio,t.cons,@price FROM inserted t;
+  UPDATE bom_details SET bom_details.PRICE = materials.unit_price FROM bom_details INNER JOIN materials ON bom_details.material_id = materials.id WHERE bom_details.id IN (SELECT inserted.id FROM inserted);
 END;');
         }
         elseif(env('DB_CONNECTION')==='mysql'){
@@ -31,8 +25,11 @@ END;');
 
     public function down(): void
     {
-        Schema::table('bom_details', function (Blueprint $table) {
-            //
-        });
+        if (env('DB_CONNECTION')==='sqlsrv'){
+            DB::unprepared('DROP TRIGGER IF EXISTS set_price;');
+        }
+        elseif(env('DB_CONNECTION')==='mysql'){
+            DB::unprepared('DROP TRIGGER IF EXISTS set_price');
+        }
     }
 };
