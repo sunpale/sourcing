@@ -13,7 +13,7 @@ return new class extends Migration {
             $table->bigInteger('material_id')->index();
             $table->tinyInteger('product_group_id')->index();
             $table->tinyInteger('size_id')->index();
-            $table->tinyInteger('ratio');
+            $table->tinyInteger('ratio')->nullable();
             $table->float('cons');
         });
     }
