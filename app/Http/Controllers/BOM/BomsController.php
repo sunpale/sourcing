@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\BomRequest;
 use App\Models\BOM\Bom;
 use App\Models\BOM\Bom_detail;
+use App\Models\BOM\Bom_detail_service;
 use App\Models\master_aks\ProductGroup;
+use App\Models\master_data\Service;
 use App\Models\master_data\Size;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -22,7 +24,8 @@ class BomsController extends Controller
     public function create(){
         $size = Size::pluck('size','id');
         $productGroup = ProductGroup::select(['id','group'])->where('kode','!=','NG')->get();
-        return view('bom.create',compact('size','productGroup'));
+        $service = Service::select(['name','id'])->get();
+        return view('bom.create',compact('size','productGroup','service'));
     }
 
     public function store(Request $request)
@@ -43,6 +46,7 @@ class BomsController extends Controller
         }
         $detailBody=array();
         $detailAks = [];
+        $detailService = [];
         if (isset($request->body_size)){
             for ($i=0;$i<count($request->body_size);$i++){
                 $detailBody[$i] = array(
@@ -71,8 +75,26 @@ class BomsController extends Controller
             }
         }
 
+        for ($i=0;$i<count($request->service);$i++){
+            if ($request->price[$i+1] > 0){
+                $detailService[] = array(
+                    'id' => $id->short(),
+                    'bom_id' => $bom->id,
+                    'service_id' => $request->service_id[$i+1],
+                    'remarks'   => $request->remarks[$i+1],
+                    'cons'     => $request->service_cons[$i+1],
+                    'price'     => str_replace(',','.',$request->price[$i+1])
+                );
+            }
+        }
+
         $detail = array_merge($detailBody,$detailAks);
-        if (Bom_detail::insert($detail)){
+        if (!Bom_detail::insert($detail)){
+            DB::rollBack();
+            return redirect()->route('bom.index')->with('failed',config('constants.FAILED_SAVE'));
+        }
+
+        if (Bom_detail_service::insert($detailService)){
             DB::commit();
             return redirect()->route('bom.index')->with('success',config('constants.SUCCESS_SAVE'));
         }
@@ -94,8 +116,11 @@ class BomsController extends Controller
         return redirect()->route('bom.index');
     }
     public function findBom(Bom $bom){
-        $result = Bom_detail::select(['material_id','product_group_id','size_id','ratio','cons'])->with(['material:id,kode,item_name','size:id,size','ProductGroup:id,group'])->where('bom_id',$bom->id)->get();
-        return response()->json(compact('result'));
+        $material = Bom_detail::select(['material_id','product_group_id','size_id','ratio','cons',DB::raw('price*cons as sub_total')])->with(['material:id,kode,item_name,unit_price','size:id,size','ProductGroup:id,group'])->where('bom_id',$bom->id)->get();
+        $jasa = Bom_detail_service::select(['id','bom_id','service_id','remarks','cons','price','cons',DB::raw('price*cons as sub_total')])->with('service:id,name')->where('bom_id',$bom->id)->get();
+        $sumMaterial = number_format($material->sum('sub_total'),2,',','.');
+        $sumJasa = number_format($jasa->sum('sub_total'),2, ',', '.');
+        return response()->json(compact('material','jasa','sumJasa','sumMaterial'));
     }
     public function show(Bom $bom)
     {

@@ -187,6 +187,53 @@
                     </div>
                 </div>
                 <!--end card-->
+                <div class="card">
+                    <div class="card-header align-items-center d-flex">
+                        <h6 class="card-title mb-0 flex-grow-1 text-start">Jasa Section</h6>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="table-responsive">
+                            <table class="invoice-table table table-borderless table-nowrap mb-0">
+                                <thead class="align-middle">
+                                <tr class="table-active">
+                                    <th scope="col" class="text-center" style="width: 1%;">#</th>
+                                    <th scope="col" class="text-center w-25">
+                                        Jasa
+                                    </th>
+                                    <th scope="col" class="text-center w-50">
+                                        Remarks
+                                    </th>
+                                    <th scope="col" class="text-center w-10">
+                                        Cons
+                                    </th>
+                                    <th scope="col" class="w-14">Price</th>
+                                    <th scope="col" class="text-center w-5"></th>
+                                </tr>
+                                </thead>
+                                <tbody id="service">
+                                @for($i=0;$i<count($service);$i++)
+                                    <tr id="service-row-{{$i+1}}" class="items">
+                                        <th scope="row" class="service-id text-center">{{$i+1}}</th>
+                                        <td class="text-start">
+                                            <x-forms.input class="form-control-sm" id="service{{$i+1}}" name="service[{{$i+1}}]" readonly value="{{$service[$i]->name}}"></x-forms.input>
+                                            <x-forms.input type="hidden" id="service-id{{$i+1}}" name="service_id[{{$i+1}}]" class="form-control-sm sembunyi" value="{{$service[$i]->id}}"></x-forms.input>
+                                        </td>
+                                        <td>
+                                            <x-forms.input class="form-control-sm" id="remarks{{$i+1}}" name="remarks[{{$i+1}}]"></x-forms.input>
+                                        </td>
+                                        <td><x-forms.input class="form-control-sm" id="service-cons{{$i+1}}" name="service_cons[{{$i+1}}]"></x-forms.input></td>
+                                        <td>
+                                            <x-forms.input class="form-control-sm text-end" id="price{{$i+1}}" name="price[{{$i+1}}]" value="0"></x-forms.input>
+                                        </td>
+                                    </tr>
+                                @endfor
+                                </tbody>
+                            </table>
+                            <!--end table-->
+                        </div>
+                    </div>
+                </div>
+                <!--end card-->
                 <div class="text-end">
                     <button type="submit" class="btn btn-success data-submit me-1">Save</button>
                     <a href="{!! route('bom.index') !!}" class="btn btn-outline-danger">Cancel</a>

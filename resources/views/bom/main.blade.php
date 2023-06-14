@@ -12,7 +12,7 @@
                 </div>
                 <div class="card-body">
                     @csrf
-                    <table id="tbl-bom" class="table table-sm table-bordered table-hover dt-responsive nowrap table-striped align-middle w-100 fw">
+                    <table id="tbl-bom" class="table table-sm table-bordered dt-responsive nowrap table-striped align-middle w-100 fw">
                         <thead>
                         <tr>
                             <th></th>
@@ -35,6 +35,10 @@
     </div>
     @section('script')
     <script>
+        function formatNumber(num) {
+            return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
+        }
+
         function tableBom(){
             const bom = $('#tbl-bom').DataTable({
                 serverSide: true,
@@ -90,7 +94,7 @@
                             })
                                 .then(response => response.json())
                                 .then(data => {
-                                    let ratio;
+                                    let ratio,remarks;
                                     let childTable = '<div class="row p-3"><div class=col-md-12><table id="tbl-bom-detail" class="table table-sm table-bordered table-hover table-striped align-middle table-nowrap mb-0 w-100 caption-top">' +
                                         '<caption class="p-0"> Bom Item</caption>' +
                                         '<thead class="table-light">' +
@@ -101,23 +105,63 @@
                                         '<th class="text-center">Item</th>'+
                                         '<th class="text-center">Item Description</th>'+
                                         '<th class="text-center">Cons</th>'+
+                                        '<th class="text-center">Price</th>'+
                                         '</tr>' +
                                         '</thead>' +
                                         '<tbody>';
                                     let rowNum=0
-                                    for (let i=0;i<data.result.length;i++){
+                                    let priceMaterial;
+                                    let cons;
+                                    for (let i=0;i<data.material.length;i++){
                                         rowNum+=1;
-                                        ratio = data.result[i].ratio==='0' ? '':data.result[i].ratio;
+                                        ratio = data.material[i].ratio==='0' ? '':data.material[i].ratio;
+                                        priceMaterial = data.material[i].material['unit_price'].replace('.00','');
+                                        cons = data.material[i].cons.replace('.0000','');
+                                        cons = cons.substring(0,1) ==='.' ? 0+''+cons : cons;
                                         childTable +=
                                             '<tr>' +
                                             '<td class="text-center">'+rowNum+'</td>' +
-                                            '<td class="text-center">'+data.result[i].size['size']+'</td>' +
+                                            '<td class="text-center">'+data.material[i].size['size']+'</td>' +
                                             '<td class="text-center">'+ratio+'</td>' +
-                                            '<td class="text-center">'+data.result[i].product_group['group']+'</td>' +
-                                            '<td class="text-center">'+data.result[i].material['item_name']+'</td>' +
-                                            '<td class="text-center">'+parseFloat(data.result[i].cons).toFixed(4)+'</td></tr>';
+                                            '<td class="text-center">'+data.material[i].product_group['group']+'</td>' +
+                                            '<td class="text-center">'+data.material[i].material['item_name']+'</td>' +
+                                            '<td class="text-center">'+ cons.replace('.',',') +'</td>'+
+                                            '<td class="text-end">'+formatNumber(priceMaterial)+'</td></tr>';
                                     }
-                                    childTable +=  '</tbody></table></div></div>';
+                                    childTable +=  '</tbody><tfoot class="table-light">' +
+                                        '<tr>' +
+                                        '<td colspan="6" class="text-center fw-bold">Total</td><td class="text-end fw-bold">'+data.sumMaterial.replace(',00','')+'</td>' +
+                                        '</tr></tfoot></table></div></div>';
+                                    childTable += '<div class="row p-3"><div class=col-md-12><table id="tbl-bom-jasa" class="table table-sm table-bordered table-hover table-striped align-middle table-nowrap mb-0 w-100 caption-top">' +
+                                        '<caption class="p-0"> Jasa</caption>' +
+                                        '<thead class="table-light">' +
+                                        '<tr>' +
+                                        '<th class="text-center">No</th>' +
+                                        '<th class="text-center">Jasa</th>'+
+                                        '<th class="text-center">Remarks</th>'+
+                                        '<th class="text-center">cons</th>'+
+                                        '<th class="text-center">price</th>'+
+                                        '</tr>' +
+                                        '</thead>' +
+                                        '<tbody>';
+                                    let rowJasa=0
+                                    let priceJasa;
+                                    for (let i=0;i<data.jasa.length;i++){
+                                        rowJasa+=1;
+                                        remarks = data.jasa[i].remarks=== null ? '':data.jasa[i].remarks;
+                                        priceJasa = data.jasa[i].price.replace('.00','');
+                                        childTable +=
+                                            '<tr>' +
+                                            '<td class="text-center">'+rowJasa+'</td>' +
+                                            '<td class="text-center">'+data.jasa[i].service['name']+'</td>' +
+                                            '<td class="text-center">'+remarks+'</td>' +
+                                            '<td class="text-center">'+data.jasa[i].cons+'</td>' +
+                                            '<td class="text-end">'+formatNumber(priceJasa.replace('.',','))+'</td></tr>';
+                                    }
+                                    childTable +=  '</tbody><tfoot class="table-light">' +
+                                        '<tr>' +
+                                        '<td colspan="4" class="text-center fw-bold">Total</td><td class="text-end fw-bold">'+data.sumJasa.replace(',00','')+'</td>' +
+                                        '</tr></tfoot></table></div></div>';
 
                                     row.child(childTable).show();
                                     tr.addClass('shown');
