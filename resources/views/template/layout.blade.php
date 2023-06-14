@@ -93,14 +93,14 @@
                         <span class="d-flex align-items-center">
                             <img class="rounded-circle header-profile-user" src="{{asset('src/images/user-img.jpg')}}" alt="Header Avatar">
                             <span class="text-start ms-xl-2">
-                                <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">Anna Adame</span>
-                                <span class="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text">Founder</span>
+                                <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{Auth::user()->name}}</span>
+                                <span class="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text">{{session()->get('role')}}</span>
                             </span>
                         </span>
                         </button>
                         <div class="dropdown-menu dropdown-menu-end">
                             <!-- item-->
-                            <h6 class="dropdown-header">Welcome Anna!</h6>
+                            <h6 class="dropdown-header">Welcome {{Auth::user()->name}}!</h6>
                             <a class="dropdown-item" href="#"><i class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Profile</span></a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#"><span class="badge bg-soft-success text-success mt-1 float-end">New</span><i class="mdi mdi-cog-outline text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Settings</span></a>
@@ -149,7 +149,7 @@
                             <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Dashboards</span>
                         </a>
                     </li> <!-- end Dashboard Menu -->
-                    <li class="menu-title"><span data-key="t-master">Master Data</span></li>
+                    {{--<li class="menu-title"><span data-key="t-master">Master Data</span></li>
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="#sidebarMasterMaterial" data-bs-toggle="collapse" role="button" aria-expanded="{{Route::is('master-rm.*')?'true':'false'}}" aria-controls="sidebarMasterMaterial">
                             <i class="ri-apps-2-line"></i> <span data-key="t-apps">Master Raw Material</span>
@@ -262,7 +262,7 @@
                             <i class="ri-shield-user-line"></i> <span data-key="t-widgets">User</span>
                         </a>
                     </li>
-                    @endrole
+                    @endrole--}}
                 </ul>
             </div>
             <!-- Sidebar -->

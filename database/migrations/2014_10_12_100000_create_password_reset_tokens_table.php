@@ -10,16 +10,14 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         if (env('DB_CONNECTION')==='sqlsrv') {
             DB::connection()->setSchemaGrammar(new CustomSqlServerGrammar());
         }
-        Schema::create('password_resets', function (Blueprint $table) {
-            $table->string('email')->primary();
+        Schema::create('password_reset_tokens', function (Blueprint $table) {
+            $table->string('username')->primary();
             $table->string('token');
             $table->timestamp('created_at')->nullable();
         });
@@ -27,11 +25,9 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('password_resets');
+        Schema::dropIfExists('password_reset_tokens');
     }
 };
