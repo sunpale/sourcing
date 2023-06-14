@@ -55,7 +55,6 @@ class BomsController extends Controller
                     'material_id' => $request->body_item[$i+1],
                     'product_group_id' => $request->body_group[$i+1],
                     'size_id' => $request->body_size[$i+1],
-                    'ratio' =>$request->body_ratio[$i+1],
                     'cons' => str_replace(',','.',$request->body_cons[$i+1])
                 );
             }
@@ -69,7 +68,6 @@ class BomsController extends Controller
                     'material_id' => $request->aks_item[$i+1],
                     'product_group_id' => $request->aks_group[$i+1],
                     'size_id' => $request->aks_size[$i+1],
-                    'ratio' =>$request->aks_ratio[$i+1],
                     'cons' => str_replace(',','.',$request->aks_cons[$i+1])
                 );
             }
@@ -118,7 +116,8 @@ class BomsController extends Controller
     public function findBom(Bom $bom){
         $material = Bom_detail::select(['material_id','product_group_id','size_id','ratio','cons',DB::raw('price*cons as sub_total')])->with(['material:id,kode,item_name,unit_price','size:id,size','ProductGroup:id,group'])->where('bom_id',$bom->id)->get();
         $jasa = Bom_detail_service::select(['id','bom_id','service_id','remarks','cons','price','cons',DB::raw('price*cons as sub_total')])->with('service:id,name')->where('bom_id',$bom->id)->get();
-        $sumMaterial = number_format($material->sum('sub_total'),2,',','.');
+        $materialUnique = $material->unique('product_group_id');
+        $sumMaterial = number_format($materialUnique->sum('sub_total'),2,',','.');
         $sumJasa = number_format($jasa->sum('sub_total'),2, ',', '.');
         return response()->json(compact('material','jasa','sumJasa','sumMaterial'));
     }

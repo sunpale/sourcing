@@ -114,7 +114,7 @@
                                     let cons;
                                     for (let i=0;i<data.material.length;i++){
                                         rowNum+=1;
-                                        ratio = data.material[i].ratio==='0' ? '':data.material[i].ratio;
+                                        ratio = data.material[i].ratio==='0'||data.material[i].ratio===null ? '':data.material[i].ratio;
                                         priceMaterial = data.material[i].material['unit_price'].replace('.00','');
                                         cons = data.material[i].cons.replace('.0000','');
                                         cons = cons.substring(0,1) ==='.' ? 0+''+cons : cons;

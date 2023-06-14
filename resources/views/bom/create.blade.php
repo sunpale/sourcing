@@ -80,10 +80,7 @@
                                     <th scope="col" class="text-center w-14">
                                         Size
                                     </th>
-                                    <th scope="col" class="text-center w-8point7">
-                                        Rasio
-                                    </th>
-                                    <th scope="col" class="w-25">Group</th>
+                                    <th scope="col" class="text-center w-25">Group</th>
                                     <th scope="col" class="text-center w-40">Items</th>
                                     <th scope="col" class="text-center w-10">
                                         Cons
@@ -96,9 +93,6 @@
                                         <th scope="row" class="body-id text-center">1</th>
                                         <td class="text-start">
                                             <x-forms.select class="form-select-sm" id="body-size1" name="body_size[1]" :list-value="$size->toArray()">Size</x-forms.select>
-                                        </td>
-                                        <td>
-                                            <x-forms.input class="form-control-sm text-center" id="body-ratio1" name="body_ratio[1]" :value="0"></x-forms.input>
                                         </td>
                                         <td>
                                             <x-forms.select class="form-select-sm" id="body-group1" name="body_group[1]" :list-value="$productGroup->whereIn('group',['Body','Rib'])->pluck('group','id')->toArray()" onchange="init_item(1,'body')">Select Group</x-forms.select>
@@ -140,9 +134,6 @@
                                     <th scope="col" class="text-center w-14">
                                         Size
                                     </th>
-                                    <th scope="col" class="text-center w-8point7">
-                                        Rasio
-                                    </th>
                                     <th scope="col" class="w-25">Group</th>
                                     <th scope="col" class="text-center w-40">Items</th>
                                     <th scope="col" class="text-center w-10">
@@ -156,9 +147,6 @@
                                     <th scope="row" class="aks-id text-center">1</th>
                                     <td class="text-start">
                                         <x-forms.select class="form-select-sm" id="aks-size1" name="aks_size[1]" :list-value="$size->toArray()">Size</x-forms.select>
-                                    </td>
-                                    <td>
-                                        <x-forms.input class="form-control-sm text-center" id="aks-ratio1" name="aks_ratio[1]" :value="0"></x-forms.input>
                                     </td>
                                     <td>
                                         <x-forms.select class="form-select-sm" id="aks-group1" name="aks_group[1]"  :list-value="$productGroup->whereNotIn('group',['Body','Rib'])->pluck('group','id')->toArray()" onchange="init_item(1,'aks')">Select Group</x-forms.select>
@@ -221,7 +209,7 @@
                                         <td>
                                             <x-forms.input class="form-control-sm" id="remarks{{$i+1}}" name="remarks[{{$i+1}}]"></x-forms.input>
                                         </td>
-                                        <td><x-forms.input class="form-control-sm" id="service-cons{{$i+1}}" name="service_cons[{{$i+1}}]"></x-forms.input></td>
+                                        <td><x-forms.input class="form-control-sm text-center" id="service-cons{{$i+1}}" name="service_cons[{{$i+1}}]" value="1"></x-forms.input></td>
                                         <td>
                                             <x-forms.input class="form-control-sm text-end" id="price{{$i+1}}" name="price[{{$i+1}}]" value="0"></x-forms.input>
                                         </td>
@@ -248,8 +236,6 @@
             var count_body=1,count_aks = 1;
             const BodySizeNode = document.getElementById('body-size1');
             const BodySizeClone = BodySizeNode.cloneNode(true);
-            const BodyRatioNode = document.getElementById('body-ratio1');
-            const BodyRatioClone = BodyRatioNode.cloneNode(true);
             const BodyGroupNode = document.getElementById('body-group1');
             const BodyGroupClone = BodyGroupNode.cloneNode(true);
             const BodyItemNode = document.getElementById('body-item1');
@@ -264,8 +250,6 @@
             const AksItemClone = AksItemNode.cloneNode(true);
             const AksConsNode = document.getElementById('aks-cons1');
             const AksConsClone = AksConsNode.cloneNode(true);
-            const AksRatioNode = document.getElementById('aks-ratio1');
-            const AksRatioClone = AksRatioNode.cloneNode(true);
 
             function getArticles(){
                 $('#article').select2({
@@ -358,8 +342,6 @@
             function SetBodyAttributeElement(number){
                 BodySizeClone.setAttribute('id','body-size'+number);
                 BodySizeClone.setAttribute('name','body_size['+number+']');
-                BodyRatioClone.setAttribute('id','body-ratio'+number);
-                BodyRatioClone.setAttribute('name','body_ratio['+number+']');
                 BodyGroupClone.setAttribute('id','body-group'+number);
                 BodyGroupClone.setAttribute('name','body_group['+number+']');
                 BodyGroupClone.setAttribute('onchange','init_item('+number+',"body")');
@@ -381,8 +363,6 @@
                 AksItemClone.setAttribute('onchange','getImagePrice('+number+',"aks")');
                 AksConsClone.setAttribute('id','aks-cons'+number);
                 AksConsClone.setAttribute('name','aks_cons['+number+']');
-                AksRatioClone.setAttribute('id','aks-ratio'+number);
-                AksRatioClone.setAttribute('name','aks_ratio['+number+']');
             }
 
             function init_select(row,section){
@@ -398,7 +378,7 @@
                 count_body++;
                 SetBodyAttributeElement(count_body);
                 let e = Object.assign(document.createElement('tr'),{id:'body-row-'+count_body,className:'items'});
-                e.innerHTML = ('<tr><th scope="row" class="body-id text-center">' + count_body + '</th><td class="text-start">' + BodySizeClone.outerHTML + '</td><td>' + BodyRatioClone.outerHTML + '</td><td>' + BodyGroupClone.outerHTML + '</td><td><div class="mb-2">' + BodyItemClone.outerHTML + '</div><strong class="body-price'+count_body+' sembunyi"></strong></td><td>' + BodyConsClone.outerHTML + '</td><td class="body-removal"><a href="javascript:void(0)" class="btn btn-xs btn-danger" id="btn-body-delete'+count_body+'"><i class="ri-delete-bin-2-line"></i></a></td>');
+                e.innerHTML = ('<tr><th scope="row" class="body-id text-center">' + count_body + '</th><td class="text-start">' + BodySizeClone.outerHTML + '</td><td>' + BodyGroupClone.outerHTML + '</td><td><div class="mb-2">' + BodyItemClone.outerHTML + '</div><strong class="body-price'+count_body+' sembunyi"></strong></td><td>' + BodyConsClone.outerHTML + '</td><td class="body-removal"><a href="javascript:void(0)" class="btn btn-xs btn-danger" id="btn-body-delete'+count_body+'"><i class="ri-delete-bin-2-line"></i></a></td>');
                 document.getElementById('body').appendChild(e);
                 init_select(count_body,'body');
                 remove('body');
@@ -408,7 +388,7 @@
                 count_aks++;
                 SetAksAttributeElement(count_aks);
                 let e = Object.assign(document.createElement('tr'),{id:'aks-row-'+count_aks,className:'items'});
-                e.innerHTML = ('<tr><th scope="row" class="aks-id text-center">' + count_aks + '</th><td class="text-start">' + AksSizeClone.outerHTML + '</td><td>' + AksRatioClone.outerHTML + '</td><td>' +AksGroupClone.outerHTML + '</td><td><div class="mb-2">' + AksItemClone.outerHTML + '</div><strong class="aks-price'+count_aks+' sembunyi"></strong> </td><td>' + AksConsClone.outerHTML + '</td><td class="aks-removal"><a href="javascript:void(0)" class="btn btn-xs btn-danger" id="btn-aks-delete'+count_aks+'"><i class="ri-delete-bin-2-line"></i></a></td>');
+                e.innerHTML = ('<tr><th scope="row" class="aks-id text-center">' + count_aks + '</th><td class="text-start">' + AksSizeClone.outerHTML + '</td><td>' +AksGroupClone.outerHTML + '</td><td><div class="mb-2">' + AksItemClone.outerHTML + '</div><strong class="aks-price'+count_aks+' sembunyi"></strong> </td><td>' + AksConsClone.outerHTML + '</td><td class="aks-removal"><a href="javascript:void(0)" class="btn btn-xs btn-danger" id="btn-aks-delete'+count_aks+'"><i class="ri-delete-bin-2-line"></i></a></td>');
                 document.getElementById('aks').appendChild(e);
                 init_select(count_aks,'aks');
                 remove('aks');
@@ -437,8 +417,6 @@
                         document.getElementById(e.getAttribute('id')).setAttribute('id','body-row-'+t);
                         document.getElementById('body-size'+row).setAttribute('name','body_size['+t+']');
                         document.getElementById('body-size'+row).setAttribute('id','body-size'+t);
-                        document.getElementById('body-ratio'+row).setAttribute('name','body_ratio['+t+']');
-                        document.getElementById('body-ratio'+row).setAttribute('id','body-ratio'+t);
                         document.getElementById('body-group'+row).setAttribute('name','body_group['+t+']');
                         document.getElementById('body-group'+row).setAttribute('onchange','init_item('+t+',"body")');
                         document.getElementById('body-group'+row).setAttribute('id','body-group'+t);
@@ -455,6 +433,7 @@
                         init_select(t,'body');
                         /*mencegah data item hilang*/
                         let item = document.getElementById('body-item'+t)
+                        if(item.value==='')return
                         const optionItem=new Option(item.options[item.selectedIndex].textContent,item.value,true,true);
                         init_item(t,'body');
                         item.appendChild(optionItem);
@@ -471,8 +450,6 @@
                         document.getElementById(e.getAttribute('id')).setAttribute('id','aks-row-'+t);
                         document.getElementById('aks-size'+row).setAttribute('name','aks_size['+t+']');
                         document.getElementById('aks-size'+row).setAttribute('id','aks-size'+t);
-                        document.getElementById('aks-ratio'+row).setAttribute('name','aks_ratio['+t+']');
-                        document.getElementById('aks-ratio'+row).setAttribute('id','aks-ratio'+t);
                         document.getElementById('aks-group'+row).setAttribute('name','aks_group['+t+']');
                         document.getElementById('aks-group'+row).setAttribute('onchange','init_item('+t+',"aks")');
                         document.getElementById('aks-group'+row).setAttribute('id','aks-group'+t);
@@ -489,6 +466,7 @@
                         init_select(t,'aks');
                         /*mencegah data item hilang*/
                         let item = document.getElementById('aks-item'+t)
+                        if(item.value==='')return
                         const optionItem=new Option(item.options[item.selectedIndex].textContent,item.value,true,true);
                         init_item(t,'aks');
                         item.appendChild(optionItem);
@@ -534,8 +512,6 @@
                 init_select(1,'aks');
                 remove('body');
                 remove('aks');
-                /*localStorage.setItem('count_body',1);
-                localStorage.setItem('count_aks',1);*/
             })
         </script>
     @endsection
