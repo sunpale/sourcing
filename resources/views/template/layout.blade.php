@@ -149,7 +149,7 @@
                             <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Dashboards</span>
                         </a>
                     </li> <!-- end Dashboard Menu -->
-                    {{--<li class="menu-title"><span data-key="t-master">Master Data</span></li>
+                    <li class="menu-title"><span data-key="t-master">Master Data</span></li>
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="#sidebarMasterMaterial" data-bs-toggle="collapse" role="button" aria-expanded="{{Route::is('master-rm.*')?'true':'false'}}" aria-controls="sidebarMasterMaterial">
                             <i class="ri-apps-2-line"></i> <span data-key="t-apps">Master Raw Material</span>
@@ -159,17 +159,17 @@
                                 <li class="nav-item">
                                     <a href="{!! route('master-rm.fabric.index') !!}" class="nav-link {{Route::is('master-rm.fabric.index')?'active':''}}" data-key="t-fabric"> Jenis Fabric </a>
                                 </li>
-                                <li class="nav-item">
+                               {{-- <li class="nav-item">
                                     <a href="{!! route('master-rm.komposisi.index') !!}" class="nav-link {{Route::is('master-rm.komposisi.index')?'active':''}}" data-key="t-komposisi"> Komposisi </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{!! route('master-rm.raw-material.index') !!}" class="nav-link" data-key="t-aspek"> Raw Material </a>
-                                </li>
+                                </li>--}}
                             </ul>
                         </div>
                     </li><!-- end Dashboard Menu -->
 
-                    <li class="nav-item">
+                    {{--<li class="nav-item">
                         <a class="nav-link menu-link" href="#sidebarMasterAksesoris" data-bs-toggle="collapse" role="button"
                            aria-expanded="{{Route::is('master-aks.*')?'true':'false'}}" aria-controls="sidebarMasterAksesoris">
                             <i class="ri-pantone-fill"></i> <span
