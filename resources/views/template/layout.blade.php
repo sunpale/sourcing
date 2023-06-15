@@ -159,10 +159,10 @@
                                 <li class="nav-item">
                                     <a href="{!! route('master-rm.fabric.index') !!}" class="nav-link {{Route::is('master-rm.fabric.index')?'active':''}}" data-key="t-fabric"> Jenis Fabric </a>
                                 </li>
-                               {{-- <li class="nav-item">
+                                <li class="nav-item">
                                     <a href="{!! route('master-rm.komposisi.index') !!}" class="nav-link {{Route::is('master-rm.komposisi.index')?'active':''}}" data-key="t-komposisi"> Komposisi </a>
                                 </li>
-                                <li class="nav-item">
+                                {{--<li class="nav-item">
                                     <a href="{!! route('master-rm.raw-material.index') !!}" class="nav-link" data-key="t-aspek"> Raw Material </a>
                                 </li>--}}
                             </ul>
