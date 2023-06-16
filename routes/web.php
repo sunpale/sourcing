@@ -6,7 +6,7 @@ use App\Http\Controllers\BOM\BomDetailsController;
 use App\Http\Controllers\BOM\BomsController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\master_aks\AksesorisController;
-use App\Http\Controllers\master_aks\ProductGroupsController;
+use App\Http\Controllers\master_material\ProductGroupController;
 use App\Http\Controllers\master_data\ArticlesController;
 use App\Http\Controllers\master_data\BrandsController;
 use App\Http\Controllers\master_data\MeasuresController;
@@ -47,7 +47,7 @@ Route::prefix('master-material')->middleware(['auth'/*,'permission:create-master
 //endregion
 
 //region Product Group
-Route::resource('product-group', ProductGroupsController::class)->except(['create','show']);
+Route::resource('product-group', ProductGroupController::class)->except(['create','show']);
 //endregion
 
 //region material
