@@ -15,9 +15,10 @@ class UserInputObserver
 
     public function updating(Model $model): void
     {
-        $model->updated_by = Auth::user()->id;
-        if ($model->forceDeleting) {
+        if ($model->trashed()) {
             $model->deleted_by = Auth::user()->id;
+        } else {
+            $model->updated_by = Auth::user()->id;
         }
     }
 }
