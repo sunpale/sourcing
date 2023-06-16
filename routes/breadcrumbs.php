@@ -27,20 +27,20 @@ Breadcrumbs::for('permission',function (BreadcrumbTrail $trail){
 //endregion
 
 //region Master RM
-Breadcrumbs::for('master-rm',function (BreadcrumbTrail $trail){
+Breadcrumbs::for('master-material',function (BreadcrumbTrail $trail){
     $trail->parent('main');
-    $trail->push('Master RM');
+    $trail->push('Master Material');
 });
 //region Fabric
 Breadcrumbs::for('fabric',function (BreadcrumbTrail $trail){
-    $trail->parent('master-rm');
-    $trail->push('Jenis Fabric',route('master-rm.fabric.index'));
+    $trail->parent('master-material');
+    $trail->push('Jenis Fabric',route('master-material.fabric.index'));
 });
 //endregion
 //region Komposisi
 Breadcrumbs::for('komposisi',function (BreadcrumbTrail $trail){
-    $trail->parent('master-rm');
-    $trail->push('Komposisi',route('master-rm.komposisi.index'));
+    $trail->parent('master-material');
+    $trail->push('Komposisi',route('master-material.komposisi.index'));
 });
 //endregion
 //region material

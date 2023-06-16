@@ -14,13 +14,13 @@ class KomposisiController extends Controller
         $data = [
             'dataKomposisi' => $komposisi
         ];
-        return view('master_rm.komposisi.main',$data);
+        return view('master_material.komposisi.main',$data);
     }
 
     public function store(KomposisiRequest $request)
     {
         Komposisi::create($request->only(['komposisi','keterangan']));
-        return redirect()->route('master-rm.komposisi.index')->with('success',config('constants.SUCCESS_SAVE'));
+        return redirect()->route('master-material.komposisi.index')->with('success',config('constants.SUCCESS_SAVE'));
     }
 
     public function edit(Komposisi $komposisi)
@@ -31,12 +31,12 @@ class KomposisiController extends Controller
     public function update(KomposisiRequest $request, Komposisi $komposisi)
     {
         Komposisi::where('id',$komposisi->id)->update($request->only(['komposisi','keterangan']));
-        return redirect()->route('master-rm.komposisi.index')->with('success',config('constants.SUCCESS_UPDATE'));
+        return redirect()->route('master-material.komposisi.index')->with('success',config('constants.SUCCESS_UPDATE'));
     }
 
     public function destroy(Komposisi $komposisi)
     {
         Komposisi::destroy($komposisi->id);
-        return redirect()->route('master-rm.komposisi.index')->with('success',config('constants.SUCCESS_DELETE'));
+        return redirect()->route('master-material.komposisi.index')->with('success',config('constants.SUCCESS_DELETE'));
     }
 }
