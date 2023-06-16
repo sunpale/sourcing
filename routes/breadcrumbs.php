@@ -43,6 +43,12 @@ Breadcrumbs::for('komposisi',function (BreadcrumbTrail $trail){
     $trail->push('Komposisi',route('master-material.komposisi.index'));
 });
 //endregion
+//region Product Group
+Breadcrumbs::for('product-group',function (BreadcrumbTrail $trail){
+    $trail->parent('master-material');
+    $trail->push('Product Group',route('master-material.product-group.index'));
+});
+//endregion
 //region material
 Breadcrumbs::for('material',function (BreadcrumbTrail $trail){
     $trail->parent('master-rm');
@@ -140,12 +146,6 @@ Breadcrumbs::for('master-aks',function (BreadcrumbTrail $trail){
     $trail->parent('main');
     $trail->push('Master Aksesoris');
 });
-//region Product Group
-Breadcrumbs::for('product-group',function (BreadcrumbTrail $trail){
-    $trail->parent('master-aks');
-    $trail->push('Product Group',route('master-aks.product-group.index'));
-});
-//endregion
 Breadcrumbs::for('aksesoris',function (BreadcrumbTrail $trail){
     $trail->parent('master-aks');
     $trail->push('Aksesoris',route('master-aks.aksesoris.index'));
