@@ -189,7 +189,7 @@
                         </div>
                     </li>--}}
 
-                    {{--<li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link menu-link" href="#sidebarMasterWarna" data-bs-toggle="collapse" role="button"
                            aria-expanded="{{Route::is('master-warna.*')?'true':'false'}}" aria-controls="sidebarMasterWarna">
                             <i class="ri-palette-line"></i> <span
@@ -200,17 +200,17 @@
                                 <li class="nav-item">
                                     <a href="{!! route('master-warna.warna.index') !!}" class="nav-link {{Route::is('master-warna.warna.index')?'active':''}}" data-key="t-warna"> Warna MD </a>
                                 </li>
-                                <li class="nav-item">
+                               {{-- <li class="nav-item">
                                     <a href="{!! route('master-warna.pantone.index') !!}" class="nav-link {{Route::is('master-warna.pantone.index')?'active':''}}" data-key="t-region"> Pantone </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{!! route('master-warna.warna-aksesoris.index') !!}" class="nav-link {{Route::is('master-warna.warna-aksesoris.index')?'active':''}}" data-key="t-region"> Warna Aksesoris </a>
-                                </li>
+                                </li>--}}
                             </ul>
                         </div>
                     </li>
 
-                    <li class="nav-item">
+                    {{--<li class="nav-item">
                         <a class="nav-link menu-link {{Route::is('brands.index') ? 'active':''}}" href="{!! route('brands.index') !!}" aria-expanded="false">
                             <i class="icon-3second"></i> <span data-key="t-widgets">Brands</span>
                         </a>
