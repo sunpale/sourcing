@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\master_material;
 
 use App\Rules\AlphaNumericSpaceRule;
 use Illuminate\Foundation\Http\FormRequest;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\master_rm;
+namespace App\Http\Requests\master_material;
 
 use App\Rules\AlphaNumericPunctRule;
 use App\Rules\AlphaNumericSpaceRule;

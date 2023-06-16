@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\master_material;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\FabricRequest;
+use App\Http\Requests\master_material\FabricRequest;
 use App\Models\master_material\Fabric;
 use App\Services\CodeGenerator\CodeGeneratorServiceImplement;
 use Illuminate\Http\Request;

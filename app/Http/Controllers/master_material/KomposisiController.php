@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\master_material;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\master_rm\KomposisiRequest;
+use App\Http\Requests\master_material\KomposisiRequest;
 use App\Models\master_material\Komposisi;
 
 class KomposisiController extends Controller
