@@ -13,9 +13,9 @@ use App\Http\Controllers\master_data\MeasuresController;
 use App\Http\Controllers\master_data\ServiceController;
 use App\Http\Controllers\master_data\SizeController;
 use App\Http\Controllers\master_data\SuppliersController;
-use App\Http\Controllers\master_rm\FabricsController;
-use App\Http\Controllers\master_rm\KomposisiController;
-use App\Http\Controllers\master_rm\MaterialsController;
+use App\Http\Controllers\master_material\FabricsController;
+use App\Http\Controllers\master_material\KomposisiController;
+use App\Http\Controllers\master_material\MaterialsController;
 use App\Http\Controllers\master_warna\ColorAksController;
 use App\Http\Controllers\master_warna\ColorsController;
 use App\Http\Controllers\master_warna\PantonesController;
@@ -36,7 +36,7 @@ Route::get('/', [MainController::class,'index'])->name('main')->middleware('auth
 Route::get('/images/{path}/{file}',[MainController::class,'viewImage']);
 Route::get('/images/conversions/{path}/{file}',[MainController::class,'viewThumbnail']);
 //region Master RM
-Route::prefix('master-rm')->middleware(['auth'/*,'permission:create-master'*/])->name('master-rm.')->group(function (){
+Route::prefix('master-material')->middleware(['auth'/*,'permission:create-master'*/])->name('master-material.')->group(function (){
 //region Fabric
     Route::get('fabric/generate-code',[FabricsController::class,'generateCode'])->name('fabric.generate-code');
     Route::resource('fabric', FabricsController::class)->except(['create','show']);
@@ -45,6 +45,11 @@ Route::prefix('master-rm')->middleware(['auth'/*,'permission:create-master'*/])-
 //region Komposisi
     Route::resource('komposisi', KomposisiController::class)->except(['create','show']);
 //endregion
+
+//region Product Group
+Route::resource('product-group', ProductGroupsController::class)->except(['create','show']);
+//endregion
+
 //region material
     Route::get('/raw-material/generate-code',[MaterialsController::class,'generateCode'])->name('raw-material.generate-code');
     Route::get('/raw-material/data',[MaterialsController::class,'data'])->name('raw-material.data');
@@ -98,9 +103,7 @@ Route::prefix('master-data')->middleware('auth:web')->group(function (){
 
 //region Master Aksesoris
 Route::prefix('master-aksesoris')->middleware('auth:web')->name('master-aks.')->group(function (){
-//region Product Group
-    Route::resource('product-group', ProductGroupsController::class)->except(['create','show']);
-//endregion
+
     Route::get('/aksesoris/data',[AksesorisController::class,'data'])->name('aksesoris.data');
     /*Route::get('/aksesoris/view-image/{file}',[AksesorisController::class,'viewImage'])->name('aksesoris.view-image');*/
     Route::get('aksesoris/image-url/{file}',[AksesorisController::class,'getImageAndPrice'])->name('aksesoris.image-url');

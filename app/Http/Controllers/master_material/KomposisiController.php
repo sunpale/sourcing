@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\master_rm;
+namespace App\Http\Controllers\master_material;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\master_rm\KomposisiRequest;
-use App\Models\master_rm\Komposisi;
+use App\Models\master_material\Komposisi;
 
 class KomposisiController extends Controller
 {

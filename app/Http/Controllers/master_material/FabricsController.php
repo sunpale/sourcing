@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\master_rm;
+namespace App\Http\Controllers\master_material;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\FabricRequest;
-use App\Models\master_rm\Fabric;
-use App\Services\CodeGenerator\CodeGeneratorService;
+use App\Models\master_material\Fabric;
 use App\Services\CodeGenerator\CodeGeneratorServiceImplement;
 use Illuminate\Http\Request;
 

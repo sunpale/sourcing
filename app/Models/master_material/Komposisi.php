@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\master_rm;
+namespace App\Models\master_material;
 
 use App\Traits\CustomSoftDelete;
 use App\Traits\UserInput;
