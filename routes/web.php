@@ -8,7 +8,7 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\master_aks\AksesorisController;
 use App\Http\Controllers\master_material\ProductGroupController;
 use App\Http\Controllers\master_data\ArticlesController;
-use App\Http\Controllers\master_data\BrandsController;
+use App\Http\Controllers\master_data\BrandController;
 use App\Http\Controllers\master_data\MeasuresController;
 use App\Http\Controllers\master_data\ServiceController;
 use App\Http\Controllers\master_data\SizeController;
@@ -77,7 +77,7 @@ Route::prefix('master-warna')->middleware('auth:web')->name('master-warna.')->gr
 //region Master Data
 Route::prefix('master-data')->middleware('auth:web')->group(function (){
 //region Brand
-    Route::resource('brands', BrandsController::class)->except(['create','show']);
+    Route::resource('brands', BrandController::class)->except(['create','show']);
 //endregion
 //region Unit of Measure
     Route::resource('measure', MeasuresController::class)->except(['show','create']);

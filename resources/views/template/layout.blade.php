@@ -210,12 +210,12 @@
                         </div>
                     </li>
 
-                    {{--<li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link menu-link {{Route::is('brands.index') ? 'active':''}}" href="{!! route('brands.index') !!}" aria-expanded="false">
                             <i class="icon-3second"></i> <span data-key="t-widgets">Brands</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    {{--<li class="nav-item">
                         <a class="nav-link menu-link {{Route::is('articles.index') ? 'active':''}}" href="{{route('articles.index')}}" aria-expanded="false">
                             <i class="ri-shirt-fill"></i><span data-ket="t-widgets">Articles</span>
                         </a>
