@@ -215,12 +215,12 @@
                             <i class="icon-3second"></i> <span data-key="t-widgets">Brands</span>
                         </a>
                     </li>
-                    {{--<li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link menu-link {{Route::is('articles.index') ? 'active':''}}" href="{{route('articles.index')}}" aria-expanded="false">
                             <i class="ri-shirt-fill"></i><span data-ket="t-widgets">Articles</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    {{--<li class="nav-item">
                         <a class="nav-link menu-link {{Route::is('article-size.index') ? 'active':''}}" href="{{route('article-size.index')}}" aria-expanded="false">
                             <i class="mdi mdi-size-xl fs-21"></i><span data-ket="t-widgets">Article Size</span>
                         </a>
