@@ -12,7 +12,7 @@ use App\Http\Controllers\master_data\BrandController;
 use App\Http\Controllers\master_data\MeasuresController;
 use App\Http\Controllers\master_data\ServiceController;
 use App\Http\Controllers\master_data\SizeController;
-use App\Http\Controllers\master_data\SuppliersController;
+use App\Http\Controllers\master_data\SupplierController;
 use App\Http\Controllers\master_material\FabricsController;
 use App\Http\Controllers\master_material\KomposisiController;
 use App\Http\Controllers\master_material\MaterialsController;
@@ -83,8 +83,8 @@ Route::prefix('master-data')->middleware('auth:web')->group(function (){
     Route::resource('measure', MeasuresController::class)->except(['show','create']);
 //endregion
 //region Supplier
-    Route::resource('supplier', SuppliersController::class)->names(['show' => 'supplier.data']);
-    Route::get('data-supplier',[SuppliersController::class,'getSupplier'])->name('suppliers.data-supplier');
+    Route::resource('supplier', SupplierController::class)->names(['show' => 'supplier.data']);
+    Route::get('data-supplier',[SupplierController::class,'getSupplier'])->name('suppliers.data-supplier');
 //endregion
 //region Article
     Route::get('/articles/data',[ArticleController::class,'data'])->name('articles.data');
