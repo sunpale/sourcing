@@ -27,13 +27,13 @@ class ProductGroupController extends Controller
 
     public function update(ProductGroupRequest $request, ProductGroup $productGroup)
     {
-        ProductGroup::where('id',$productGroup->id)->update($request->only(['kode','type','group','remarks']));
+        $productGroup->update($request->only(['kode','type','group','remarks']));
         return redirect()->route('master-material.product-group.index')->with('success',config('constants.SUCCESS_UPDATE'));
     }
 
     public function destroy(ProductGroup $productGroup)
     {
-        ProductGroup::destroy($productGroup->id);
+        $productGroup->delete();
         return redirect()->route('master-material.product-group.index')->with('success',config('constants.SUCCESS_DELETE'));
     }
 }

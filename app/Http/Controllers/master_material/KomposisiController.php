@@ -30,13 +30,13 @@ class KomposisiController extends Controller
 
     public function update(KomposisiRequest $request, Komposisi $komposisi)
     {
-        Komposisi::where('id',$komposisi->id)->update($request->only(['komposisi','keterangan']));
+        $komposisi->update($request->only(['komposisi','keterangan']));
         return redirect()->route('master-material.komposisi.index')->with('success',config('constants.SUCCESS_UPDATE'));
     }
 
     public function destroy(Komposisi $komposisi)
     {
-        Komposisi::destroy($komposisi->id);
+        $komposisi->delete();
         return redirect()->route('master-material.komposisi.index')->with('success',config('constants.SUCCESS_DELETE'));
     }
 }

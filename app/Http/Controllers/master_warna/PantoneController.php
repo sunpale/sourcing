@@ -27,13 +27,13 @@ class PantoneController extends Controller
 
     public function update(PantoneRequest $request, Pantone $pantone)
     {
-        Pantone::where('id',$pantone->id)->update($request->only(['kode','pantone']));
+        $pantone->update($request->only(['kode','pantone']));
         return redirect()->route('master-warna.pantone.index')->with('success',config('constants.SUCCESS_UPDATE'));
     }
 
     public function destroy(Pantone $pantone)
     {
-        Pantone::destroy($pantone->id);
+        $pantone->delete();
         return redirect()->route('master-warna.pantone.index')->with('success',config('constants.SUCCESS_DELETE'));
     }
 }

@@ -50,13 +50,13 @@ class ColorAksController extends Controller
 
     public function update(ColorAksRequest $request, ColorAks $warna_aksesori)
     {
-        ColorAks::where('id',$warna_aksesori->id)->update($request->except(['_token','number','_method']));
+        $warna_aksesori->update($request->except(['_token','number','_method']));
         return redirect()->route('master-warna.warna-aksesoris.index')->with('success',config('constants.SUCCESS_UPDATE'));
     }
 
     public function destroy(ColorAks $warna_aksesori)
     {
-        ColorAks::destroy($warna_aksesori->id);
+        $warna_aksesori->delete();
         return redirect()->route('master-warna.warna-aksesoris.index')->with('success',config('constants.SUCCESS_DELETE'));
     }
 }

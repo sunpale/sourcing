@@ -27,13 +27,13 @@ class ColorController extends Controller
 
     public function update(ColorRequest $request, Color $warna)
     {
-        Color::where('id',$warna->id)->update($request->only(['kode','description']));
+        $warna->update($request->only(['kode','description']));
         return redirect()->route('master-warna.warna.index')->with('success',config('constants.SUCCESS_UPDATE'));
     }
 
     public function destroy(Color $warna)
     {
-        Color::destroy($warna->id);
+        $warna->delete();
         return redirect()->route('master-warna.warna.index')->with('success',config('constants.SUCCESS_DELETE'));
     }
 }

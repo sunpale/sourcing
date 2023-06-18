@@ -39,13 +39,13 @@ class FabricsController extends Controller
 
     public function update(Request $request, Fabric $fabric)
     {
-        Fabric::where('id',$fabric->id)->update($request->only(['kode','description']));
+        $fabric->update($request->only(['kode','description']));
         return redirect()->route('master-material.fabric.index')->with('success',config('constants.SUCCESS_UPDATE'));
     }
 
     public function destroy(Fabric $fabric)
     {
-        Fabric::destroy($fabric->id);
+        $fabric->delete();
         return redirect()->route('master-material.fabric.index')->with('success',config('constants.SUCCESS_DELETE'));
     }
 }
