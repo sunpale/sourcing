@@ -23,13 +23,13 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($dataKomposisi as $komposisi)
+                        @foreach($komposisi as $dataKomposisi)
                             <tr>
                                 <td></td>
                                 <td></td>
-                                <td>{{$komposisi->id}}</td>
-                                <td>{{$komposisi->komposisi}}</td>
-                                <td>{{$komposisi->keterangan}}</td>
+                                <td>{{$dataKomposisi->id}}</td>
+                                <td>{{$dataKomposisi->komposisi}}</td>
+                                <td>{{$dataKomposisi->keterangan}}</td>
                                 <td>
                                     <div class="dropdown d-inline-block">
                                         <button class="btn btn-soft-primary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -37,11 +37,11 @@
                                         </button>
                                         <ul class="dropdown-menu" class="dropdown-menu dropdown-menu-end">
                                             <li>
-                                                <a href="#" data-bs-toggle="tooltip" data-placement="auto" title="Edit Data" onclick="edit('{{$komposisi->id}}')" class="dropdown-item"><i class="ri-edit-fill"></i> Edit Data
+                                                <a href="#" data-bs-toggle="tooltip" data-placement="auto" title="Edit Data" onclick="edit('{{$dataKomposisi->id}}')" class="dropdown-item"><i class="ri-edit-fill"></i> Edit Data
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="#" data-bs-toggle="tooltip" data-placement="auto" title="Hapus Data" class="dropdown-item" onclick="hapus('{{$komposisi->id}}')"><i class="ri-close-circle-fill"></i> Hapus Data</a>
+                                                <a href="#" data-bs-toggle="tooltip" data-placement="auto" title="Hapus Data" class="dropdown-item" onclick="hapus('{{$dataKomposisi->id}}')"><i class="ri-close-circle-fill"></i> Hapus Data</a>
                                             </li>
                                         </ul>
                                     </div>

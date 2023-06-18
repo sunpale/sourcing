@@ -12,11 +12,8 @@ class FabricsController extends Controller
 {
     public function index()
     {
-        $fabric = Fabric::select(['id','kode','description'])->get();
-        $data = [
-            'dataFabric' => $fabric
-        ];
-        return view('master_material.fabric.main',$data);
+        $fabrics = Fabric::select(['id','kode','description'])->get();
+        return view('master_material.fabric.main',compact('fabrics'));
     }
 
     public function generateCode(Request $request){

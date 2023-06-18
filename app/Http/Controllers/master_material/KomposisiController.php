@@ -11,10 +11,7 @@ class KomposisiController extends Controller
     public function index()
     {
         $komposisi = Komposisi::select(['id','komposisi','keterangan'])->get();
-        $data = [
-            'dataKomposisi' => $komposisi
-        ];
-        return view('master_material.komposisi.main',$data);
+        return view('master_material.komposisi.main',compact('komposisi'));
     }
 
     public function store(KomposisiRequest $request)

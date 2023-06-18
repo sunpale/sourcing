@@ -23,7 +23,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($dataFabric as $fabric)
+                        @foreach($fabrics as $fabric)
                             <tr>
                                 <td></td>
                                 <td></td>
