@@ -90,7 +90,7 @@ class ArticleController extends Controller
         }else{
             $image = $article->getMedia('articles');
             if ($image->count() > 0){
-                $updateNameFile = CustomMedia::where('model_id',$article->id)->update(['name' => $request->kode,'file_name' => $request->kode.'.'.$image[0]->custom_properties['extension']]);
+                $updateNameFile = $article->media()->update(['name' => $request->kode,'file_name' => $request->kode.'.'.$image[0]->custom_properties['extension']]);
                 if ($updateNameFile)
                     ImageManipulationServiceImplement::rename_image($image,$request->kode);
             }
