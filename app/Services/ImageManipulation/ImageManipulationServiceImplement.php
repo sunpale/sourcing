@@ -39,7 +39,8 @@ class ImageManipulationServiceImplement implements ImageManipulationService{
         Storage::disk($conversionDisk)->move($collection.'/'.$fileName.'-thumb.'.$extension,$collection.'/'.$new_name.'-thumb.'.$extension);
     }
 
-    public static function delete_image(MediaCollection $image){
+    public static function delete_image(MediaCollection $image): void
+    {
         $collection = $image->collectionName;
         $extension = $image[0]->custom_properties['extension'];
         $diskName = $image[0]->disk;
