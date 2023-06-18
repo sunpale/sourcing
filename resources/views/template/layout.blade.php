@@ -235,12 +235,12 @@
                             <i class="mdi mdi-tape-measure"></i> <span data-key="t-widgets">Unit of Measure</span>
                         </a>
                     </li>
-                    {{--<li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link menu-link {{Route::is('services.index') ? 'active':''}}" href="{{route('services.index')}}" aria-expanded="false">
                             <i class="ri-service-fill"></i> <span data-key="t-widgets">Jasa</span>
                         </a>
                     </li>
-                    <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">Bill of Material</span>
+                    {{--<li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">Bill of Material</span>
                     </li>
 
                     <a class="nav-link menu-link {{Route::is('bom.index') ? 'active':''}}" href="{{route('bom.index')}}" aria-expanded="false">
