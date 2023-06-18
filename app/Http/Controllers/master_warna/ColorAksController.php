@@ -5,6 +5,8 @@ namespace App\Http\Controllers\master_warna;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\master_warna\ColorAksRequest;
 use App\Models\master_warna\ColorAks;
+use App\Services\CodeGenerator\code_type;
+use App\Services\CodeGenerator\CodeGeneratorServiceImplement;
 
 class ColorAksController extends Controller
 {
@@ -16,14 +18,7 @@ class ColorAksController extends Controller
 
     private function generateCode(): string
     {
-        $stringList = '0123456789';
-        $code = '';
-        while (strlen($code) < 3){
-            $position = rand(0,strlen($stringList)-1);
-            $character = $stringList[$position];
-            $code .= $character;
-        }
-        return $this->validateCodeGenerated($code);
+        return $this->validateCodeGenerated(CodeGeneratorServiceImplement::generate_random_code(code_type::NUMERIC, 3));
     }
 
     private function validateCodeGenerated(string $kode): string
