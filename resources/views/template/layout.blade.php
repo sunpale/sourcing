@@ -220,12 +220,12 @@
                             <i class="ri-shirt-fill"></i><span data-ket="t-widgets">Articles</span>
                         </a>
                     </li>
-                    {{--<li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link menu-link {{Route::is('article-size.index') ? 'active':''}}" href="{{route('article-size.index')}}" aria-expanded="false">
                             <i class="mdi mdi-size-xl fs-21"></i><span data-ket="t-widgets">Article Size</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    {{--<li class="nav-item">
                         <a class="nav-link menu-link {{Route::is('supplier*') ? 'active':''}}" href="{!! route('supplier.index') !!}" aria-expanded="false">
                             <i class="mdi mdi-truck-delivery"></i> <span data-key="t-widgets">Supplier</span>
                         </a>

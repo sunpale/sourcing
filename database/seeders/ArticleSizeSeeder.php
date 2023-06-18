@@ -16,6 +16,39 @@ class ArticleSizeSeeder extends Seeder
             'created_by' => 1,
             'updated_by' => 1,
             'created_at' => now(),
-            'updated_at' => now()]);
+            'updated_at' => now()]
+        );
+        Size::insert([
+            'size'      => 'S',
+            'remarks'   => '',
+            'created_by' => 1,
+            'updated_by' => 1,
+            'created_at' => now(),
+            'updated_at' => now()]
+        );
+        Size::insert([
+            'size'      => 'M',
+            'remarks'   => '',
+            'created_by' => 1,
+            'updated_by' => 1,
+            'created_at' => now(),
+            'updated_at' => now()]
+        );
+        Size::insert([
+            'size'      => 'L',
+            'remarks'   => '',
+            'created_by' => 1,
+            'updated_by' => 1,
+            'created_at' => now(),
+            'updated_at' => now()]
+        );
+        Size::insert([
+            'size'      => 'XL',
+            'remarks'   => '',
+            'created_by' => 1,
+            'updated_by' => 1,
+            'created_at' => now(),
+            'updated_at' => now()]
+        );
     }
 }
