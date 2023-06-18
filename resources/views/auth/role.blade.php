@@ -63,7 +63,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="{{route('role.store')}}" id="frm-role">
+                    <form method="post" action="{{route('auth.role.store')}}" id="frm-role">
                         @csrf
                         <input type="hidden" name="number" id="number" value="{{old('number')??''}}">
                         <x-forms.input label="Role Name" id="name" name="name" placeholder="Role Name"></x-forms.input>

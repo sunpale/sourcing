@@ -245,17 +245,17 @@
 
                     <a class="nav-link menu-link {{Route::is('bom.index') ? 'active':''}}" href="{{route('bom.index')}}" aria-expanded="false">
                         <i class="ri-book-read-line"></i><span data-ket="t-widgets">BOM</span>
-                    </a>
-                    @role('Super Admin')
+                    </a>--}}
+                    @role('super administrator')
                     <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">User Management</span>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link menu-link {{Route::is('role.index')?'active':''}}" href="{{route('role.index')}}" aria-expanded="false">
+                        <a class="nav-link menu-link {{Route::is('role.index')?'active':''}}" href="{{route('auth.role.index')}}" aria-expanded="false">
                             <i class="ri-team-fill"></i> <span data-key="t-widgets">Role</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link menu-link {{Route::is('permission.index')?'active':''}}" href="{{route('permission.index')}}" aria-expanded="false">
+                        <a class="nav-link menu-link {{Route::is('auth.role.indexpermission.index')?'active':''}}" href="{{route('auth.permission.index')}}" aria-expanded="false">
                             <i class="ri-spy-line"></i> <span data-key="t-widgets">Permission</span>
                         </a>
                     </li>
@@ -264,7 +264,7 @@
                             <i class="ri-shield-user-line"></i> <span data-key="t-widgets">User</span>
                         </a>
                     </li>
-                    @endrole--}}
+                    @endrole
                 </ul>
             </div>
             <!-- Sidebar -->

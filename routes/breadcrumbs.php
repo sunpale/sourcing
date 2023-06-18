@@ -15,7 +15,7 @@ Breadcrumbs::for('user-management',function (BreadcrumbTrail $trail){
 //region Role
 Breadcrumbs::for('role',function (BreadcrumbTrail $trail){
     $trail->parent('user-management');
-    $trail->push('Role',route('role.index'));
+    $trail->push('Role',route('auth.role.index'));
 });
 //endregion
 //region Role

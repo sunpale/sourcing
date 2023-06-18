@@ -118,7 +118,7 @@ Route::resource('bom',BomsController::class)->middleware('auth:web');
 //endregion
 
 //Region Auth
-Route::prefix('auth')->middleware(['auth','role:Super Admin'])->group(function (){
+Route::prefix('auth')->middleware(['auth','role:super administrator'])->name('auth.')->group(function (){
 //region Role
     Route::resource('role', RoleController::class)->except(['create','show']);
 // endregion
