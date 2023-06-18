@@ -94,14 +94,6 @@ class ArticleController extends Controller
                 if ($updateNameFile)
                     ImageManipulationServiceImplement::rename_image($image,$request->kode);
             }
-            /*if (strcmp($request->old_kode,$request->kode)!=0){
-                $oldImage = CustomMedia::select(['file_name'])->where('model_id',$article->id)->get();
-                $ext = explode('.',$oldImage[0]->file_name);
-                CustomMedia::where('model_id',$article->id)->update(['name' => $request->kode,'file_name' => $request->kode.'.'.$ext[count($ext)-1]]);
-                $path = 'articles/';
-                Storage::disk('media')->move($path.$oldImage[0]->file_name,$path.$request->kode.'.'.$ext[count($ext)-1]);
-                Storage::move($path.$oldImage[0]->file_name,$path.$request->kode.'.'.$ext[count($ext)-1]);
-            }*/
         }
         return redirect()->route('articles.index')->with('success',config('constants.SUCCESS_UPDATE'));
     }
