@@ -63,7 +63,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="{{route('permission.store')}}" id="frm-permission">
+                    <form method="post" action="{{route('auth.permission.store')}}" id="frm-permission">
                         @csrf
                         <input type="hidden" name="number" id="number" value="{{old('number')??''}}">
                         <x-forms.input label="Permission Name" id="name" name="name" placeholder="Permission Name"></x-forms.input>

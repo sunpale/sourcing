@@ -21,7 +21,7 @@ Breadcrumbs::for('role',function (BreadcrumbTrail $trail){
 //region Role
 Breadcrumbs::for('permission',function (BreadcrumbTrail $trail){
     $trail->parent('user-management');
-    $trail->push('Permission',route('permission.index'));
+    $trail->push('Permission',route('auth.permission.index'));
 });
 //endregion
 //endregion
