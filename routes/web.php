@@ -9,7 +9,7 @@ use App\Http\Controllers\master_aks\AksesorisController;
 use App\Http\Controllers\master_material\ProductGroupController;
 use App\Http\Controllers\master_data\ArticleController;
 use App\Http\Controllers\master_data\BrandController;
-use App\Http\Controllers\master_data\MeasuresController;
+use App\Http\Controllers\master_data\MeasureController;
 use App\Http\Controllers\master_data\ServiceController;
 use App\Http\Controllers\master_data\SizeController;
 use App\Http\Controllers\master_data\SupplierController;
@@ -80,7 +80,7 @@ Route::prefix('master-data')->middleware('auth:web')->group(function (){
     Route::resource('brands', BrandController::class)->except(['create','show']);
 //endregion
 //region Unit of Measure
-    Route::resource('measure', MeasuresController::class)->except(['show','create']);
+    Route::resource('measure', MeasureController::class)->except(['show','create']);
 //endregion
 //region Supplier
     Route::resource('supplier', SupplierController::class)->names(['show' => 'supplier.data']);
