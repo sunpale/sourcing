@@ -2,9 +2,11 @@
 
 namespace App\Models\master_warna;
 
+use App\Models\master_material\Material;
 use App\Traits\CustomSoftDelete;
 use App\Traits\UserInput;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ColorAks extends Model
@@ -15,5 +17,10 @@ class ColorAks extends Model
     public function getFullColorAttribute(): string
     {
         return $this->kode.' - '.$this->color_desc;
+    }
+
+    public function Material(): HasMany
+    {
+        return $this->hasMany(Material::class);
     }
 }

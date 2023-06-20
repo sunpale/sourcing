@@ -2,6 +2,7 @@
 
 namespace App\Models\master_data;
 
+use App\Models\master_material\Material;
 use App\Traits\CustomSoftDelete;
 use App\Traits\UserInput;
 use Illuminate\Database\Eloquent\Model;
@@ -21,5 +22,10 @@ class Brand extends Model
     public function Article(): HasMany
     {
         return $this->hasMany(Article::class);
+    }
+
+    public function Material(): HasMany
+    {
+        return $this->hasMany(Material::class);
     }
 }

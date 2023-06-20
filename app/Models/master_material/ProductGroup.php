@@ -24,4 +24,9 @@ class ProductGroup extends Model
     {
         return $this->hasMany(Supplier::class,'product_group_id','id');
     }
+
+    public function Material(): HasMany
+    {
+        return $this->hasMany(Material::class);
+    }
 }
