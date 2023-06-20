@@ -51,16 +51,16 @@ Breadcrumbs::for('product-group',function (BreadcrumbTrail $trail){
 //endregion
 //region material
 Breadcrumbs::for('material',function (BreadcrumbTrail $trail){
-    $trail->parent('master-rm');
-    $trail->push('Raw Material',route('master-rm.raw-material.index'));
+    $trail->parent('master-material');
+    $trail->push('Raw Material',route('master-material.raw-material.index'));
 });
 Breadcrumbs::for('material.create',function (BreadcrumbTrail $trail){
     $trail->parent('material');
-    $trail->push('New',route('master-rm.raw-material.index'));
+    $trail->push('New',route('master-material.raw-material.index'));
 });
 Breadcrumbs::for('material.view',function (BreadcrumbTrail $trail){
     $trail->parent('material');
-    $trail->push('View Data',route('master-rm.raw-material.index'));
+    $trail->push('View Data',route('master-material.raw-material.index'));
 });
 //endregion
 //endregion

@@ -165,11 +165,11 @@
                                 <li class="nav-item">
                                     <a href="{!! route('master-material.product-group.index') !!}" class="nav-link {{Route::is('master-aks.product-group.index')?'active':''}}" data-key="t-toko"> Product Group </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{!! route('master-material.raw-material.index') !!}" class="nav-link" data-key="t-aspek"> Raw Material </a>
+                                </li>
                                 {{--<li class="nav-item">
                                     <a href="{!! route('master-aks.aksesoris.index') !!}" class="nav-link {{Route::is('master-aks.aksesoris*')?'active':''}}" data-key="t-region"> Aksesoris </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{!! route('master-rm.raw-material.index') !!}" class="nav-link" data-key="t-aspek"> Raw Material </a>
                                 </li>--}}
                             </ul>
                         </div>

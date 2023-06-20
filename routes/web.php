@@ -15,7 +15,7 @@ use App\Http\Controllers\master_data\SizeController;
 use App\Http\Controllers\master_data\SupplierController;
 use App\Http\Controllers\master_material\FabricsController;
 use App\Http\Controllers\master_material\KomposisiController;
-use App\Http\Controllers\master_material\MaterialsController;
+use App\Http\Controllers\master_material\MaterialController;
 use App\Http\Controllers\master_warna\ColorAksController;
 use App\Http\Controllers\master_warna\ColorController;
 use App\Http\Controllers\master_warna\PantoneController;
@@ -51,11 +51,11 @@ Route::resource('product-group', ProductGroupController::class)->except(['create
 //endregion
 
 //region material
-    Route::get('/raw-material/generate-code',[MaterialsController::class,'generateCode'])->name('raw-material.generate-code');
-    Route::get('/raw-material/data',[MaterialsController::class,'data'])->name('raw-material.data');
-    Route::get('raw-material/image-url/{file}',[MaterialsController::class,'getImageAndPrice'])->name('raw-material.image-url');
-    Route::get('/raw-material/data-materials',[MaterialsController::class,'getMaterials'])->name('raw-material.data-materials');
-    Route::resource('raw-material',MaterialsController::class);
+    Route::get('/raw-material/generate-code',[MaterialController::class,'generateCode'])->name('raw-material.generate-code');
+    Route::get('/raw-material/data',[MaterialController::class,'data'])->name('raw-material.data');
+    Route::get('raw-material/image-url/{file}',[MaterialController::class,'getImageAndPrice'])->name('raw-material.image-url');
+    Route::get('/raw-material/data-materials',[MaterialController::class,'getMaterials'])->name('raw-material.data-materials');
+    Route::resource('raw-material',MaterialController::class);
 //endregion
 });
 //endregion
