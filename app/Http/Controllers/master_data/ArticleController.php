@@ -78,6 +78,7 @@ class ArticleController extends Controller
         if ($request->hasFile('img_file') && $request->file('img_file')->isValid()){
             $image = $request->file('img_file');
             $filename = $request->kode.'.'.$image->extension();
+            /*cek apakah kodenya berbeda, jika berbeda gambar sebelumnya akan dihapus dan diganti dengan gambar yang baru*/
             if(strcmp($request->old_kode,$request->kode)!=0){
                 $media = $article->getMedia('articles');
                 if ($media->count() > 0){
@@ -103,7 +104,7 @@ class ArticleController extends Controller
         $article->delete();
         $image = $article->getMedia('articles');
         if($image->count() >0){
-            CustomMedia::where('model_id',$article->id)->update(['collection_name' => 'media-archived','disk' => 'media-archived','conversions_disk' => 'media-archived']);
+            $article->media()->update(['collection_name' => 'media-archived','disk' => 'media-archived','conversions_disk' => 'media-archived']);
             ImageManipulationServiceImplement::move_image($image,true);
         }
         return redirect()->route('articles.index')->with('success',config('constants.SUCCESS_DELETE'));
