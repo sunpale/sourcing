@@ -14,6 +14,7 @@ use App\Models\master_warna\Color;
 use App\Models\master_warna\Pantone;
 use App\Services\CodeGenerator\CodeGeneratorServiceImplement;
 use App\Services\ImageManipulation\ImageManipulationServiceImplement;
+use App\Traits\StoreTrait;
 use Exception;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
@@ -22,6 +23,7 @@ use Yajra\DataTables\Facades\DataTables;
 
 class MaterialController extends Controller
 {
+    use StoreTrait;
     private function getMaterialComponent(){
         $fabric = Fabric::all()->pluck('full_description','id');
         $warna = Color::all()->pluck('full_description','id');
@@ -49,19 +51,7 @@ class MaterialController extends Controller
      */
     public function store(MaterialRequest $request)
     {
-        $data = $request->except(['_token','number','img_file']);
-        $kodeGenerated = $request->number;
-        $prefix = substr($kodeGenerated,0,strlen($kodeGenerated)-4);
-        $kode = $this->createCode($prefix);
-        $data['kode'] = $kode;
-        $data['unit_price'] = str_replace('.','',$request->unit_price);
-        $material = Material::create($data);
-        if ($request->hasFile('img_file') && $request->file('img_file')->isValid()){
-            $image = $request->file('img_file');
-            $filename = $kode.'.'.$image->extension();
-            $material->addMediaFromRequest('img_file')->usingName($kode)->usingFileName($filename)->storingConversionsOnDisk('media-thumb')->withCustomProperties(['extension' => $image->extension()])->toMediaCollection('raw material');
-        }
-        return redirect()->route('master-material.raw-material.index')->with(config('constants.SUCCESS_SAVE'));
+        return $this->storeImplementation($request,'raw material','master-material.raw-material.index');
     }
 
     public function show(Material $raw_material)
@@ -100,37 +90,7 @@ class MaterialController extends Controller
      */
     public function update(MaterialRequest $request, Material $raw_material)
     {
-        $data = $request->except(['_token','_method','number','img_file']);
-        $kodeGenerated = $request->number;
-        $prefixOldKode = substr($raw_material->kode,0,strlen($raw_material->kode)-4);
-        $prefix = substr($kodeGenerated,0,strlen($kodeGenerated)-4);
-        $kode = strcmp($prefix,$prefixOldKode) == 0 ? $raw_material->kode : $this->createCode($prefix);
-        $data['kode'] = $kode;
-        $data['unit_price'] = str_replace('.','',$request->unit_price);
-
-        $raw_material->update($data);
-
-        if ($request->hasFile('img_file') && $request->file('img_file')->isValid()){
-            $image = $request->file('img_file');
-            $filename = $kode.'.'.$image->extension();
-            /*cek apakah kodenya berbeda, jika berbeda gambar sebelumnya akan dihapus dan diganti dengan gambar yang baru*/
-            if(strcmp($request->old_kode,$kode)!=0){
-                $media = $raw_material->getMedia('raw material');
-                if ($media->count() > 0){
-                    ImageManipulationServiceImplement::delete_image($media);
-                }
-            }
-            $raw_material->media()->delete();
-            $raw_material->addMediaFromRequest('img_file')->usingName($kode)->usingFileName($filename)->storingConversionsOnDisk('media-thumb')->withCustomProperties(['extension'=>$image->extension()])->toMediaCollection('raw material');
-        }else{
-            $image = $raw_material->getMedia('raw material');
-            if ($image->count() > 0) {
-                $updateNameFile = $raw_material->media()->update(['name' => $kode,'file_name'=>$kode.'.'.$image[0]->custom_properties['extension']]);
-                if ($updateNameFile)
-                    ImageManipulationServiceImplement::rename_image($image,$kode);
-            }
-        }
-        return redirect()->route('master-material.raw-material.index')->with('success',config('constants.SUCCESS_UPDATE'));
+        return $this->updateImplementation($request,'raw material','master-material.raw-material.index',$raw_material);
     }
 
     public function destroy(Material $raw_material)
@@ -142,11 +102,6 @@ class MaterialController extends Controller
             ImageManipulationServiceImplement::move_image($image,true);
         }
         return redirect()->route('master-material.raw-material.index')->with('success',config('constants.SUCCESS_DELETE'));
-    }
-
-    private function createCode(string $prefix){
-        $lastKode = Material::select('kode')->where('kode','LIKE','%'.$prefix.'%')->orderBy('created_at','desc')->withTrashed()->get();
-        return CodeGeneratorServiceImplement::generate($lastKode,$prefix,8,4);
     }
 
     public function generateCode(Request $request){
