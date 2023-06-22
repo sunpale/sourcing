@@ -2,6 +2,7 @@
 
 namespace App\Models\master_material;
 
+use App\Models\BOM\Bom_detail;
 use App\Models\master_data\Supplier;
 use App\Traits\CustomSoftDelete;
 use App\Traits\UserInput;
@@ -28,5 +29,10 @@ class ProductGroup extends Model
     public function Material(): HasMany
     {
         return $this->hasMany(Material::class);
+    }
+
+    public function BomDetail(): HasMany
+    {
+        return $this->hasMany(Bom_detail::class);
     }
 }
