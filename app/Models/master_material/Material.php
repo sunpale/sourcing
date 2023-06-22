@@ -25,7 +25,7 @@ class Material extends Model implements HasMedia
     use HasShortflakePrimary, UserInput, InteractsWithMedia, CustomSoftDelete, SoftDeletes {CustomSoftDelete::runSoftDelete insteadof SoftDeletes;}
 
     public $incrementing = false;
-    protected $fillable = ['kode','kode_infor','fabric_id','color_id','brand_id','supplier_id','pantone_id','product_group_id','color_aks_id','komposisi_id','item_name','item_desc','gramasi','lebar','susut','finish','lead_time','moq','moq_color','ppn','measure_id','unit_price'];
+    protected $fillable = ['kode','kode_infor','fabric_id','color_id','brand_id','supplier_id','pantone_id','product_group_id','color_aks_id','komposisi_id','item_name','item_desc','gramasi','lebar','susut','finish','lead_time','moq','moq_color','ppn','measure_id','unit_price','component'];
 
     /**
      * @throws InvalidManipulation
