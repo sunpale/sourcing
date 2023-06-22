@@ -26,7 +26,7 @@ Breadcrumbs::for('permission',function (BreadcrumbTrail $trail){
 //endregion
 //endregion
 
-//region Master RM
+//region Master Material
 Breadcrumbs::for('master-material',function (BreadcrumbTrail $trail){
     $trail->parent('main');
     $trail->push('Master Material');
@@ -49,7 +49,7 @@ Breadcrumbs::for('product-group',function (BreadcrumbTrail $trail){
     $trail->push('Product Group',route('master-material.product-group.index'));
 });
 //endregion
-//region material
+//region raw material
 Breadcrumbs::for('material',function (BreadcrumbTrail $trail){
     $trail->parent('master-material');
     $trail->push('Raw Material',route('master-material.raw-material.index'));
@@ -61,6 +61,20 @@ Breadcrumbs::for('material.create',function (BreadcrumbTrail $trail){
 Breadcrumbs::for('material.view',function (BreadcrumbTrail $trail){
     $trail->parent('material');
     $trail->push('View Data',route('master-material.raw-material.index'));
+});
+//endregion
+//region Aksesori
+Breadcrumbs::for('aksesoris',function (BreadcrumbTrail $trail){
+    $trail->parent('master-material');
+    $trail->push('Aksesoris',route('master-material.aksesoris.index'));
+});
+Breadcrumbs::for('aksesoris.create',function (BreadcrumbTrail $trail){
+    $trail->parent('aksesoris');
+    $trail->push('New',route('master-material.aksesoris.index'));
+});
+Breadcrumbs::for('aksesoris.view',function (BreadcrumbTrail $trail){
+    $trail->parent('aksesoris');
+    $trail->push('View Data',route('master-material.aksesoris.index'));
 });
 //endregion
 //endregion
@@ -139,25 +153,6 @@ Breadcrumbs::for('services',function (BreadcrumbTrail $trail){
     $trail->push('Jasa');
 });
 //endregion
-//endregion
-
-//region Master Aksesoris
-Breadcrumbs::for('master-aks',function (BreadcrumbTrail $trail){
-    $trail->parent('main');
-    $trail->push('Master Aksesoris');
-});
-Breadcrumbs::for('aksesoris',function (BreadcrumbTrail $trail){
-    $trail->parent('master-aks');
-    $trail->push('Aksesoris',route('master-aks.aksesoris.index'));
-});
-Breadcrumbs::for('aksesoris.create',function (BreadcrumbTrail $trail){
-    $trail->parent('aksesoris');
-    $trail->push('New',route('master-aks.aksesoris.index'));
-});
-Breadcrumbs::for('aksesoris.view',function (BreadcrumbTrail $trail){
-    $trail->parent('aksesoris');
-    $trail->push('View Data',route('master-aks.aksesoris.index'));
-});
 //endregion
 
 //region BOM

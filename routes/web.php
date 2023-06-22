@@ -5,7 +5,7 @@ use App\Http\Controllers\auth\RoleController;
 use App\Http\Controllers\BOM\BomDetailsController;
 use App\Http\Controllers\BOM\BomsController;
 use App\Http\Controllers\MainController;
-use App\Http\Controllers\master_aks\AksesorisController;
+use App\Http\Controllers\master_material\AksesorisController;
 use App\Http\Controllers\master_material\ProductGroupController;
 use App\Http\Controllers\master_data\ArticleController;
 use App\Http\Controllers\master_data\BrandController;
@@ -57,6 +57,12 @@ Route::resource('product-group', ProductGroupController::class)->except(['create
     Route::get('/raw-material/data-materials',[MaterialController::class,'getMaterials'])->name('raw-material.data-materials');
     Route::resource('raw-material',MaterialController::class);
 //endregion
+
+//region Aksesoris
+    Route::get('/aksesoris/data',[AksesorisController::class,'data'])->name('aksesoris.data');
+    Route::get('aksesoris/image-url/{file}',[AksesorisController::class,'getImageAndPrice'])->name('aksesoris.image-url');
+    Route::resource('aksesoris', AksesorisController::class);
+//endregion
 });
 //endregion
 
@@ -98,16 +104,6 @@ Route::prefix('master-data')->middleware('auth:web')->group(function (){
 //region Jasa
     Route::resource('services', ServiceController::class)->except(['create','show']);
 //endregion
-});
-//endregion
-
-//region Master Aksesoris
-Route::prefix('master-aksesoris')->middleware('auth:web')->name('master-aks.')->group(function (){
-
-    Route::get('/aksesoris/data',[AksesorisController::class,'data'])->name('aksesoris.data');
-    /*Route::get('/aksesoris/view-image/{file}',[AksesorisController::class,'viewImage'])->name('aksesoris.view-image');*/
-    Route::get('aksesoris/image-url/{file}',[AksesorisController::class,'getImageAndPrice'])->name('aksesoris.image-url');
-    Route::resource('aksesoris', AksesorisController::class);
 });
 //endregion
 

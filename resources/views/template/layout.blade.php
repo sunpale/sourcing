@@ -152,7 +152,7 @@
                     <li class="menu-title"><span data-key="t-master">Master Data</span></li>
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="#sidebarMasterMaterial" data-bs-toggle="collapse" role="button" aria-expanded="{{Route::is('master-rm.*')?'true':'false'}}" aria-controls="sidebarMasterMaterial">
-                            <i class="ri-apps-2-line"></i> <span data-key="t-apps">Master Raw Material</span>
+                            <i class="ri-apps-2-line"></i> <span data-key="t-apps">Master Material</span>
                         </a>
                         <div class="collapse menu-dropdown {{Route::is('master-rm.*')?'show':''}}" id="sidebarMasterMaterial">
                             <ul class="nav nav-sm flex-column">
@@ -168,9 +168,9 @@
                                 <li class="nav-item">
                                     <a href="{!! route('master-material.raw-material.index') !!}" class="nav-link" data-key="t-aspek"> Raw Material </a>
                                 </li>
-                                {{--<li class="nav-item">
-                                    <a href="{!! route('master-aks.aksesoris.index') !!}" class="nav-link {{Route::is('master-aks.aksesoris*')?'active':''}}" data-key="t-region"> Aksesoris </a>
-                                </li>--}}
+                                <li class="nav-item">
+                                    <a href="{!! route('master-material.aksesoris.index') !!}" class="nav-link {{Route::is('master-aks.aksesoris*')?'active':''}}" data-key="t-region"> Aksesoris </a>
+                                </li>
                             </ul>
                         </div>
                     </li><!-- end Dashboard Menu -->
