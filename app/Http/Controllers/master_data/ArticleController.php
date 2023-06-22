@@ -9,6 +9,7 @@ use App\Models\master_data\Article;
 use App\Models\master_data\Brand;
 use App\Models\master_warna\Pantone;
 use App\Services\ImageManipulation\ImageManipulationServiceImplement;
+use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 use Yajra\DataTables\Facades\DataTables;
@@ -108,5 +109,47 @@ class ArticleController extends Controller
             ImageManipulationServiceImplement::move_image($image,true);
         }
         return redirect()->route('articles.index')->with('success',config('constants.SUCCESS_DELETE'));
+    }
+
+    public function getArticlesForBom(Request $request){
+        /*get data pencarian dan jumlah halaman dari komponen select2*/
+        $search = $request->search;
+        $halaman = $request->page;
+        $searchData = empty($search) ? "" : $search;
+        /*$type = $request->type;*/
+        /*end*/
+        /*Set jumlah data per halaman*/
+        $pageLoad = 25;
+        /*End*/
+        /*Cek jumlah halaman, kemudian dikurang satu (offset data di mulai dari 0)*/
+        if($halaman==1){
+            $page=0;
+        }else{
+            /*Jika halaman lebih dari 1, maka setelah dikurang satu dikalikan jumlah data per halaman untuk mendapatkan data offset halaman berikutnya*/
+            $page=($halaman-1)*$pageLoad;
+            /*end*/
+        }
+        /*end*/
+        /*Memanggil data dan jumlah data dari database*/
+        $dataItem=Article::select(['id','kode','name'])->where('kode','LIKE','%'.$searchData.'%')->where('bom_release',FALSE)->limit($pageLoad)->offset($page)->get();
+        $dataCount=Article::select(['id','kode','name'])->where('kode','LIKE','%'.$searchData.'%')->where('bom_release',FALSE)->count();
+        /*End*/
+
+        /*Mengubah hasil data dari database sesuai dengan format dari select2*/
+        $result=array();
+        foreach ($dataItem as $item){
+            $result[] = array("id" => $item->id,"text"=>$item->kode.' - '.$item->name);
+        }
+        $resultQuery['items']=$result;
+        $resultQuery['total_count']=$dataCount;
+        /*End*/
+        return response()->json($resultQuery);
+    }
+
+    public function findArticle(Article $article){
+        $result = $article->with(['pantone:id,kode,pantone','brand:id,brand'])->select(['kode','modul','name','pantone_id','brand_id','designer'])
+            ->where('id',$article->id)->get();
+        $image = $article->getFirstMediaUrl('articles');
+        return response()->json(compact('result','image'));
     }
 }
