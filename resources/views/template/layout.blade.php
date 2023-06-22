@@ -240,12 +240,12 @@
                             <i class="ri-service-fill"></i> <span data-key="t-widgets">Jasa</span>
                         </a>
                     </li>
-                    {{--<li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">Bill of Material</span>
+                    <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">Bill of Material</span>
                     </li>
 
                     <a class="nav-link menu-link {{Route::is('bom.index') ? 'active':''}}" href="{{route('bom.index')}}" aria-expanded="false">
                         <i class="ri-book-read-line"></i><span data-ket="t-widgets">BOM</span>
-                    </a>--}}
+                    </a>
                     @role('super administrator')
                     <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">User Management</span>
                     </li>

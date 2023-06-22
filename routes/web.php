@@ -3,7 +3,7 @@
 use App\Http\Controllers\auth\PermissionController;
 use App\Http\Controllers\auth\RoleController;
 use App\Http\Controllers\BOM\BomDetailsController;
-use App\Http\Controllers\BOM\BomsController;
+use App\Http\Controllers\BOM\BomController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\master_material\AksesorisController;
 use App\Http\Controllers\master_material\ProductGroupController;
@@ -108,9 +108,9 @@ Route::prefix('master-data')->middleware('auth:web')->group(function (){
 //endregion
 
 //region BOM
-Route::get('/bom/data',[BomsController::class,'data'])->name('bom.data');
-Route::get('/bom/find-detail/{bom}',[BomsController::class,'findBom'])->name('bom.find-detail');
-Route::resource('bom',BomsController::class)->middleware('auth:web');
+Route::get('/bom/data',[BomController::class,'data'])->name('bom.data');
+Route::get('/bom/find-detail/{bom}',[BomController::class,'findBom'])->name('bom.find-detail');
+Route::resource('bom',BomController::class)->middleware('auth:web');
 //endregion
 
 //Region Auth
