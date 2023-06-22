@@ -139,6 +139,12 @@
                                     <td class="fw-bold">PPN</td>
                                     <td>{{$material[0]['ppn']==1?'PPN':'Non PPN'}}</td>
                                 </tr>
+                                @if($form==='AKS')
+                                <tr>
+                                    <td class="fw-bold">Accessories Component List</td>
+                                    <td>{{$material[0]['component']}}</td>
+                                </tr>
+                                @endif
                             </table>
                         </div>
                     </div>

@@ -27,6 +27,9 @@
                             </div>
                             @else
                             <div class="col-md-4">
+                                <x-forms.select id="group" name="product_group_id" label="Product Group" class="form-select-sm select2 select-default" :list-value="$group" :value="$editMode ? $dataEdit[0]['product_group_id']:''">Select Product Group</x-forms.select>
+                            </div>
+                            <div class="col-md-4">
                                 <x-forms.select id="color_aks" name="color_aks_id" label="Color Accessories Code" class="form-select-sm select2 select-default" :list-value="$warnaAks" :value="$editMode ? $dataEdit[0]['color_aks_id']:''">Select Color AKS</x-forms.select>
                             </div>
                             @endif
@@ -55,6 +58,19 @@
                             </div>
                             <div class="col-md-6">
                                 <x-forms.select id="komposisi" name="komposisi_id" label="Composition" class="form-select-sm select2 select-default" :list-value="$komposisi" :value="$editMode ? $dataEdit[0]['komposisi_id']:''">Select Composition</x-forms.select>
+                            </div>
+                            @endif
+                            @if($form==='AKS')
+                            <div class="mb-2 col-md-12">
+                                <label class="form-label" for="supplier">Supplier</label>
+                                <select class="form-select form-select-sm select2 @error('supplier_id') is-invalid @enderror" id="supplier" name="supplier_id">
+                                    <option disabled selected value>Select Supplier</option>
+                                </select>
+                                @error('supplier_id')
+                                <div class="invalid-feedback">
+                                    {{$errors->messages()['supplier_id'][0]}}
+                                </div>
+                                @enderror
                             </div>
                             @endif
                             <x-forms.input class="form-control-sm" id="item_name" name="item_name" label="Item Name" placeholder="Item Name" :value="$editMode ? $dataEdit[0]['item_name']:''"></x-forms.input>
@@ -117,11 +133,13 @@
                                 <x-forms.input class="form-control-sm" type="file" name="img_file" id="img_file" label="Photo" class="form-control-sm"></x-forms.input>
                             </div>
                             @if($form==='AKS')
-
+                            <div class="col-md-12">
+                                <x-forms.textarea id="component" name="component" label="Accessories Component List" placeholder="Separate each accessory component with a comma" class="form-control-sm" :value="$editMode ? $dataEdit[0]['component']:''"></x-forms.textarea>
+                            </div>
                             @endif
                             <div class="text-end mt-5">
                                 <button type="submit" class="btn btn-success data-submit me-1">Save</button>
-                                <a href="{!! $form==='RM' ? route('master-material.raw-material.index') : route('master-aks.aksesoris.index') !!}" class="btn btn-outline-danger">Cancel</a>
+                                <a href="{!! $form==='RM' ? route('master-material.raw-material.index') : route('master-material.aksesoris.index') !!}" class="btn btn-outline-danger">Cancel</a>
                             </div>
                         </div>
                     </form>
