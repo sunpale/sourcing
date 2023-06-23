@@ -242,10 +242,32 @@
                     </li>
                     <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">Bill of Material</span>
                     </li>
-
                     <a class="nav-link menu-link {{Route::is('bom.index') ? 'active':''}}" href="{{route('bom.index')}}" aria-expanded="false">
                         <i class="ri-book-read-line"></i><span data-ket="t-widgets">BOM</span>
                     </a>
+                    <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">Inventory</span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="#sidebarWarehouse" data-bs-toggle="collapse" role="button"
+                           aria-expanded="{{Route::is('inventory.warehouse.*')?'true':'false'}}" aria-controls="sidebarWarehouse">
+                            <i class="las la-warehouse"></i> <span
+                                data-key="t-authentication">Warehouse</span>
+                        </a>
+                        <div class="collapse menu-dropdown {{Route::is('inventory.warehouse.*')?'show':''}}" id="sidebarWarehouse">
+                            <ul class="nav nav-sm flex-column">
+                                <li class="nav-item">
+                                    <a href="{!! route('inventory.warehouse.location.index') !!}" class="nav-link {{Route::is('inventory.warehouse.location.index')?'active':''}}" data-key="t-location"> Location </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{!! route('master-warna.pantone.index') !!}" class="nav-link {{Route::is('master-warna.pantone.index')?'active':''}}" data-key="t-region"> Storage Type </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{!! route('master-warna.warna-aksesoris.index') !!}" class="nav-link {{Route::is('master-warna.warna-aksesoris.index')?'active':''}}" data-key="t-region"> Storage </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
                     @role('super administrator')
                     <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">User Management</span>
                     </li>

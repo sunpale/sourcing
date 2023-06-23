@@ -165,3 +165,22 @@ Breadcrumbs::for('bom.create',function (BreadcrumbTrail $trail){
     $trail->push('New Bill of Material');
 });
 //endregion
+
+//region Inventory
+Breadcrumbs::for('inventory',function (BreadcrumbTrail $trail){
+    $trail->parent('main');
+    $trail->push('Inventory');
+});
+//region Warehouse
+Breadcrumbs::for('warehouse',function (BreadcrumbTrail $trail){
+    $trail->parent('inventory');
+    $trail->push('Warehouse');
+});
+//region Location
+Breadcrumbs::for('location',function (BreadcrumbTrail $trail){
+    $trail->parent('warehouse');
+    $trail->push('Warehouse Location');
+});
+//endregion
+//endregion
+//endregion

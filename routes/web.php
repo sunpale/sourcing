@@ -4,6 +4,7 @@ use App\Http\Controllers\auth\PermissionController;
 use App\Http\Controllers\auth\RoleController;
 use App\Http\Controllers\BOM\BomDetailsController;
 use App\Http\Controllers\BOM\BomController;
+use App\Http\Controllers\inventory\warehouse\LocationController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\master_material\AksesorisController;
 use App\Http\Controllers\master_material\ProductGroupController;
@@ -113,6 +114,17 @@ Route::get('/bom/find-detail/{bom}',[BomController::class,'findBom'])->name('bom
 Route::resource('bom',BomController::class)->middleware('auth:web');
 //endregion
 
+//region Inventory
+Route::prefix('inventory')->middleware(['auth'])->name('inventory.')->group(function (){
+    //region Warehouse
+    Route::prefix('warehouse')->name('warehouse.')->group(function (){
+        //region Location
+        Route::resource('location', LocationController::class)->except(['create','show']);
+        //endregion
+    });
+    //endregion
+});
+//endregion
 //Region Auth
 Route::prefix('auth')->middleware(['auth','role:super administrator'])->name('auth.')->group(function (){
 //region Role
